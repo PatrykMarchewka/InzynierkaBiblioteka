@@ -5,10 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InżynierkaBiblioteka"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Background="MediumPurple">
+        Title="Aplikacja biblioteczna" Height="450" Width="800" Background="MediumPurple" ResizeMode="NoResize" WindowStyle="None">
     
     <Grid>
-        <Frame x:Name="MainFrame">
+        <Border Background="DimGray" Height="20" VerticalAlignment="Top" MouseLeftButtonDown="Border_MouseLeftButtonDown">
+            <Grid>
+                <Button x:Name="btnZamknij" Content=" X " Background="Black" Foreground="Gray" HorizontalAlignment="Right" Click="btnZamknij_Click"/>
+                <TextBlock Text="Aplikacja biblioteczna" Foreground="White" HorizontalAlignment="Left"/>
+            </Grid>
+            
+        </Border>
+        <Frame x:Name="MainFrame" Margin="0,20,0,0">
             
         </Frame>
     </Grid>

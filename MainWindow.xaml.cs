@@ -21,11 +21,22 @@ namespace InżynierkaBiblioteka
     public partial class MainWindow : Window
     {
 
-        public static Frame GlownaRamka = ((MainWindow)Application.Current.MainWindow).MainFrame;
-
+        public static Frame GlownaRamka;
+        public static string UserInput;
         public MainWindow()
         {
             InitializeComponent();
+            GlownaRamka = ((MainWindow)Application.Current.MainWindow).MainFrame;
+            try
+            {
+                //Laczenie z baza danych
+            }
+            catch (Exception)
+            {
+                //Przeniesienie do strony bledu
+                //Nawigacja("");
+            }
+            Nawigacja("GlowneOkno.xaml");
         }
 
         public static string DzisiejszaData()
@@ -37,6 +48,19 @@ namespace InżynierkaBiblioteka
         public static void Nawigacja(string UriMiejsceDocelowe)
         {
             GlownaRamka.Navigate(new Uri(UriMiejsceDocelowe, UriKind.Relative));
+        }
+
+        private void btnZamknij_Click(object sender, RoutedEventArgs e)
+        {
+            Environment.Exit(0);
+        }
+
+        private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                DragMove();
+            }
         }
     }
 }

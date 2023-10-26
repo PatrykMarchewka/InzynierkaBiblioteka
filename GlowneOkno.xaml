@@ -1,0 +1,37 @@
+﻿<Page x:Class="InżynierkaBiblioteka.GlowneOkno"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:InżynierkaBiblioteka"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="GlowneOkno" Background="MediumPurple">
+
+    <Grid>
+        <Button x:Name="btnZalogujHaslem" Content=" Zaloguj sie uzywajac hasla " FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,-100,0,0" Background="Black" Foreground="White" Click="btnZalogujHaslem_Click">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+             </Button.Resources>
+         </Button>
+
+        <Button x:Name="btnZalogujRFID" Content=" Zaloguj sie uzywajac RFID " FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" Background="Black" Foreground="White" Click="btnZalogujRFID_Click">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+
+        <Button x:Name="btnStworzNoweKonto" Content=" Stwórz nowe konto " FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,100,0,0" Background="Black" Foreground="White" Click="btnStworzNoweKonto_Click">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+
+    </Grid>
+</Page>
