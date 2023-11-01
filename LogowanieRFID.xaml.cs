@@ -25,21 +25,27 @@ namespace InżynierkaBiblioteka
         public LogowanieRFID()
         {
             InitializeComponent();
-            PreviewKeyDown += CzytanieZCzytnika;
+            //PreviewKeyDown += CzytanieZCzytnika;
         }
 
-        private static void CzytanieZCzytnika(object sender, KeyEventArgs e)
+        private void btnPowrot_Click(object sender, RoutedEventArgs e)
         {
-            if (e.Key >= Key.D0 && e.Key <= Key.D9)
-            {
-                Kod += (e.Key - Key.D0).ToString();
-            }
-            else if (e.Key == Key.Enter)
-            {
-                //Tutaj sprawdzic konto
-                //
-                Kod = String.Empty;
-            }
+            MainWindow.GlownaRamka.GoBack();
         }
+
+        //RIP IN PEACE  27.10.2023
+        //private static void CzytanieZCzytnika(object sender, KeyEventArgs e)
+        //{
+        //    if (e.Key >= Key.D0 && e.Key <= Key.D9)
+        //    {
+        //        Kod += (e.Key - Key.D0).ToString();
+        //    }
+        //    else if (e.Key == Key.Enter)
+        //    {
+        //        //Tutaj sprawdzic konto
+        //        //
+        //        Kod = String.Empty;
+        //    }
+        //}
     }
 }

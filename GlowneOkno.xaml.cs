@@ -27,7 +27,7 @@ namespace InżynierkaBiblioteka
 
         private void btnZalogujHaslem_Click(object sender, RoutedEventArgs e)
         {
-
+            MainWindow.Nawigacja("LogowanieHaslem.xaml");
         }
 
         private void btnZalogujRFID_Click(object sender, RoutedEventArgs e)

@@ -15,7 +15,7 @@
             </Grid>
             
         </Border>
-        <Frame x:Name="MainFrame" Margin="0,20,0,0">
+        <Frame x:Name="MainFrame" Margin="0,20,0,0" NavigationUIVisibility="Hidden">
             
         </Frame>
     </Grid>

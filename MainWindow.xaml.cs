@@ -27,15 +27,6 @@ namespace InżynierkaBiblioteka
         {
             InitializeComponent();
             GlownaRamka = ((MainWindow)Application.Current.MainWindow).MainFrame;
-            try
-            {
-                //Laczenie z baza danych
-            }
-            catch (Exception)
-            {
-                //Przeniesienie do strony bledu
-                //Nawigacja("");
-            }
             Nawigacja("GlowneOkno.xaml");
         }
 
