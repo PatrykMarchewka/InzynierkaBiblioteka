@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InżynierkaBiblioteka"
         mc:Ignorable="d"
-        Title="Aplikacja biblioteczna" Height="450" Width="800" Background="MediumPurple" ResizeMode="NoResize" WindowStyle="None">
+        Title="Aplikacja biblioteczna" Height="540" Width="960" Background="MediumPurple" ResizeMode="NoResize" WindowStyle="None">
     
     <Grid>
         <Border Background="DimGray" Height="20" VerticalAlignment="Top" MouseLeftButtonDown="Border_MouseLeftButtonDown">

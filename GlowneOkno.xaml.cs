@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InżynierkaBiblioteka.BazaDanych;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,12 @@ namespace InżynierkaBiblioteka
     /// </summary>
     public partial class GlowneOkno : Page
     {
+        internal static Uzytkownik? ZalogowanyUzytkownik;
+
         public GlowneOkno()
         {
             InitializeComponent();
+            ZalogowanyUzytkownik = null;
         }
 
         private void btnZalogujHaslem_Click(object sender, RoutedEventArgs e)
@@ -37,7 +41,7 @@ namespace InżynierkaBiblioteka
 
         private void btnStworzNoweKonto_Click(object sender, RoutedEventArgs e)
         {
-
+            MainWindow.Nawigacja("StworzNoweKonto.xaml");
         }
     }
 }

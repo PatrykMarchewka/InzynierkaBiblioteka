@@ -27,7 +27,7 @@ namespace InżynierkaBiblioteka
             InitializeComponent();
         }
 
-        private static void WeryfikacjaHasla(string Haslo, string SolString, string Hash)
+        private static void WeryfikacjaHasla(string Haslo, string Hash, string SolString = "BibliotekaInzynieria")
         {
             byte[] SolIHaslo = Encoding.UTF8.GetBytes(SolString + Haslo);
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InżynierkaBiblioteka.BazaDanych;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,7 +23,7 @@ namespace InżynierkaBiblioteka
     {
 
         public static Frame GlownaRamka;
-        public static string UserInput;
+        public static string UserInput; //Po co to? Bo zapomnialem
         public MainWindow()
         {
             InitializeComponent();
