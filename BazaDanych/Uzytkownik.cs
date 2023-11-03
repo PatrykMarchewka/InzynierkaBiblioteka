@@ -12,7 +12,7 @@ namespace InżynierkaBiblioteka.BazaDanych
     internal class Uzytkownik
     {
         [System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity), Key]
-        public int id { get; set; }
+        public int idUzytkownika { get; set; }
         public int? RFID { get; set; }
         public int? RFIDPin { get; set; }
         [MaxLength(255)]
@@ -33,22 +33,18 @@ namespace InżynierkaBiblioteka.BazaDanych
        
         public int LiczbaWypozyczonychKsiazek { get; set; } = 0;
         public DateTime DataStworzeniaKonta { get; set; }
-        public int idPlci { get; set; }
-        public int idRoli { get; set; }
-        public int idStatusu { get; set; }
-
         [MaxLength]
         public string? Komentarze;
 
 
 
-        [ForeignKey("id")]
+        [ForeignKey("idPlci")]
         public Plec Plec { get; set; }
 
-        [ForeignKey("id")]
+        [ForeignKey("idRoli")]
         public Role Rola { get; set; }
 
-        [ForeignKey("id")]
+        [ForeignKey("idStatusu")]
         public Statusy StatusKonta { get; set; }
 
         internal ICollection<Wypozyczenia> Wypozyczenia;

@@ -11,17 +11,15 @@ namespace InżynierkaBiblioteka.BazaDanych
     internal class Wypozyczenia
     {
         [System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity), Key]
-        public int id { get; set; }
-        public int idUzytkownika { get; set; }
-        public string ISBNKsiazki { get; set; }
+        public int idWypozyczenia { get; set; }
         public DateTime DataWypozyczenia { get; set; }
         public DateTime DataDoOddania { get; set; }
         public DateTime? DataAktualnegoOddania { get; set; }
 
 
-        [ForeignKey("id")]
+        [ForeignKey("idUzytkownika")]
         public Uzytkownik Uzytkownik { get; set; }
-        [ForeignKey("ISBN")]
+        [ForeignKey("idKsiazki")]
         public Ksiazki Ksiazka { get; set; }
     }
 }

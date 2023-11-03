@@ -13,10 +13,8 @@ namespace InżynierkaBiblioteka.BazaDanych
         [System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity)]
         [Key]
         public int IDReportu { get; set; }
-        [ForeignKey("id")]
-        public Uzytkownik idUzytkownika { get; set; }
         [ForeignKey("IDRecenzji")]
-        public Recenzje idRecenzji { get; set; }
+        public Recenzje Recenzje { get; set; }
         [MaxLength]
         public string TrescRaportu { get; set; }
         public bool StatusRaportu { get; set; }

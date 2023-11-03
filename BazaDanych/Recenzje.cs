@@ -12,9 +12,6 @@ namespace InżynierkaBiblioteka.BazaDanych
     {
         [System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity), Key]
         public int IDRecenzji { get; set; }
-        public int idUzytkownika { get; set; }
-        public string ISBNKsiazki { get; set; }
-
         public DateTime DataWystawienia { get; set; }
         public int Ocena { get; set; }
         [MaxLength]
@@ -22,10 +19,11 @@ namespace InżynierkaBiblioteka.BazaDanych
         public bool Ukryta { get; set; }
 
 
-        [ForeignKey("id")]
+        [ForeignKey("idUzytkownika")]
         public Uzytkownik Uzytkownik { get; set; }
-        [ForeignKey("ISBN")]
+        [ForeignKey("idKsiazki")]
         public Ksiazki Ksiazka { get; set; }
 
+        public ICollection<Reporty> Reporty;
     }
 }

@@ -27,7 +27,7 @@ namespace InżynierkaBiblioteka
             InitializeComponent();
         }
 
-        private static void WeryfikacjaHasla(string Haslo, string Hash, string SolString = "BibliotekaInzynieria")
+        private static bool WeryfikacjaHasla(string Haslo, string Hash, string SolString = "BibliotekaInzynieria")
         {
             byte[] SolIHaslo = Encoding.UTF8.GetBytes(SolString + Haslo);
 
@@ -47,11 +47,11 @@ namespace InżynierkaBiblioteka
             StringComparer stringComparer = StringComparer.OrdinalIgnoreCase;
             if (stringComparer.Compare(Hash, HashJakoString.ToString()) == 0)
             {
-                MessageBox.Show("Dobre haslo");
+                return true;
             }
             else
             {
-                MessageBox.Show("Zle haslo");
+                return false;
             }
         }
 
@@ -64,18 +64,6 @@ namespace InżynierkaBiblioteka
                 MyDatabase.SaveChanges();
 
             }
-
-            //using (var MyDatabase = new MyDbContext())
-            //{
-            //    var sqlQuery = "SELECT * FROM Uzytkownik";
-            //    var sqldwa = "Insert INTO Plec VALUES ('Ja')";
-            //    var wynik = MyDatabase.Database.ExecuteSqlRaw(sqldwa);
-            //    MessageBox.Show(wynik.ToString());
-            //    MyDatabase.SaveChanges();
-            //}
-
-
-            //WeryfikacjaHasla(txtBoxZalogujHaslemHaslo.Text, "Sol", "To z bazy");
         }
 
         private void btnPowrot_Click(object sender, RoutedEventArgs e)

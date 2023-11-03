@@ -10,7 +10,7 @@ namespace InżynierkaBiblioteka.BazaDanych
     internal class GatunkiKsiazek
     {
         [System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity), Key]
-        public int id { get; set; }
+        public int idGatunku { get; set; }
         [MaxLength(255)]
         public string Nazwa { get; set; }
     }

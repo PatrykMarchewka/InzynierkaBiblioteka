@@ -11,7 +11,7 @@ namespace InżynierkaBiblioteka.BazaDanych
     internal class Statusy
     {
         [System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity), Key]
-        public int id { get; set; }
+        public int idStatusu { get; set; }
         [MaxLength(255)]
         public string Nazwa { get; set; }
 

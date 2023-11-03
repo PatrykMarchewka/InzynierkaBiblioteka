@@ -12,12 +12,8 @@ namespace InżynierkaBiblioteka.BazaDanych
     internal class HashKsiazkiAutorzy
     {
         [System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity), Key]
-        public int id { get; set; }
-        public string ISBN { get; set; }
-        public int idAutora { get; set; }
 
-
-        [ForeignKey("ISBN")]
+        [ForeignKey("idKsiazki")]
         public Ksiazki Ksiazka { get; set; }
         [ForeignKey("idAutora")]
         public Autorzy Autor { get; set; }

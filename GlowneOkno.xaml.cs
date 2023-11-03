@@ -27,6 +27,10 @@ namespace InżynierkaBiblioteka
         {
             InitializeComponent();
             ZalogowanyUzytkownik = null;
+            using (var MyDatabase = new MyDbContext())
+            {
+                MyDatabase.Database.EnsureCreated();
+            }
         }
 
         private void btnZalogujHaslem_Click(object sender, RoutedEventArgs e)

@@ -12,16 +12,13 @@ namespace InżynierkaBiblioteka.BazaDanych
     {
         [System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity)]
         [Key]
-        public int id { get; set; }
-        public string ISBNKsiazki { get; set; }
-        public int idUzytkownika { get; set; }
-
+        public int idPowiadomienia { get; set; }
         public DateTime KiedyStworzono { get; set; }
         public DateTime? KiedyWyslanoMail { get; set; }
 
-        [ForeignKey("ISBN")]
+        [ForeignKey("idKsiazki")]
         public Ksiazki Ksiazka { get; set; }
-        [ForeignKey("id")]
+        [ForeignKey("idUzytkownika")]
         public Uzytkownik Uzytkownik { get; set; }
     }
 }

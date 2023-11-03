@@ -10,14 +10,16 @@ namespace InżynierkaBiblioteka.BazaDanych
 {
     internal class Ksiazki
     {
-        [System.ComponentModel.DataAnnotations.Key, MaxLength(13)]
-        public string ISBN { get; set; }
+        [System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity), System.ComponentModel.DataAnnotations.Key]
+        public int idKsiazki { get; set; } //ID Poniewaz EF Core ma problem z kluczem glownym jako String
+        [MaxLength(13)]
+        public string ISBN { get; set; } 
         [MaxLength(255)]
         public string TytulKsiazki { get; set; }
-        [ForeignKey("id")]
+        [ForeignKey("idGatunku")]
         public GatunkiKsiazek GatunekKsiazki { get; set; }
         public int RokPublikacjiKsiazki { get; set; }
-        [ForeignKey("id")]
+        [ForeignKey("idJezyka")]
         public Jezyki JezykKsiazki { get; set; }
         public int IloscStron { get; set; }
         public int DostepnoscKsiazki { get; set; }

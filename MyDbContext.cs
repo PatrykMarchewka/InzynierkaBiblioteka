@@ -27,8 +27,10 @@ namespace InżynierkaBiblioteka
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             string serwer = "sql.bsite.net\\MSSQL2016";
-            string Login = "patryk4610_InzBib"; //Nazwa bazy danych jest taka sama jak loginn
-            string Haslo = "kHKPeKLLgWy7F3";
+            string Login = "patryk4610_test";
+            string Haslo = "test";
+            //string Login = "patryk4610_InzBib"; //Nazwa bazy danych jest taka sama jak loginn
+            //string Haslo = "kHKPeKLLgWy7F3";
 
 
             optionsBuilder.UseSqlServer($"Server={serwer};Database={Login};User Id={Login};Password={Haslo};Encrypt=False");
@@ -36,22 +38,23 @@ namespace InżynierkaBiblioteka
 
         protected override void OnModelCreating(ModelBuilder mod)
         {
-            mod.Entity<Uzytkownik>().HasOne(u => u.Plec).WithMany(p => p.Uzytkownicy).HasForeignKey(u => u.idPlci);
-            mod.Entity<Uzytkownik>().HasOne(u => u.Rola).WithMany(r => r.Uzytkownicy).HasForeignKey(u => u.idRoli);
-            mod.Entity<Uzytkownik>().HasOne(u => u.StatusKonta).WithMany(s => s.Uzytkownicy).HasForeignKey(u => u.idStatusu);
+            mod.Entity<Uzytkownik>().HasOne(u => u.Plec).WithMany(p => p.Uzytkownicy);
+            mod.Entity<Uzytkownik>().HasOne(u => u.Rola).WithMany(r => r.Uzytkownicy);
+            mod.Entity<Uzytkownik>().HasOne(u => u.StatusKonta).WithMany(s => s.Uzytkownicy);
 
-            mod.Entity<HashKsiazkiAutorzy>().HasOne(h => h.Ksiazka).WithMany(k => k.Hashe).HasForeignKey(h => h.ISBN);
-            mod.Entity<HashKsiazkiAutorzy>().HasOne(h => h.Autor).WithMany(a => a.Hashe).HasForeignKey(h => h.idAutora);
+            mod.Entity<HashKsiazkiAutorzy>().HasOne(h => h.Ksiazka).WithMany(k => k.Hashe);
+            mod.Entity<HashKsiazkiAutorzy>().HasOne(h => h.Autor).WithMany(a => a.Hashe);
 
-            mod.Entity<Wypozyczenia>().HasOne(w => w.Uzytkownik).WithMany(u => u.Wypozyczenia).HasForeignKey(w => w.idUzytkownika);
-            mod.Entity<Wypozyczenia>().HasOne(w => w.Ksiazka).WithMany(k => k.Wypozyczenia).HasForeignKey(w => w.ISBNKsiazki);
+            mod.Entity<Wypozyczenia>().HasOne(w => w.Uzytkownik).WithMany(u => u.Wypozyczenia);
+            mod.Entity<Wypozyczenia>().HasOne(w => w.Ksiazka).WithMany(k => k.Wypozyczenia);
 
-            mod.Entity<Powiadomienia>().HasOne(p => p.Ksiazka).WithMany(k => k.Powiadomienia).HasForeignKey(p => p.ISBNKsiazki);
-            mod.Entity<Powiadomienia>().HasOne(p => p.Uzytkownik).WithMany(u => u.Powiadomienia).HasForeignKey(p => p.idUzytkownika);
+            mod.Entity<Powiadomienia>().HasOne(p => p.Ksiazka).WithMany(k => k.Powiadomienia);
+            mod.Entity<Powiadomienia>().HasOne(p => p.Uzytkownik).WithMany(u => u.Powiadomienia);
 
-            mod.Entity<Recenzje>().HasOne(r => r.Ksiazka).WithMany(k => k.Recenzje).HasForeignKey(r => r.ISBNKsiazki);
-            mod.Entity<Recenzje>().HasOne(r => r.Uzytkownik).WithMany(u => u.Recenzje).HasForeignKey(r => r.idUzytkownika);
+            mod.Entity<Recenzje>().HasOne(r => r.Ksiazka).WithMany(k => k.Recenzje);
+            mod.Entity<Recenzje>().HasOne(r => r.Uzytkownik).WithMany(u => u.Recenzje);
 
+            mod.Entity<HashKsiazkiAutorzy>().HasNoKey();
             base.OnModelCreating(mod);
         }
     }

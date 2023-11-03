@@ -10,18 +10,11 @@ namespace InżynierkaBiblioteka.BazaDanych
     public class Plec
     {
         [System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity), Key]
-        public int id { get; set; }
+        public int idPlci { get; set; }
         [MaxLength(255)]
         public string Nazwa { get; set; }
 
 
-        //Do laczenia z Uzytkownikami
         internal ICollection<Uzytkownik> Uzytkownicy;
-
-
-        public Plec()
-        {
-
-        }
     }
 }

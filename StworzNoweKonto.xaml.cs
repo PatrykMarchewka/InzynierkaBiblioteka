@@ -33,7 +33,7 @@ namespace InżynierkaBiblioteka
             {
                 using (var MyDatabase = new MyDbContext())
                 {
-                    foreach (var item in MyDatabase.Plec.OrderBy(x => x.id))
+                    foreach (var item in MyDatabase.Plec.OrderBy(x => x.idPlci))
                     {
                         ListaPlci.Add(item.Nazwa);
                     }
@@ -42,7 +42,7 @@ namespace InżynierkaBiblioteka
             catch (Exception ex)
             {
                 MessageBox.Show($"Blad! {ex.Message}");
-                MainWindow.Nawigacja("GlowneHaslo.xaml");
+                MainWindow.Nawigacja("GlowneOkno.xaml");
             }
             
             comboBoxPlec.ItemsSource = ListaPlci;
@@ -82,7 +82,7 @@ namespace InżynierkaBiblioteka
 
         private void btnStworzUzytkownika_Click(object sender, RoutedEventArgs e)
         {
-            if (String.IsNullOrEmpty(txtBoxEmail.Text) || String.IsNullOrEmpty(txtBoxHaslo.Text) || String.IsNullOrEmpty(txtBoxImie.Text) || String.IsNullOrEmpty(txtBoxLogin.Text) || String.IsNullOrEmpty(txtBoxNazwisko.Text) || String.IsNullOrEmpty(txtBoxNrTelefonu.Text) || (comboBoxPlec.SelectedItem.ToString() == "Inna" && String.IsNullOrEmpty(txtBoxPlec.Text)))
+            if (String.IsNullOrEmpty(txtBoxHaslo.Text) || String.IsNullOrEmpty(txtBoxImie.Text) || String.IsNullOrEmpty(txtBoxLogin.Text) || String.IsNullOrEmpty(txtBoxNazwisko.Text) || (comboBoxPlec.SelectedItem.ToString() == "Inna" && String.IsNullOrEmpty(txtBoxPlec.Text)))
             {
                 MessageBox.Show("Blad! Wypelnij wszystkie wymagane pola");
             }
@@ -96,13 +96,13 @@ namespace InżynierkaBiblioteka
                         {
                             MyDatabase.Plec.Add(new Plec() { Nazwa = txtBoxPlec.Text });
                             MyDatabase.SaveChanges();
-                            WybranaPlecID = MyDatabase.Plec.First(p => p.Nazwa == txtBoxPlec.Text).id;
+                            WybranaPlecID = MyDatabase.Plec.First(p => p.Nazwa == txtBoxPlec.Text).idPlci;
                         }
                     }
                     catch (Exception ex)
                     {
                         MessageBox.Show($"Blad! {ex.Message}");
-                        MainWindow.Nawigacja("GlowneHaslo.xaml");
+                        MainWindow.Nawigacja("GlowneOkno.xaml");
                     }
                     
                 }
@@ -111,15 +111,31 @@ namespace InżynierkaBiblioteka
                 {
                     using (var MyDatabase = new MyDbContext())
                     {
-                        MyDatabase.Uzytkownik.Add(new Uzytkownik() { }); //TODO: Do zakonczenia
+                        Plec tempPlec = MyDatabase.Plec.First(p => p.idPlci == WybranaPlecID);
+                        Role tempRola = MyDatabase.Role.First(r => r.idRoli == 1);
+                        Statusy tempStatus = MyDatabase.Statusy.First(s => s.idStatusu == 1);
+
+                        Uzytkownik nowy = new Uzytkownik() { LoginUzytkownika = txtBoxLogin.Text, hashHaslo = StworzHash(txtBoxHaslo.Text),Imie = txtBoxImie.Text, Nazwisko = txtBoxNazwisko.Text, DataStworzeniaKonta = DateTime.UtcNow, Plec = tempPlec, Rola =tempRola, StatusKonta = tempStatus };
+                        if (!String.IsNullOrEmpty(txtBoxEmail.Text))
+                        {
+                            nowy.email = txtBoxEmail.Text;
+                        }
+                        if (!String.IsNullOrEmpty(txtBoxNrTelefonu.Text))
+                        {
+                            nowy.nrTelefonu = txtBoxNrTelefonu.Text;
+                        }
+
+                        MyDatabase.Uzytkownik.Add(nowy); //TODO: Do zakonczenia
                         MyDatabase.SaveChanges();
                         MessageBox.Show("Dodano Uzytkownika");
+                        GlowneOkno.ZalogowanyUzytkownik = nowy;
+                        nowy = null;
                     }
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show($"Blad! {ex.Message}");
-                    MainWindow.Nawigacja("GlowneHaslo.xaml");
+                    MainWindow.Nawigacja("GlowneOkno.xaml");
                 }
             }
         }
