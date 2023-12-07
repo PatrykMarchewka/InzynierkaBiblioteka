@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -9,14 +8,22 @@ using System.Threading.Tasks;
 
 namespace InżynierkaBiblioteka.BazaDanych
 {
-    internal class HashKsiazkiAutorzy
+    public class HashKsiazkiAutorzy
     {
         [System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity), Key]
+        public int CompositeKey { get; set; }
+
 
         [ForeignKey("idKsiazki")]
-        public Ksiazki Ksiazka { get; set; }
+        public virtual Ksiazki Ksiazka { get; set; }
+        
         [ForeignKey("idAutora")]
-        public Autorzy Autor { get; set; }
+        public virtual Autorzy Autor { get; set; }
+
+        public HashKsiazkiAutorzy()
+        {
+            
+        }
 
     }
 }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace InżynierkaBiblioteka.BazaDanych
 {
-    internal class Ksiazki
+    public class Ksiazki
     {
         [System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity), System.ComponentModel.DataAnnotations.Key]
         public int idKsiazki { get; set; } //ID Poniewaz EF Core ma problem z kluczem glownym jako String
@@ -17,19 +17,26 @@ namespace InżynierkaBiblioteka.BazaDanych
         [MaxLength(255)]
         public string TytulKsiazki { get; set; }
         [ForeignKey("idGatunku")]
-        public GatunkiKsiazek GatunekKsiazki { get; set; }
+        public virtual GatunkiKsiazek GatunekKsiazki { get; set; }
         public int RokPublikacjiKsiazki { get; set; }
         [ForeignKey("idJezyka")]
-        public Jezyki JezykKsiazki { get; set; }
+        public virtual Jezyki JezykKsiazki { get; set; }
         public int IloscStron { get; set; }
         public int DostepnoscKsiazki { get; set; }
         public int LiczbaOczekujacych { get; set; }
         public bool DoWypozyczenia { get; set; }
         public int IloscWypozyczen30Dni { get; set; }
 
-        internal ICollection<HashKsiazkiAutorzy> Hashe;
-        internal ICollection<Wypozyczenia> Wypozyczenia;
-        internal ICollection<Powiadomienia> Powiadomienia;
-        internal ICollection<Recenzje> Recenzje;
+        public virtual ICollection<HashKsiazkiAutorzy> Hashe { get; set; } = new List<HashKsiazkiAutorzy>();
+        public virtual ICollection<Wypozyczenia> Wypozyczenia { get; set; } = new List<Wypozyczenia>();
+        public virtual ICollection<Powiadomienia> Powiadomienia { get; set; } = new List<Powiadomienia>();
+        public virtual ICollection<Recenzje> Recenzje { get; set; } = new List<Recenzje>();
+
+
+        public Ksiazki()
+        {
+            
+        }
+
     }
 }

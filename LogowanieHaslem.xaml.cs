@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using InżynierkaBiblioteka.BazaDanych;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,13 +58,42 @@ namespace InżynierkaBiblioteka
 
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            using (var MyDatabase = new MyDbContext())
-            {
+            string Login = txtBoxZalogujHaslemLogin.Text;
+            string Haslo = txtBoxZalogujHaslemHaslo.Text;
 
-                MyDatabase.Plec.Add(new BazaDanych.Plec() { Nazwa="aa"});
-                MyDatabase.SaveChanges();
 
-            }
+                Uzytkownik? proba = null;
+                try
+                {
+                    proba = GlowneOkno.BazaDanych.Uzytkownik.First(u => u.LoginUzytkownika == Login);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Nie znaleziono takiego uzytkownika, sprawdz swoj login");
+                }
+                
+
+                if(proba != null)
+                {
+                    string hash = proba.hashHaslo;
+                    if (WeryfikacjaHasla(Haslo,hash))
+                    {
+                        GlowneOkno.ZalogowanyUzytkownik = proba;
+                        proba = null;
+                        if (GlowneOkno.ZalogowanyUzytkownik.Rola.idRoli == 1)
+                        {
+                            MainWindow.Nawigacja("PoZalogowaniuUzytkownik.xaml");
+                        }
+                        else if (GlowneOkno.ZalogowanyUzytkownik.Rola.idRoli == 2)
+                        {
+                            MainWindow.Nawigacja("PoZalogowaniuAdmin.xaml");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Zle haslo, sprobuj ponownie");
+                    }
+                }
         }
 
         private void btnPowrot_Click(object sender, RoutedEventArgs e)

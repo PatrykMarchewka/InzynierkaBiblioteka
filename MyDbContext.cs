@@ -3,12 +3,14 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace InżynierkaBiblioteka
 {
-    internal class MyDbContext : DbContext
+    public class MyDbContext : DbContext
     {
         public DbSet<Uzytkownik> Uzytkownik { get; set; }
         public DbSet<Ksiazki> Ksiazki { get; set; }
@@ -26,14 +28,15 @@ namespace InżynierkaBiblioteka
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            string serwer = "sql.bsite.net\\MSSQL2016";
-            string Login = "patryk4610_test";
-            string Haslo = "test";
+            string serwer = "InzynieriaBiblioteka.mssql.somee.com";
+            string nazwaBazy = "InzynieriaBiblioteka";
+            string Login = "patryk4610_SQLLogin_1";
+            string Haslo = "myy4mgwo5k";
             //string Login = "patryk4610_InzBib"; //Nazwa bazy danych jest taka sama jak loginn
             //string Haslo = "kHKPeKLLgWy7F3";
 
 
-            optionsBuilder.UseSqlServer($"Server={serwer};Database={Login};User Id={Login};Password={Haslo};Encrypt=False");
+            optionsBuilder.UseLazyLoadingProxies().UseSqlServer($"Server={serwer};Database={nazwaBazy};User Id={Login};Password={Haslo};Encrypt=False");
         }
 
         protected override void OnModelCreating(ModelBuilder mod)
@@ -54,7 +57,7 @@ namespace InżynierkaBiblioteka
             mod.Entity<Recenzje>().HasOne(r => r.Ksiazka).WithMany(k => k.Recenzje);
             mod.Entity<Recenzje>().HasOne(r => r.Uzytkownik).WithMany(u => u.Recenzje);
 
-            mod.Entity<HashKsiazkiAutorzy>().HasNoKey();
+
             base.OnModelCreating(mod);
         }
     }

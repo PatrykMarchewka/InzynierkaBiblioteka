@@ -7,13 +7,18 @@ using System.Threading.Tasks;
 
 namespace InżynierkaBiblioteka.BazaDanych
 {
-    internal class Role
+    public class Role
     {
         [System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity), Key]
         public int idRoli { get; set; }
         [MaxLength(255)]
         public string Nazwa { get; set; }
 
-        internal ICollection<Uzytkownik> Uzytkownicy;
+        public virtual ICollection<Uzytkownik> Uzytkownicy { get; set; }
+
+        public Role()
+        {
+            
+        }
     }
 }

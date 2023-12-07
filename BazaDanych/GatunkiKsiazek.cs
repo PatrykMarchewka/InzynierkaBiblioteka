@@ -7,11 +7,16 @@ using System.Threading.Tasks;
 
 namespace InżynierkaBiblioteka.BazaDanych
 {
-    internal class GatunkiKsiazek
+    public class GatunkiKsiazek
     {
         [System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity), Key]
         public int idGatunku { get; set; }
         [MaxLength(255)]
         public string Nazwa { get; set; }
+
+        public GatunkiKsiazek()
+        {
+                
+        }
     }
 }

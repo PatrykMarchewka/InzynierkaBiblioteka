@@ -9,7 +9,8 @@
       Title="StworzNoweKonto" Background="MediumPurple">
 
         <Grid>
-            <Label Content="Login" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,20,0,0"/>
+        <Button x:Name="btnPowrot" Content="◀" FontSize="48" VerticalAlignment="Top" HorizontalAlignment="Left" Background="Transparent" BorderThickness="0" Click="btnPowrot_Click"/>
+        <Label Content="Login" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,20,0,0"/>
             <TextBox x:Name="txtBoxLogin" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,40,0,0" Width="100"/>
             <Label Content="Haslo" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,80,0,0"/>
             <TextBox x:Name="txtBoxHaslo" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,100,0,0" Width="100"/>

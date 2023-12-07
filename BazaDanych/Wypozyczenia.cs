@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace InżynierkaBiblioteka.BazaDanych
 {
-    internal class Wypozyczenia
+    public class Wypozyczenia
     {
         [System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity), Key]
         public int idWypozyczenia { get; set; }
@@ -18,8 +18,13 @@ namespace InżynierkaBiblioteka.BazaDanych
 
 
         [ForeignKey("idUzytkownika")]
-        public Uzytkownik Uzytkownik { get; set; }
+        public virtual Uzytkownik Uzytkownik { get; set; }
         [ForeignKey("idKsiazki")]
-        public Ksiazki Ksiazka { get; set; }
+        public virtual Ksiazki Ksiazka { get; set; }
+
+        public Wypozyczenia()
+        {
+            
+        }
     }
 }

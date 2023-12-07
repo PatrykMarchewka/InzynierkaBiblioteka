@@ -15,6 +15,11 @@ namespace InżynierkaBiblioteka.BazaDanych
         public string Nazwa { get; set; }
 
 
-        internal ICollection<Uzytkownik> Uzytkownicy;
+        public virtual ICollection<Uzytkownik> Uzytkownicy { get; set; }
+
+        public Plec()
+        {
+            
+        }
     }
 }

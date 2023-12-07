@@ -8,13 +8,18 @@ using System.Threading.Tasks;
 namespace InżynierkaBiblioteka.BazaDanych
 {
     //Status konta, np aktywowane, dezaktywowane, zbanowane itp
-    internal class Statusy
+    public class Statusy
     {
         [System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity), Key]
         public int idStatusu { get; set; }
         [MaxLength(255)]
         public string Nazwa { get; set; }
 
-        internal ICollection<Uzytkownik> Uzytkownicy;
+        public virtual ICollection<Uzytkownik> Uzytkownicy { get; set; }
+
+        public Statusy()
+        {
+            
+        }
     }
 }

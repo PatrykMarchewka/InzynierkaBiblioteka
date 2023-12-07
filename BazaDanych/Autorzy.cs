@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace InżynierkaBiblioteka.BazaDanych
 {
-    internal class Autorzy
+    public class Autorzy
     {
         [System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity), Key]
         public int idAutora { get; set; }
@@ -16,6 +16,12 @@ namespace InżynierkaBiblioteka.BazaDanych
         [MaxLength(255)]
         public string NazwiskoAutora { get; set; }
 
-        internal ICollection<HashKsiazkiAutorzy> Hashe;
+        public virtual ICollection<HashKsiazkiAutorzy> Hashe { get; set; }
+
+
+        public Autorzy()
+        {
+                
+        }
     }
 }

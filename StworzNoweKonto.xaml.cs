@@ -31,13 +31,11 @@ namespace InżynierkaBiblioteka
             InitializeComponent();
             try
             {
-                using (var MyDatabase = new MyDbContext())
-                {
-                    foreach (var item in MyDatabase.Plec.OrderBy(x => x.idPlci))
+
+                    foreach (var item in GlowneOkno.BazaDanych.Plec.OrderBy(x => x.idPlci))
                     {
                         ListaPlci.Add(item.Nazwa);
                     }
-                }
             }
             catch (Exception ex)
             {
@@ -47,7 +45,6 @@ namespace InżynierkaBiblioteka
             
             comboBoxPlec.ItemsSource = ListaPlci;
             comboBoxPlec.SelectedIndex = 0;
-
         }
 
         private static string StworzHash(string Haslo, string SolString = "BibliotekaInzynieria")
@@ -75,6 +72,7 @@ namespace InżynierkaBiblioteka
             }
             else
             {
+                txtBoxPlec.Visibility = Visibility.Hidden;
                 WybranaPlecID = comboBoxPlec.SelectedIndex + 1;
             }
             
@@ -92,12 +90,13 @@ namespace InżynierkaBiblioteka
                 {
                     try
                     {
-                        using (var MyDatabase = new MyDbContext())
-                        {
-                            MyDatabase.Plec.Add(new Plec() { Nazwa = txtBoxPlec.Text });
-                            MyDatabase.SaveChanges();
-                            WybranaPlecID = MyDatabase.Plec.First(p => p.Nazwa == txtBoxPlec.Text).idPlci;
-                        }
+                        
+                            string tempPlec = txtBoxPlec.Text;
+                            tempPlec = tempPlec.ToLower();
+                            tempPlec = char.ToUpper(tempPlec[0]) + tempPlec.Substring(1);
+                            GlowneOkno.BazaDanych.Plec.Add(new Plec() { Nazwa = tempPlec });
+                        GlowneOkno.BazaDanych.SaveChanges();
+                            WybranaPlecID = GlowneOkno.BazaDanych.Plec.First(p => p.Nazwa == tempPlec).idPlci;
                     }
                     catch (Exception ex)
                     {
@@ -109,11 +108,9 @@ namespace InżynierkaBiblioteka
 
                 try
                 {
-                    using (var MyDatabase = new MyDbContext())
-                    {
-                        Plec tempPlec = MyDatabase.Plec.First(p => p.idPlci == WybranaPlecID);
-                        Role tempRola = MyDatabase.Role.First(r => r.idRoli == 1);
-                        Statusy tempStatus = MyDatabase.Statusy.First(s => s.idStatusu == 1);
+                        Plec tempPlec = GlowneOkno.BazaDanych.Plec.First(p => p.idPlci == WybranaPlecID);
+                        Role tempRola = GlowneOkno.BazaDanych.Role.First(r => r.idRoli == 1);
+                        Statusy tempStatus = GlowneOkno.BazaDanych.Statusy.First(s => s.idStatusu == 1);
 
                         Uzytkownik nowy = new Uzytkownik() { LoginUzytkownika = txtBoxLogin.Text, hashHaslo = StworzHash(txtBoxHaslo.Text),Imie = txtBoxImie.Text, Nazwisko = txtBoxNazwisko.Text, DataStworzeniaKonta = DateTime.UtcNow, Plec = tempPlec, Rola =tempRola, StatusKonta = tempStatus };
                         if (!String.IsNullOrEmpty(txtBoxEmail.Text))
@@ -125,12 +122,11 @@ namespace InżynierkaBiblioteka
                             nowy.nrTelefonu = txtBoxNrTelefonu.Text;
                         }
 
-                        MyDatabase.Uzytkownik.Add(nowy); //TODO: Do zakonczenia
-                        MyDatabase.SaveChanges();
+                    GlowneOkno.BazaDanych.Uzytkownik.Add(nowy); //TODO: Do zakonczenia
+                    GlowneOkno.BazaDanych.SaveChanges();
                         MessageBox.Show("Dodano Uzytkownika");
                         GlowneOkno.ZalogowanyUzytkownik = nowy;
                         nowy = null;
-                    }
                 }
                 catch (Exception ex)
                 {
@@ -138,6 +134,11 @@ namespace InżynierkaBiblioteka
                     MainWindow.Nawigacja("GlowneOkno.xaml");
                 }
             }
+        }
+
+        private void btnPowrot_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow.GlownaRamka.GoBack();
         }
     }
 }

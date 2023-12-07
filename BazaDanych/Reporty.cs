@@ -8,16 +8,21 @@ using System.Threading.Tasks;
 
 namespace InżynierkaBiblioteka.BazaDanych
 {
-    internal class Reporty
+    public class Reporty
     {
         [System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity)]
         [Key]
         public int IDReportu { get; set; }
         [ForeignKey("IDRecenzji")]
-        public Recenzje Recenzje { get; set; }
+        public virtual Recenzje Recenzje { get; set; }
         [MaxLength]
         public string TrescRaportu { get; set; }
         public bool StatusRaportu { get; set; }
+
+        public Reporty()
+        {
+            
+        }
 
     }
 }

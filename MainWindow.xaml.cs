@@ -1,4 +1,5 @@
 ﻿using InżynierkaBiblioteka.BazaDanych;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace InżynierkaBiblioteka
 {
     /// <summary>
@@ -24,6 +26,9 @@ namespace InżynierkaBiblioteka
 
         public static Frame GlownaRamka;
         public static string UserInput; //Po co to? Bo zapomnialem
+        
+
+
         public MainWindow()
         {
             InitializeComponent();
@@ -42,8 +47,14 @@ namespace InżynierkaBiblioteka
             GlownaRamka.Navigate(new Uri(UriMiejsceDocelowe, UriKind.Relative));
         }
 
+        public static void Nawigacja(string UriMiejsceDocelowe, object DodatkoweDane)
+        {
+            GlownaRamka.Navigate(new Uri(UriMiejsceDocelowe, UriKind.Relative), DodatkoweDane);
+        }
+
         private void btnZamknij_Click(object sender, RoutedEventArgs e)
         {
+            GlowneOkno.BazaDanych.Dispose();
             Environment.Exit(0);
         }
 

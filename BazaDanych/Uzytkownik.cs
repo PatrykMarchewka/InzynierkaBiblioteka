@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace InżynierkaBiblioteka.BazaDanych
 {
-    internal class Uzytkownik
+    public class Uzytkownik
     {
         [System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity), Key]
         public int idUzytkownika { get; set; }
@@ -39,16 +39,21 @@ namespace InżynierkaBiblioteka.BazaDanych
 
 
         [ForeignKey("idPlci")]
-        public Plec Plec { get; set; }
+        public virtual Plec Plec { get; set; }
 
         [ForeignKey("idRoli")]
-        public Role Rola { get; set; }
+        public virtual Role Rola { get; set; }
 
         [ForeignKey("idStatusu")]
-        public Statusy StatusKonta { get; set; }
+        public virtual Statusy StatusKonta { get; set; }
 
-        internal ICollection<Wypozyczenia> Wypozyczenia;
-        internal ICollection<Powiadomienia> Powiadomienia;
-        internal ICollection<Recenzje> Recenzje;
+        public virtual ICollection<Wypozyczenia> Wypozyczenia { get; set; }
+        public virtual ICollection<Powiadomienia> Powiadomienia { get; set; }
+        public virtual ICollection<Recenzje> Recenzje { get; set; }
+
+        public Uzytkownik()
+        {
+            
+        }
     }
 }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace InżynierkaBiblioteka.BazaDanych
 {
-    internal class Powiadomienia
+    public class Powiadomienia
     {
         [System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity)]
         [Key]
@@ -17,8 +17,14 @@ namespace InżynierkaBiblioteka.BazaDanych
         public DateTime? KiedyWyslanoMail { get; set; }
 
         [ForeignKey("idKsiazki")]
-        public Ksiazki Ksiazka { get; set; }
+        public virtual Ksiazki Ksiazka { get; set; }
         [ForeignKey("idUzytkownika")]
-        public Uzytkownik Uzytkownik { get; set; }
+        public virtual Uzytkownik Uzytkownik { get; set; }
+
+
+        public Powiadomienia()
+        {
+            
+        }
     }
 }

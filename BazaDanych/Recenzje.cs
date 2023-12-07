@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace InżynierkaBiblioteka.BazaDanych
 {
-    internal class Recenzje
+    public class Recenzje
     {
         [System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity), Key]
         public int IDRecenzji { get; set; }
@@ -20,10 +20,15 @@ namespace InżynierkaBiblioteka.BazaDanych
 
 
         [ForeignKey("idUzytkownika")]
-        public Uzytkownik Uzytkownik { get; set; }
+        public virtual Uzytkownik Uzytkownik { get; set; }
         [ForeignKey("idKsiazki")]
-        public Ksiazki Ksiazka { get; set; }
+        public virtual Ksiazki Ksiazka { get; set; }
 
-        public ICollection<Reporty> Reporty;
+        public virtual ICollection<Reporty> Reporty { get; set; }
+
+        public Recenzje()
+        {
+            
+        }
     }
 }

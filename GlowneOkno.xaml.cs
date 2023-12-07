@@ -21,16 +21,14 @@ namespace InżynierkaBiblioteka
     /// </summary>
     public partial class GlowneOkno : Page
     {
-        internal static Uzytkownik? ZalogowanyUzytkownik;
+        public static Uzytkownik? ZalogowanyUzytkownik;
+        public static MyDbContext BazaDanych = new MyDbContext();
 
         public GlowneOkno()
         {
             InitializeComponent();
             ZalogowanyUzytkownik = null;
-            using (var MyDatabase = new MyDbContext())
-            {
-                MyDatabase.Database.EnsureCreated();
-            }
+            BazaDanych.Database.EnsureCreated();
         }
 
         private void btnZalogujHaslem_Click(object sender, RoutedEventArgs e)
