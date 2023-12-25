@@ -53,22 +53,33 @@ namespace InżynierkaBiblioteka
 
         private void btnWypozyczKsiazke_Click(object sender, RoutedEventArgs e)
         {
-            Wypozyczenia w = new Wypozyczenia()
+            if (GlowneOkno.ZalogowanyUzytkownik.LiczbaWypozyczonychKsiazek >= 3)
             {
-                DataWypozyczenia = DateTime.UtcNow,
-                DataDoOddania = DateTime.UtcNow.AddDays(14),
-                DataAktualnegoOddania = null,
-                Uzytkownik = GlowneOkno.ZalogowanyUzytkownik,
-                Ksiazka = PokazKsiazkeKsiazka
-            };
-            GlowneOkno.BazaDanych.Wypozyczenia.Add(w);
-            GlowneOkno.ZalogowanyUzytkownik.Wypozyczenia.Add(w);
-            PokazKsiazkeKsiazka.Wypozyczenia.Add(w);
-            GlowneOkno.ZalogowanyUzytkownik.LiczbaWypozyczonychKsiazek++;
-            PokazKsiazkeKsiazka.DostepnoscKsiazki--;
-            PokazKsiazkeKsiazka.IloscWypozyczen30Dni++;
-            GlowneOkno.BazaDanych.SaveChanges();
-            MessageBox.Show("Udano!");
+                MessageBox.Show("Blad! Zbyt wiele wypozyczonych ksiazek!");
+            }
+            else
+            {
+                Wypozyczenia w = new Wypozyczenia()
+                {
+                    DataWypozyczenia = DateTime.UtcNow,
+                    DataDoOddania = DateTime.UtcNow.AddDays(14),
+                    DataAktualnegoOddania = null,
+                    Uzytkownik = GlowneOkno.ZalogowanyUzytkownik,
+                    Ksiazka = PokazKsiazkeKsiazka
+                };
+                GlowneOkno.BazaDanych.Wypozyczenia.Add(w);
+                GlowneOkno.ZalogowanyUzytkownik.Wypozyczenia.Add(w);
+                PokazKsiazkeKsiazka.Wypozyczenia.Add(w);
+                GlowneOkno.ZalogowanyUzytkownik.LiczbaWypozyczonychKsiazek++;
+                PokazKsiazkeKsiazka.DostepnoscKsiazki--;
+                PokazKsiazkeKsiazka.IloscWypozyczen30Dni++;
+                GlowneOkno.ZalogowanyUzytkownik.WszystkieWypozyczoneKsiazki.Add(PokazKsiazkeKsiazka);
+                GlowneOkno.BazaDanych.SaveChanges();
+                MessageBox.Show("Wypozyczono ksiazke!");
+            }
+
+
+            
         }
 
         private void btnPowrot_Click(object sender, RoutedEventArgs e)

@@ -33,6 +33,18 @@ namespace InżynierkaBiblioteka
             comboJezyki.Items.Clear();
             comboGatunki.Items.Add("Brak zaznaczenia");
             comboJezyki.Items.Add("Brak zaznaczenia");
+            foreach (var item in GlowneOkno.BazaDanych.GatunkiKsiazek)
+            {
+                comboGatunki.Items.Add(item.Nazwa);
+            }
+
+
+            foreach (var item in GlowneOkno.BazaDanych.Jezyki)
+            {
+                comboJezyki.Items.Add(item.Nazwa);
+            }
+
+
             SliderStrony.Maximum = MaksLiczbaStron;
             SliderStrony.Value = SliderStrony.Maximum;
             SliderRok.Maximum = DateTime.Now.Year;
@@ -52,7 +64,7 @@ namespace InżynierkaBiblioteka
             }
             if (comboJezyki.SelectedIndex > 0)
             {
-                Lista = Lista.Where(b => b.GatunekKsiazki.idGatunku == comboGatunki.SelectedIndex).ToHashSet();
+                Lista = Lista.Where(b => b.JezykKsiazki.idJezyka == comboJezyki.SelectedIndex).ToHashSet();
             }
             Lista = Lista.Where(b => b.RokPublikacjiKsiazki >= 1900 && b.RokPublikacjiKsiazki <= SliderRok.Value).ToHashSet();
             Lista = Lista.Where(b => b.IloscStron <= SliderStrony.Value).ToHashSet();
@@ -107,19 +119,13 @@ namespace InżynierkaBiblioteka
 
         private void comboGatunki_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (comboGatunki.SelectedIndex > 0)
-            {
-                Wyszukaj();
-            }
+            Wyszukaj();
             
         }
 
         private void comboJezyki_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (comboJezyki.SelectedIndex > 0)
-            {
-                Wyszukaj();
-            }
+            Wyszukaj();
             
         }
 

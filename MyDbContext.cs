@@ -32,8 +32,10 @@ namespace InżynierkaBiblioteka
             string nazwaBazy = "InzynieriaBiblioteka";
             string Login = "patryk4610_SQLLogin_1";
             string Haslo = "myy4mgwo5k";
-            //string Login = "patryk4610_InzBib"; //Nazwa bazy danych jest taka sama jak loginn
-            //string Haslo = "kHKPeKLLgWy7F3";
+            //string serwer = "sql.bsite.net\\MSSQL2016";
+            //string nazwaBazy = "patryk4610_InzynieriaBiblioteka";
+            //string Login = "patryk4610_InzynieriaBiblioteka"; //Nazwa bazy danych jest taka sama jak loginn
+            //string Haslo = "Logowanie";
 
 
             optionsBuilder.UseLazyLoadingProxies().UseSqlServer($"Server={serwer};Database={nazwaBazy};User Id={Login};Password={Haslo};Encrypt=False");
@@ -56,6 +58,8 @@ namespace InżynierkaBiblioteka
 
             mod.Entity<Recenzje>().HasOne(r => r.Ksiazka).WithMany(k => k.Recenzje);
             mod.Entity<Recenzje>().HasOne(r => r.Uzytkownik).WithMany(u => u.Recenzje);
+
+
 
 
             base.OnModelCreating(mod);

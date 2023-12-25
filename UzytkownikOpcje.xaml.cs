@@ -16,38 +16,40 @@ using System.Windows.Shapes;
 namespace InżynierkaBiblioteka
 {
     /// <summary>
-    /// Interaction logic for PoZalogowaniu.xaml
+    /// Interaction logic for UzytkownikOpcje.xaml
     /// </summary>
-    public partial class PoZalogowaniu : Page
+    public partial class UzytkownikOpcje : Page
     {
-
-        public PoZalogowaniu()
+        public UzytkownikOpcje()
         {
             InitializeComponent();
         }
 
         private void btnPowrot_Click(object sender, RoutedEventArgs e)
         {
-            GlowneOkno.ZalogowanyUzytkownik = null;
             MainWindow.GlownaRamka.GoBack();
         }
 
-        private void btnWyszukajKsiazke_Click(object sender, RoutedEventArgs e)
+        private void btnZmienHaslo_Click(object sender, RoutedEventArgs e)
         {
-                MainWindow.Nawigacja("WyszukajKsiazke.xaml");
+            MainWindow.Nawigacja("ZmienHaslo.xaml");
         }
 
-        private void btnOddajKsiazke_Click(object sender, RoutedEventArgs e)
+        private void btnZmienRFIDPin_Click(object sender, RoutedEventArgs e)
         {
-            if (GlowneOkno.ZalogowanyUzytkownik.LiczbaWypozyczonychKsiazek == 0)
+            if (GlowneOkno.ZalogowanyUzytkownik.RFID == null)
             {
-                MessageBox.Show("Blad! Nie masz ksiazek do oddania");
+                MessageBox.Show("Blad! Nie przypisano czytnika RFID");
             }
             else
             {
-                //Przejscie do strony oddania
-                MainWindow.Nawigacja("OddajKsiazke.xaml");
+                //TODO: Przejscie na strone zmiany pinu
             }
+        }
+
+        private void btnZmienDaneOsobowe_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow.Nawigacja("ZmienDaneOsobowe.xaml");
         }
     }
 }

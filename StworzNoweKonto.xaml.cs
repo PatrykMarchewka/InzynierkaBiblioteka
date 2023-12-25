@@ -47,7 +47,7 @@ namespace InżynierkaBiblioteka
             comboBoxPlec.SelectedIndex = 0;
         }
 
-        private static string StworzHash(string Haslo, string SolString = "BibliotekaInzynieria")
+        public static string StworzHash(string Haslo, string SolString = "BibliotekaInzynieria")
         {
             byte[] SolIHaslo = Encoding.UTF8.GetBytes(SolString + Haslo);
             byte[] Hash;
@@ -66,6 +66,7 @@ namespace InżynierkaBiblioteka
 
         private void comboBoxPlec_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            /*
             if (comboBoxPlec.SelectedItem.ToString() == "Inna")
             {
                 txtBoxPlec.Visibility = Visibility.Visible;
@@ -75,6 +76,7 @@ namespace InżynierkaBiblioteka
                 txtBoxPlec.Visibility = Visibility.Hidden;
                 WybranaPlecID = comboBoxPlec.SelectedIndex + 1;
             }
+            */
             
         }
 

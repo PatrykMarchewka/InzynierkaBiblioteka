@@ -29,7 +29,7 @@ namespace InżynierkaBiblioteka
                 grid.RowDefinitions.Add(new RowDefinition() { Height= GridLength.Auto});
                 Button button = new Button() { Content= item.Ksiazka.TytulKsiazki };
                 button.Click += (s, e) => btnButton_Click(s, e, item);
-                Grid.SetRow(button, grid.RowDefinitions.Count - 1);
+                Grid.SetRow(button, grid.RowDefinitions.Count);
                 grid.Children.Add(button);
             }
         }
@@ -43,12 +43,24 @@ namespace InżynierkaBiblioteka
         {
             
             //Przetestowac to bo watpie by dzialalo
+            w.DataAktualnegoOddania = DateTime.UtcNow;
+            if (w.DataAktualnegoOddania > w.DataDoOddania)
+            {
+                //TODO: Naliczanie kary
+                //Np dodanie decimal do Uzytkownika w bazie i nie pozwalanie na wypozyczanie
+                //Moze dodac jeszcze jakies sprawdzanie przez admina?
+            }
+            GlowneOkno.ZalogowanyUzytkownik.LiczbaWypozyczonychKsiazek--;
+            MessageBox.Show($"Oddano ksiazke! {w.Ksiazka.TytulKsiazki}");
             
-                w.DataAktualnegoOddania = DateTime.UtcNow;
-                GlowneOkno.ZalogowanyUzytkownik.LiczbaWypozyczonychKsiazek--;
-                MessageBox.Show($"Oddano ksiazke! {w.Ksiazka.TytulKsiazki}");
-                w.Ksiazka.DostepnoscKsiazki++;
-                GlowneOkno.BazaDanych.SaveChanges();
+            w.Ksiazka.DostepnoscKsiazki++;
+
+            if (w.Ksiazka.LiczbaOczekujacych > 0)
+            {
+                //TODO: Wysylanie maili
+            }
+            GlowneOkno.ZalogowanyUzytkownik.Wypozyczenia.Remove(w);
+            GlowneOkno.BazaDanych.SaveChanges();
 
 
         }

@@ -26,6 +26,8 @@ namespace InżynierkaBiblioteka
         public LogowanieHaslem()
         {
             InitializeComponent();
+            txtBoxZalogujHaslemLogin.Text = String.Empty;
+            txtBoxZalogujHaslemHaslo.Text = String.Empty;
         }
 
         private static bool WeryfikacjaHasla(string Haslo, string Hash, string SolString = "BibliotekaInzynieria")

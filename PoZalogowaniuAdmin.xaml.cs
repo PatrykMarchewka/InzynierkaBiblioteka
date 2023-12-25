@@ -23,12 +23,15 @@ namespace InżynierkaBiblioteka
         public PoZalogowaniuAdmin()
         {
             InitializeComponent();
+            GlowneOkno.ZalogowanyAdministrator = GlowneOkno.ZalogowanyUzytkownik;
+
         }
 
         private void btnPowrot_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow.GlownaRamka.GoBack();
             GlowneOkno.ZalogowanyUzytkownik = null;
+            GlowneOkno.ZalogowanyAdministrator = null;
+            MainWindow.GlownaRamka.GoBack();
         }
     }
 }

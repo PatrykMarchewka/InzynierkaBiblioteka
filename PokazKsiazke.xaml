@@ -10,26 +10,26 @@
 
     <Grid>
         <Button x:Name="btnPowrot" Content="◀" FontSize="48" VerticalAlignment="Top" HorizontalAlignment="Left" Background="Transparent" BorderThickness="0" Click="btnPowrot_Click"/>
-        <TextBlock HorizontalAlignment="Left" Margin="337,30,0,0" TextWrapping="Wrap" Text="ISBN:" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="337,60,0,0" TextWrapping="Wrap" Text="Tytul:" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="337,90,0,0" TextWrapping="Wrap" Text="Gatunek:" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="337,120,0,0" TextWrapping="Wrap" Text="Rok publikacji:" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="337,150,0,0" TextWrapping="Wrap" Text="Jezyk" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="337,180,0,0" TextWrapping="Wrap" Text="Ilosc stron" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="337,210,0,0" TextWrapping="Wrap" Text="Dostepnosc:" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="337,240,0,0" TextWrapping="Wrap" Text="Można wypożyczyć?:" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="337,270,0,0" TextWrapping="Wrap" Text="Ilość wypożyczeń (ost 30dni)" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="302,115,0,0" TextWrapping="Wrap" Text="ISBN:" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="302,145,0,0" TextWrapping="Wrap" Text="Tytul:" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="302,175,0,0" TextWrapping="Wrap" Text="Gatunek:" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="302,205,0,0" TextWrapping="Wrap" Text="Rok publikacji:" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="302,235,0,0" TextWrapping="Wrap" Text="Jezyk" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="302,265,0,0" TextWrapping="Wrap" Text="Ilosc stron" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="302,295,0,0" TextWrapping="Wrap" Text="Dostepnosc:" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="302,325,0,0" TextWrapping="Wrap" Text="Można wypożyczyć?:" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="302,355,0,0" TextWrapping="Wrap" Text="Ilość wypożyczeń (ost 30dni)" VerticalAlignment="Top"/>
 
-        <TextBlock x:Name="textBlockISBN" HorizontalAlignment="Left" Margin="617,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBlock x:Name="textBlockTytul" HorizontalAlignment="Left" Margin="617,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBlock x:Name="textBlockGatunek" HorizontalAlignment="Left" Margin="617,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBlock x:Name="textBlockRokPublikacji" HorizontalAlignment="Left" Margin="617,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBlock x:Name="textBlockJezyk" HorizontalAlignment="Left" Margin="617,150,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBlock x:Name="textBlockIloscStron" HorizontalAlignment="Left" Margin="617,180,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBlock x:Name="textBlockDostepnosc" HorizontalAlignment="Left" Margin="617,210,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBlock x:Name="textBlockCzyDoWypozyczenia" HorizontalAlignment="Left" Margin="617,240,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBlock x:Name="textBlockIloscWypozyczen30Dni"  HorizontalAlignment="Left" Margin="617,270,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <Button x:Name="btnWypozyczKsiazke" Content=" Wypozycz ksiazke " FontSize="20" HorizontalAlignment="Left" Margin="179,387,0,0" VerticalAlignment="Top" Foreground="White" Background="Black" Click="btnWypozyczKsiazke_Click">
+        <TextBlock x:Name="textBlockISBN" HorizontalAlignment="Left" Margin="582,115,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlockTytul" HorizontalAlignment="Left" Margin="582,145,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlockGatunek" HorizontalAlignment="Left" Margin="582,175,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlockRokPublikacji" HorizontalAlignment="Left" Margin="582,205,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlockJezyk" HorizontalAlignment="Left" Margin="582,235,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlockIloscStron" HorizontalAlignment="Left" Margin="582,265,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlockDostepnosc" HorizontalAlignment="Left" Margin="582,295,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlockCzyDoWypozyczenia" HorizontalAlignment="Left" Margin="582,325,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlockIloscWypozyczen30Dni"  HorizontalAlignment="Left" Margin="582,355,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <Button x:Name="btnWypozyczKsiazke" Content=" Wypozycz ksiazke " FontSize="20" HorizontalAlignment="Left" Margin="357,423,0,0" VerticalAlignment="Top" Foreground="White" Background="Black" Click="btnWypozyczKsiazke_Click">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="10"/>
