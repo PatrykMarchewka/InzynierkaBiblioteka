@@ -36,21 +36,15 @@ namespace InżynierkaBiblioteka
             Nawigacja("GlowneOkno.xaml");
         }
 
-        public static string DzisiejszaData()
-        {
-            //Dzisiejsza data zapisywana w formacie UTC aby byla taka sama nawet gdyby komputer byl w innej strefie czasowej
-            return DateTime.UtcNow.ToString("dd-MM-yyyy HH-mm-ss");
-        }
-
         public static void Nawigacja(string UriMiejsceDocelowe)
         {
             GlownaRamka.Navigate(new Uri(UriMiejsceDocelowe, UriKind.Relative));
         }
 
-        public static void Nawigacja(string UriMiejsceDocelowe, object DodatkoweDane)
-        {
-            GlownaRamka.Navigate(new Uri(UriMiejsceDocelowe, UriKind.Relative), DodatkoweDane);
-        }
+        //public static void Nawigacja(string UriMiejsceDocelowe, object DodatkoweDane)
+        //{
+        //    GlownaRamka.Navigate(new Uri(UriMiejsceDocelowe, UriKind.Relative), DodatkoweDane);
+        //}
 
         private void btnZamknij_Click(object sender, RoutedEventArgs e)
         {

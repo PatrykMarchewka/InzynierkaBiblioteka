@@ -12,40 +12,41 @@ namespace InżynierkaBiblioteka
 
     public static class WysylanieMaili
     {
-        public static string Login;
-        public static string Haslo;
-        public static readonly string smtpGMail = "smtp.gmail.com";
-        public static readonly int smtpGMailPortSSL = 467;
-        public static readonly int smtpGMailPort = 587;
+        private static SmtpClient? GetSmtpClient;
 
-        public static void LogowanieDoMaila(string emailOdbiorcy, string smtpSerwer, int smtpPort)
+        public static void LogowanieDoMaila(string smtpSerwer = "smtp-mail.outlook.com", int smtpPort = 587, string Login = "login", string Haslo = "haslo")
         {
-            using (var smtpClient = new SmtpClient(smtpSerwer,smtpPort))
-            {
-                smtpClient.UseDefaultCredentials = false;
-                smtpClient.Credentials = new NetworkCredential(Login, Haslo);
-                smtpClient.EnableSsl = true;
-                smtpClient.Timeout = 10000; //10sek
-                smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+                GetSmtpClient = new SmtpClient(smtpSerwer, smtpPort);
+                GetSmtpClient.UseDefaultCredentials = false;
+                GetSmtpClient.Credentials = new NetworkCredential(Login, Haslo);
+                GetSmtpClient.EnableSsl = true;
+                GetSmtpClient.Timeout = 10000; //10sek
+                GetSmtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+        }
 
-                using (MailMessage mm = new MailMessage("od@", emailOdbiorcy, "temat", "Wiadomosc"))
+
+        public static void WysylanieWiadomosciEmail(string emailOdbiorcy, string temat, string wiadomosc)
+        {
+            if (GetSmtpClient == null)
+            {
+                MessageBox.Show("Blad! Nie zalogowano do klienta SMTP");
+            }
+            else
+            {
+                using (MailMessage mm = new MailMessage("email@outlook.com", emailOdbiorcy, temat, wiadomosc))
                 {
                     try
                     {
-                        smtpClient.Send(mm);
+                        GetSmtpClient.Send(mm);
+                        MessageBox.Show("Wyslano wiadomosc Email");
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        MessageBox.Show($"Blad! {ex.Message}");
                     }
-                    
                 }
-
-
-
             }
         }
-
 
 
 

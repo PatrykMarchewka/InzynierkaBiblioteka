@@ -23,6 +23,9 @@ namespace InżynierkaBiblioteka
         public ZmienHaslo()
         {
             InitializeComponent();
+            txtBoxStareHaslo.Text = String.Empty;
+            txtBoxNoweHaslo1.Text = String.Empty;
+            txtBoxNoweHaslo2.Text = String.Empty;
         }
 
         private void btnPowrot_Click(object sender, RoutedEventArgs e)
@@ -40,15 +43,22 @@ namespace InżynierkaBiblioteka
                 {
                     GlowneOkno.ZalogowanyUzytkownik.hashHaslo = StworzNoweKonto.StworzHash(txtBoxNoweHaslo1.Text);
                     GlowneOkno.BazaDanych.SaveChanges();
+                    MessageBox.Show("Sukces! Pomyslnie zmieniono dane");
                 }
                 else
                 {
                     MessageBox.Show("Blad! Sprawdz swoje dane");
+                    txtBoxStareHaslo.Text = String.Empty;
+                    txtBoxNoweHaslo1.Text = String.Empty;
+                    txtBoxNoweHaslo2.Text = String.Empty;
                 }
             }
             else
             {
                 MessageBox.Show("Blad! Sprawdz swoje dane");
+                txtBoxStareHaslo.Text = String.Empty;
+                txtBoxNoweHaslo1.Text = String.Empty;
+                txtBoxNoweHaslo2.Text = String.Empty;
             }
         }
     }

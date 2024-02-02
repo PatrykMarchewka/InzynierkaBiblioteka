@@ -50,7 +50,7 @@ namespace InżynierkaBiblioteka.BazaDanych
         public virtual ICollection<Wypozyczenia> Wypozyczenia { get; set; }
         public virtual ICollection<Powiadomienia> Powiadomienia { get; set; }
         public virtual ICollection<Recenzje> Recenzje { get; set; }
-        public virtual ICollection<Ksiazki> WszystkieWypozyczoneKsiazki { get; set; } = new List<Ksiazki>();
+        public virtual ICollection<Ksiazki> WszystkieWypozyczoneKsiazki { get; set; }
 
         public HashSet<Ksiazki> WszystkieWypozyczoneKsiazkiHash()
         {

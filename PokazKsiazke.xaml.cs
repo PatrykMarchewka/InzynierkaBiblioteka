@@ -49,6 +49,44 @@ namespace InżynierkaBiblioteka
                 btnWypozyczKsiazke.Visibility = Visibility.Hidden;
             }
             textBlockIloscWypozyczen30Dni.Text = PokazKsiazkeKsiazka.IloscWypozyczen30Dni.ToString();
+
+            if (GlowneOkno.ZalogowanyUzytkownik.WszystkieWypozyczoneKsiazkiHash().Contains(PokazKsiazkeKsiazka) && !GlowneOkno.ZalogowanyUzytkownik.Recenzje.Any(r => r.Ksiazka == PokazKsiazkeKsiazka))
+            {
+                btnNapiszRecenzje.Visibility = Visibility.Visible;
+            }
+
+
+
+            //Recenzje
+            foreach (var item in GlowneOkno.BazaDanych.Recenzje.Where(r => r.Ksiazka == PokazKsiazkeKsiazka))
+            {
+                var kopiaItemu = item;
+                Button button = new Button();
+                //145 znakow maks
+                string content = $"{kopiaItemu.DataWystawienia.ToShortDateString()} : {kopiaItemu.Ocena}/5 {kopiaItemu.TekstRecenzji}";
+                if (content.Length > 145)
+                {
+                    button.Content = content.Substring(0, 145) + "...";
+                }
+                else
+                {
+                    button.Content = content;
+                }
+                button.Background = new SolidColorBrush(Colors.Transparent);
+                button.Margin = new Thickness(5);
+                button.Click += (s,e) => Button_Click(s,e,kopiaItemu);
+                Stack.Children.Add(button);
+            }
+
+
+
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e, Recenzje r)
+        {
+            MainWindow.Nawigacja("ZobaczRecenzje.xaml");
+            ZobaczRecenzje.recenzja = r;
         }
 
         private void btnWypozyczKsiazke_Click(object sender, RoutedEventArgs e)
@@ -85,6 +123,11 @@ namespace InżynierkaBiblioteka
         private void btnPowrot_Click(object sender, RoutedEventArgs e)
         {
             MainWindow.GlownaRamka.GoBack();
+        }
+
+        private void btnNapiszRecenzje_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow.Nawigacja("NapiszRecenzje.xaml");
         }
     }
 }

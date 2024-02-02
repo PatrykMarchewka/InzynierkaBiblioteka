@@ -49,5 +49,10 @@ namespace InżynierkaBiblioteka
                 MainWindow.Nawigacja("OddajKsiazke.xaml");
             }
         }
+
+        private void btnOpcje_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow.Nawigacja("UzytkownikOpcje.xaml");
+        }
     }
 }

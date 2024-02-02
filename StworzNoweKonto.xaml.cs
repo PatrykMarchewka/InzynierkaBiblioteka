@@ -124,11 +124,12 @@ namespace InżynierkaBiblioteka
                             nowy.nrTelefonu = txtBoxNrTelefonu.Text;
                         }
 
-                    GlowneOkno.BazaDanych.Uzytkownik.Add(nowy); //TODO: Do zakonczenia
+                    GlowneOkno.BazaDanych.Uzytkownik.Add(nowy);
                     GlowneOkno.BazaDanych.SaveChanges();
                         MessageBox.Show("Dodano Uzytkownika");
                         GlowneOkno.ZalogowanyUzytkownik = nowy;
                         nowy = null;
+                    MainWindow.GlownaRamka.GoBack();
                 }
                 catch (Exception ex)
                 {

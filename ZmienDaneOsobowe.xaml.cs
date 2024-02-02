@@ -53,6 +53,7 @@ namespace InżynierkaBiblioteka
                 GlowneOkno.ZalogowanyUzytkownik.email = txtBoxEmail.Text;
                 GlowneOkno.ZalogowanyUzytkownik.nrTelefonu = txtBoxTelefon.Text;
                 GlowneOkno.BazaDanych.SaveChanges();
+                MessageBox.Show("Sukces! Pomyslnie zmieniono dane");
             }
         }
 

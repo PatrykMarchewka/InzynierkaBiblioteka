@@ -23,7 +23,6 @@ namespace InżynierkaBiblioteka
     public partial class WyszukajKsiazke : Page
     {
         HashSet<Ksiazki> Lista;
-        //TODO: Robic query w konstruktorze na maks liczbe stron
         private int MaksLiczbaStron = 2500;
 
         public WyszukajKsiazke()

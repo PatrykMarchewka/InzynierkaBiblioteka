@@ -26,6 +26,11 @@ namespace InżynierkaBiblioteka
         public LogowanieHaslem()
         {
             InitializeComponent();
+            this.Loaded += LogowanieHaslem_Loaded;
+        }
+
+        private void LogowanieHaslem_Loaded(object sender, RoutedEventArgs e)
+        {
             txtBoxZalogujHaslemLogin.Text = String.Empty;
             txtBoxZalogujHaslemHaslo.Text = String.Empty;
         }
@@ -102,5 +107,12 @@ namespace InżynierkaBiblioteka
         {
             MainWindow.GlownaRamka.GoBack();
         }
+
+        private void btnOdzyskajKonto_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow.Nawigacja("OdzyskajKonto.xaml");
+        }
+
+
     }
 }
