@@ -11,8 +11,8 @@
     <Grid>
         <Button x:Name="btnPowrot" Content="◀" FontSize="48" VerticalAlignment="Top" HorizontalAlignment="Left" Background="Transparent" BorderThickness="0" Click="btnPowrot_Click"/>
 
-        <TextBox x:Name="txtBoxZalogujHaslemLogin" HorizontalAlignment="Center" Margin="0,135,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="txtBoxZalogujHaslemHaslo" HorizontalAlignment="Center" Margin="0,225,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtBoxZalogujHaslemLogin" HorizontalAlignment="Center" Margin="0,135,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtBoxZalogujHaslemHaslo" HorizontalAlignment="Center" Margin="0,225,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="120"/>
         <Button Content=" Zaloguj " FontSize="40" HorizontalAlignment="Center" Margin="0,300,0,0" Foreground="White" Background="Black" VerticalAlignment="Top" Click="Button_Click">
             <Button.Resources>
                 <Style TargetType="Border">

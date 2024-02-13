@@ -25,15 +25,38 @@ namespace InżynierkaBiblioteka
         public ZobaczRecenzje()
         {
             InitializeComponent();
+            this.Loaded += ZobaczRecenzje_Loaded;
+            
         }
 
+        private void ZobaczRecenzje_Loaded(object sender, RoutedEventArgs e)
+        {
+            lblUzytkownik.Content = String.Empty;
+            lblOcena.Content = String.Empty;
+            txtBlockRecenzja.Text = String.Empty;
 
+            lblUzytkownik.Content = recenzja.Uzytkownik.LoginUzytkownika;
+            for (int i = 0; i < recenzja.Ocena; i++)
+            {
+                lblOcena.Content += "⭐";
+            }
+
+            txtBlockRecenzja.Text = recenzja.TekstRecenzji;
+
+
+
+        }
 
         private void btnPowrot_Click(object sender, RoutedEventArgs e)
         {
             MainWindow.GlownaRamka.GoBack();
         }
 
-        
+        private void btnZglosRecenzje_Click(object sender, RoutedEventArgs e)
+        {
+
+            //TODO: Przejscie na strone reportowania recenzji
+            //Reporty report = new Reporty() { Recenzje = recenzja, StatusRaportu = false, TrescRaportu = }
+        }
     }
 }

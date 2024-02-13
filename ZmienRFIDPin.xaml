@@ -13,9 +13,9 @@
         <Label Content="Podaj stary pin:" FontSize="40" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="60,92,0,0"/>
         <Label Content="Podaj nowy pin:" FontSize="40" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="55,155,0,0"/>
         <Label Content="Podaj nowy pin ponownie:" FontSize="40" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="55,218,0,0"/>
-        <TextBox x:Name="txtBoxStaryPin" FontSize="30" HorizontalAlignment="Left" Margin="620,113,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="185" Height="40" />
-        <TextBox x:Name="txtBoxNowyPin" FontSize="30" HorizontalAlignment="Left" Margin="620,167,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="185" Height="40"/>
-        <TextBox x:Name="txtBoxNowyPin2" FontSize="30" HorizontalAlignment="Left" Margin="620,230,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="185" Height="40"/>
+        <TextBox x:Name="txtBoxStaryPin" FontSize="30" HorizontalAlignment="Left" Margin="620,113,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="185" Height="40" />
+        <TextBox x:Name="txtBoxNowyPin" FontSize="30" HorizontalAlignment="Left" Margin="620,167,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="185" Height="40"/>
+        <TextBox x:Name="txtBoxNowyPin2" FontSize="30" HorizontalAlignment="Left" Margin="620,230,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="185" Height="40"/>
         <Button x:Name="btnZapiszZmiany" Content=" Zapisz Zmiany " FontSize="40" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,370,0,0" Foreground="White" Background="Black" Click="btnZapiszZmiany_Click">
             <Button.Resources>
                 <Style TargetType="Border">

@@ -14,7 +14,7 @@ namespace InżynierkaBiblioteka
     {
         private static SmtpClient? GetSmtpClient;
 
-        public static void LogowanieDoMaila(string smtpSerwer = "smtp-mail.outlook.com", int smtpPort = 587, string Login = "login", string Haslo = "haslo")
+        public static void LogowanieDoMaila(string smtpSerwer = "smtp-mail.outlook.com", int smtpPort = 587, string Login = "InzynieriaBiblioteka@outlook.com", string Haslo = "myy4mgwo5k")
         {
                 GetSmtpClient = new SmtpClient(smtpSerwer, smtpPort);
                 GetSmtpClient.UseDefaultCredentials = false;
@@ -33,7 +33,7 @@ namespace InżynierkaBiblioteka
             }
             else
             {
-                using (MailMessage mm = new MailMessage("email@outlook.com", emailOdbiorcy, temat, wiadomosc))
+                using (MailMessage mm = new MailMessage("InzynieriaBiblioteka@outlook.com", emailOdbiorcy, temat, wiadomosc))
                 {
                     try
                     {

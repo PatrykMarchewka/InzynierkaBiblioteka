@@ -10,11 +10,18 @@
 
     <Grid>
         <Button x:Name="btnPowrot" Content="◀" FontSize="48" VerticalAlignment="Top" HorizontalAlignment="Left" Background="Transparent" BorderThickness="0" Click="btnPowrot_Click"/>
-        <Label Content="Uzytkownik" HorizontalAlignment="Left" Margin="256,116,0,0" VerticalAlignment="Top"/>
-        <Label Content="Ocena" HorizontalAlignment="Left" Margin="256,230,0,0" VerticalAlignment="Top"/>
-        <Label Content="Tekst recenzji" HorizontalAlignment="Left" Margin="275,306,0,0" VerticalAlignment="Top"/>
-        <Label Content="Label" HorizontalAlignment="Left" Margin="467,129,0,0" VerticalAlignment="Top"/>
-        <Label Content="Label" HorizontalAlignment="Left" Margin="486,230,0,0" VerticalAlignment="Top"/>
-        <Label Content="Label" HorizontalAlignment="Left" Margin="505,332,0,0" VerticalAlignment="Top"/>
+        <Label Content="Uzytkownik:" FontSize="20" HorizontalAlignment="Left" Margin="200,110,0,0" VerticalAlignment="Top"/>
+        <Label Content="Ocena:" FontSize="20" HorizontalAlignment="Left" Margin="200,150,0,0" VerticalAlignment="Top"/>
+        <Label Content="Tekst recenzji" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,100"/>
+        <Label x:Name="lblUzytkownik" Content="" FontSize="20" HorizontalAlignment="Left" Margin="800,110,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblOcena" Content="" FontSize="20" HorizontalAlignment="Left" Margin="800,150,0,0" VerticalAlignment="Top"/>
+        <TextBlock x:Name="txtBlockRecenzja" Text="" FontSize="20" TextWrapping="Wrap" HorizontalAlignment="Left" Margin="10,0,0,100" VerticalAlignment="Bottom"/>
+        <Button x:Name="btnZglosRecenzje" Content=" Zglos recenzje " FontSize="40" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,10" Foreground="White" Background="Black" Click="btnZglosRecenzje_Click">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Button.Resources>
+        </Button>
     </Grid>
 </Page>

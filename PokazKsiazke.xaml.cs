@@ -85,8 +85,8 @@ namespace InżynierkaBiblioteka
 
         private void Button_Click(object sender, RoutedEventArgs e, Recenzje r)
         {
-            MainWindow.Nawigacja("ZobaczRecenzje.xaml");
             ZobaczRecenzje.recenzja = r;
+            MainWindow.Nawigacja("ZobaczRecenzje.xaml");
         }
 
         private void btnWypozyczKsiazke_Click(object sender, RoutedEventArgs e)

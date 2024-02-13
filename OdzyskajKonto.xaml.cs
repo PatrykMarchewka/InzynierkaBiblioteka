@@ -21,6 +21,9 @@ namespace InżynierkaBiblioteka
     /// </summary>
     public partial class OdzyskajKonto : Page
     {
+
+        public static Uzytkownik? proba;
+
         public OdzyskajKonto()
         {
             InitializeComponent();
@@ -31,6 +34,7 @@ namespace InżynierkaBiblioteka
 
         private void OdzyskajKonto_Loaded(object sender, RoutedEventArgs e)
         {
+            proba = null;
             txtBoxEmail.Text = String.Empty;
             txtBoxLogin.Text = String.Empty;
         }
@@ -44,7 +48,7 @@ namespace InżynierkaBiblioteka
         {
             if (txtBoxEmail.Text.Contains('@'))
             {
-                Uzytkownik? proba = null;
+                proba = null;
                 try
                 {
                     proba = GlowneOkno.BazaDanych.Uzytkownik.First(u => u.LoginUzytkownika == txtBoxLogin.Text);
@@ -56,10 +60,7 @@ namespace InżynierkaBiblioteka
 
                 if (proba != null && proba.email == txtBoxEmail.Text)
                 {
-                    //TODO: Dokonczyc Wyslanie emaila, ulepszyc, moze przekazac stringi gdzies
-                    WysylanieMaili.LogowanieDoMaila();
-                    WysylanieMaili.WysylanieWiadomosciEmail("patryk4610@gmail.com", "Prosba o odzyskanie konta", "Przykladowa wiadomosc"); //TODO: Zrobic konto outlook, na prywatnym dziala
-                    //Dac txtBoxEmail.text zamiast mojego
+                    MainWindow.Nawigacja("ZmienHaslo.xaml");
                 }
             }
             else

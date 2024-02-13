@@ -17,7 +17,7 @@
         <Button x:Name="btnGwiazda4" Content="⭐" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="100,128,0,0" BorderThickness="0" Background="Transparent" Click="btnGwiazda_Click"/>
         <Button x:Name="btnGwiazda5" Content="⭐" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="200,128,0,0" BorderThickness="0" Background="Transparent" Click="btnGwiazda_Click"/>
         <Label Content="Recenzja (opcjonalnie)" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <TextBox x:Name="txtBoxRecenzja" HorizontalAlignment="Center" Margin="0,320,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="510" Height="120"/>
+        <TextBox x:Name="txtBoxRecenzja" HorizontalAlignment="Center" Margin="0,320,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="510" Height="120"/>
         <Button x:Name="btnDodajRecenzje" Content=" Dodaj Recenzje " FontSize="20" HorizontalAlignment="Center" Margin="0,460,0,0" VerticalAlignment="Top" Foreground="White" Background="Black" Click="btnDodajRecenzje_Click">
             <Button.Resources>
                 <Style TargetType="Border">

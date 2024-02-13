@@ -12,8 +12,8 @@
         <Button x:Name="btnPowrot" Content="◀" FontSize="48" VerticalAlignment="Top" HorizontalAlignment="Left" Background="Transparent" BorderThickness="0" Click="btnPowrot_Click"/>
         <Label Content="Podaj swoj login:" FontSize="40" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="60,92,0,0"/>
         <Label Content="Podaj przypisany email:" FontSize="40" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="55,155,0,0"/>
-        <TextBox x:Name="txtBoxLogin" FontSize="30" HorizontalAlignment="Left" Margin="520,104,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="285" Height="40" />
-        <TextBox x:Name="txtBoxEmail" FontSize="30" HorizontalAlignment="Left" Margin="520,167,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="285" Height="40" TextChanged="txtBoxEmail_TextChanged"/>
+        <TextBox x:Name="txtBoxLogin" FontSize="30" HorizontalAlignment="Left" Margin="520,104,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="285" Height="40" />
+        <TextBox x:Name="txtBoxEmail" FontSize="30" HorizontalAlignment="Left" Margin="520,167,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="285" Height="40" TextChanged="txtBoxEmail_TextChanged"/>
         <Label x:Name="lblZnakA" Content="Email musi zawierac znak @" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="535,212,0,0" Foreground="Red" Visibility="Hidden"/>
         <Button x:Name="btnOdzyskajKonto" Content=" Odzyskaj konto " FontSize="40" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,270,0,0" Background="Black" Foreground="White" Click="btnOdzyskajKonto_Click">
             <Button.Resources>

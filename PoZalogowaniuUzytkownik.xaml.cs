@@ -24,6 +24,7 @@ namespace InżynierkaBiblioteka
         public PoZalogowaniu()
         {
             InitializeComponent();
+            
         }
 
         private void btnPowrot_Click(object sender, RoutedEventArgs e)
