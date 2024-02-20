@@ -10,5 +10,28 @@
 
     <Grid>
         <Button x:Name="btnPowrot" Content="◀" FontSize="48" VerticalAlignment="Top" HorizontalAlignment="Left" Background="Transparent" BorderThickness="0" Click="btnPowrot_Click"/>
+        <Button x:Name="btnWyszukajUzytkownika" Content=" Wyszukaj uzytkownika " FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" Background="Black" Click="btnWyszukajUzytkownika_Click">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+
+        <Button x:Name="btnDodajKsiazke" Content=" Dodaj ksiazke " FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,150,0,0" Foreground="White" Background="Black" Click="btnDodajKsiazke_Click">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+
+        <Button x:Name="btnZobaczReporty" Content=" ZobaczReporty " FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,300,0,0" Foreground="White" Background="Black" Click="btnZobaczReporty_Click">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Button.Resources>
+        </Button>
     </Grid>
 </Page>

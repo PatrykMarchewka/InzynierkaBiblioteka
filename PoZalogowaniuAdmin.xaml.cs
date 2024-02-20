@@ -33,5 +33,21 @@ namespace InżynierkaBiblioteka
             GlowneOkno.ZalogowanyAdministrator = null;
             MainWindow.GlownaRamka.GoBack();
         }
+
+        private void btnWyszukajUzytkownika_Click(object sender, RoutedEventArgs e)
+        {
+            //TODO: Przejscie na wyszukiwanie uzytkownikow
+
+        }
+
+        private void btnDodajKsiazke_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow.Nawigacja("AdminDodajKsiazke.xaml");
+        }
+
+        private void btnZobaczReporty_Click(object sender, RoutedEventArgs e)
+        {
+            //TODO: Przejscie na zobaczenie reportow
+        }
     }
 }

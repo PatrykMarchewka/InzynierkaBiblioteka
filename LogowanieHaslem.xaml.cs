@@ -93,6 +93,8 @@ namespace InżynierkaBiblioteka
                         }
                         else if (GlowneOkno.ZalogowanyUzytkownik.Rola.idRoli == 2)
                         {
+                            GlowneOkno.ZalogowanyAdministrator = GlowneOkno.ZalogowanyUzytkownik;
+                            GlowneOkno.ZalogowanyUzytkownik = null;
                             MainWindow.Nawigacja("PoZalogowaniuAdmin.xaml");
                         }
                     }

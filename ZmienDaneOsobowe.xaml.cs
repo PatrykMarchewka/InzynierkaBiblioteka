@@ -48,12 +48,15 @@ namespace InżynierkaBiblioteka
             }
             else
             {
+                WysylanieMaili.LogowanieDoMaila();
+                WysylanieMaili.WysylanieWiadomosciEmail(GlowneOkno.ZalogowanyUzytkownik.email, "Zmiana danych osobowych", $"Otrzymaliśmy prośbę o zmianę twoich danych osobowych\nJeśli to nie ty wysłałeś prośbę to zmień hasło jak najszybciej!");
                 GlowneOkno.ZalogowanyUzytkownik.Imie = txtBoxImie.Text;
                 GlowneOkno.ZalogowanyUzytkownik.Nazwisko = txtBoxNazwisko.Text;
                 GlowneOkno.ZalogowanyUzytkownik.email = txtBoxEmail.Text;
                 GlowneOkno.ZalogowanyUzytkownik.nrTelefonu = txtBoxTelefon.Text;
                 GlowneOkno.BazaDanych.SaveChanges();
                 MessageBox.Show("Sukces! Pomyslnie zmieniono dane");
+
             }
         }
 

@@ -55,8 +55,7 @@ namespace InżynierkaBiblioteka
         private void btnZglosRecenzje_Click(object sender, RoutedEventArgs e)
         {
 
-            //TODO: Przejscie na strone reportowania recenzji
-            //Reporty report = new Reporty() { Recenzje = recenzja, StatusRaportu = false, TrescRaportu = }
+            MainWindow.Nawigacja("RaportujRecenzje.xaml");
         }
     }
 }
