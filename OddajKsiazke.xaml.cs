@@ -24,28 +24,31 @@ namespace InżynierkaBiblioteka
         public OddajKsiazke()
         {
             InitializeComponent();
+            grid.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto });
             foreach (var item in GlowneOkno.ZalogowanyUzytkownik.Wypozyczenia)
             {
                 grid.RowDefinitions.Add(new RowDefinition() { Height= GridLength.Auto});
                 Button button = new Button() { Content= item.Ksiazka.TytulKsiazki };
                 button.Click += (s, e) => btnButton_Click(s, e, item);
-                Grid.SetRow(button, grid.RowDefinitions.Count);
+                Grid.SetRow(button, grid.RowDefinitions.Count-1);
                 grid.Children.Add(button);
             }
         }
 
         private void btnPowrot_Click(object sender, RoutedEventArgs e)
         {
+            grid.Children.Clear();
             MainWindow.GlownaRamka.GoBack();
         }
 
         private void btnButton_Click(object sender, RoutedEventArgs e, Wypozyczenia w)
         {
-            
-            //Przetestowac to bo watpie by dzialalo
             w.DataAktualnegoOddania = DateTime.UtcNow;
             if (w.DataAktualnegoOddania > w.DataDoOddania)
             {
+                TimeSpan data = w.DataAktualnegoOddania.Value - w.DataDoOddania;
+                decimal kara = 10 * data.Days;
+                GlowneOkno.ZalogowanyUzytkownik.Zaleglosci += kara;
                 //TODO: Naliczanie kary
                 //Np dodanie decimal do Uzytkownika w bazie i nie pozwalanie na wypozyczanie
                 //Moze dodac jeszcze jakies sprawdzanie przez admina?
@@ -57,11 +60,20 @@ namespace InżynierkaBiblioteka
 
             if (w.Ksiazka.LiczbaOczekujacych > 0)
             {
-                //TODO: Wysylanie maili
+                Powiadomienia? p = GlowneOkno.BazaDanych.Powiadomienia.FirstOrDefault(p => p.Ksiazka == w.Ksiazka && p.KiedyWyslanoMail == null);
+                if (p != null)
+                {
+                    WysylanieMaili.LogowanieDoMaila();
+                    WysylanieMaili.WysylanieWiadomosciEmail(p.Uzytkownik.email, "Powiadomienie o dostępności książki", $"Otrzymaliśmy dostawę z twoją książką\nKsiążka: {p.Ksiazka.TytulKsiazki} jest teraz dostępna w naszej bibliotece");
+                    p.KiedyWyslanoMail = DateTime.UtcNow;
+                    p.Ksiazka.LiczbaOczekujacych--;
+                }
+
             }
             GlowneOkno.ZalogowanyUzytkownik.Wypozyczenia.Remove(w);
             GlowneOkno.BazaDanych.SaveChanges();
 
+            grid.Children.Remove((Button)sender);
 
         }
     }

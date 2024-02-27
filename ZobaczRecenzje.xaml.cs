@@ -34,7 +34,6 @@ namespace InżynierkaBiblioteka
             lblUzytkownik.Content = String.Empty;
             lblOcena.Content = String.Empty;
             txtBlockRecenzja.Text = String.Empty;
-
             lblUzytkownik.Content = recenzja.Uzytkownik.LoginUzytkownika;
             for (int i = 0; i < recenzja.Ocena; i++)
             {

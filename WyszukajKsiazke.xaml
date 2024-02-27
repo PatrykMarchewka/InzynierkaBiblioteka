@@ -22,7 +22,7 @@
 
             </StackPanel>
         </ScrollViewer>
-        <Slider x:Name="SliderRok" Minimum="1900" Value="2023" IsSnapToTickEnabled="True" TickPlacement="BottomRight" TickFrequency="1" HorizontalAlignment="Left" Margin="321,190,0,0" VerticalAlignment="Top" Width="120" ValueChanged="SliderRok_ValueChanged"/>
+        <Slider x:Name="SliderRok" IsSnapToTickEnabled="True" TickPlacement="BottomRight" TickFrequency="1" HorizontalAlignment="Left" Margin="321,190,0,0" VerticalAlignment="Top" Width="120" ValueChanged="SliderRok_ValueChanged"/>
         <Slider x:Name="SliderStrony" Minimum="0" IsSnapToTickEnabled="True" TickPlacement="BottomRight" TickFrequency="100" HorizontalAlignment="Left" Margin="485,190,0,0" VerticalAlignment="Top" Width="120" ValueChanged="SliderStrony_ValueChanged"/>
         <Label x:Name="lblStrony" Content="" HorizontalAlignment="Left" Margin="535,165,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblRok" Content="" HorizontalAlignment="Left" Margin="376,165,0,0" VerticalAlignment="Top"/>

@@ -23,21 +23,15 @@ namespace InżynierkaBiblioteka
     public partial class AdminEdycjaKsiazki : Page
     {
         public static Ksiazki? EdytowanaKsiazka;
-        Regex regex = new Regex("[^0-9]+");
+        Regex regex = new Regex("^[0-9\\-]*(x)?$");
+        Regex regexliczby = new Regex("^[0-9]");
+        List<Powiadomienia> powia = new List<Powiadomienia>();
 
         public AdminEdycjaKsiazki()
         {
             InitializeComponent();
-            comboGatunki.Items.Clear();
-            comboJezyk.Items.Clear();
-            foreach (var item in GlowneOkno.BazaDanych.GatunkiKsiazek)
-            {
-                comboGatunki.Items.Add(item);
-            }
-            foreach (var item in GlowneOkno.BazaDanych.Jezyki)
-            {
-                comboJezyk.Items.Add(item);
-            }
+            comboGatunki.ItemsSource = GlowneOkno.BazaDanych.GatunkiKsiazek.OrderBy(g => g.Nazwa).ToHashSet();
+            comboJezyk.ItemsSource = GlowneOkno.BazaDanych.Jezyki.OrderBy(j => j.Nazwa).ToHashSet();
             if (EdytowanaKsiazka != null)
             {
                 txtBoxISBN.Text = EdytowanaKsiazka.ISBN;
@@ -76,6 +70,35 @@ namespace InżynierkaBiblioteka
             }
             else
             {
+                if (EdytowanaKsiazka.DostepnoscKsiazki == 0)
+                {
+                    int liczba = int.Parse(txtboxKopie.Text);
+                    foreach (var item in GlowneOkno.BazaDanych.Powiadomienia)
+                    {
+                        if (item.Ksiazka.ISBN == EdytowanaKsiazka.ISBN && item.KiedyWyslanoMail == null && (bool)chkBoxWypozyczenie.IsChecked && liczba > 0)
+                        {
+                            //Dodawanie do listy poniewaz EF Core nie lubi jak sie otwiera wiele polaczen naraz!
+                            powia.Add(item);
+                            item.Ksiazka.LiczbaOczekujacych--;
+                            liczba--;
+                        }
+                        else if (liczba <= 0)
+                        {
+                            break;
+                        }
+                    }
+                }
+
+
+
+
+                foreach (var item in powia)
+                {
+                    WysylanieMaili.WysylanieWiadomosciEmail(item.Uzytkownik.email, "Powiadomienie o dostępności książki", $"Otrzymaliśmy dostawę z twoją książką\nKsiążka: {EdytowanaKsiazka.TytulKsiazki} jest teraz dostępna w naszej bibliotece");
+                    item.KiedyWyslanoMail = DateTime.UtcNow;
+                }
+                powia.Clear();
+
                 EdytowanaKsiazka.ISBN = txtBoxISBN.Text;
                 EdytowanaKsiazka.TytulKsiazki = txtBoxTytul.Text;
                 EdytowanaKsiazka.GatunekKsiazki = (BazaDanych.GatunkiKsiazek)comboGatunki.SelectedItem;
@@ -84,12 +107,29 @@ namespace InżynierkaBiblioteka
                 EdytowanaKsiazka.IloscStron = int.Parse(txtBoxStrony.Text);
                 EdytowanaKsiazka.DostepnoscKsiazki = int.Parse(txtboxKopie.Text);
                 EdytowanaKsiazka.DoWypozyczenia = (bool)chkBoxWypozyczenie.IsChecked;
+
+                GlowneOkno.BazaDanych.SaveChanges();
+
+
             }
+
+
+        }
+
+        private void txtBoxISBNRegex(object sender, TextCompositionEventArgs e)
+        {
+            if (sender is TextBox txtBox)
+            {
+                string tekst = txtBox.Text + e.Text;
+                e.Handled = !regex.IsMatch(tekst);
+            }
+            
         }
 
         private void txtBoxRegex(object sender, TextCompositionEventArgs e)
         {
-            e.Handled = regex.IsMatch(e.Text);
+            e.Handled = !regexliczby.IsMatch(e.Text);
         }
+
     }
 }

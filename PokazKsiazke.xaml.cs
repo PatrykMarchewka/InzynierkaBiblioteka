@@ -50,9 +50,24 @@ namespace InżynierkaBiblioteka
             }
             textBlockIloscWypozyczen30Dni.Text = PokazKsiazkeKsiazka.IloscWypozyczen30Dni.ToString();
 
-            if (GlowneOkno.ZalogowanyUzytkownik.WszystkieWypozyczoneKsiazkiHash().Contains(PokazKsiazkeKsiazka) && !GlowneOkno.ZalogowanyUzytkownik.Recenzje.Any(r => r.Ksiazka == PokazKsiazkeKsiazka))
+            if (GlowneOkno.ZalogowanyUzytkownik.WszystkieWypozyczoneKsiazkiHash().Contains(PokazKsiazkeKsiazka))
             {
                 btnNapiszRecenzje.Visibility = Visibility.Visible;
+                if (GlowneOkno.ZalogowanyUzytkownik.Recenzje.Any(r => r.Ksiazka == PokazKsiazkeKsiazka))
+                {
+                    btnNapiszRecenzje.Content = " Edytuj Recenzje ";
+                    NapiszRecenzje.IstniejacaRecenzja = GlowneOkno.ZalogowanyUzytkownik.Recenzje.First(r => r.Ksiazka == PokazKsiazkeKsiazka);
+                }
+                else
+                {
+                    NapiszRecenzje.IstniejacaRecenzja = null;
+                }
+            }
+
+            if (!PokazKsiazkeKsiazka.DoWypozyczenia || PokazKsiazkeKsiazka.DostepnoscKsiazki == 0)
+            {
+                btnWypozyczKsiazke.Visibility = Visibility.Hidden;
+                btnStworzPowiadomienie.Visibility = Visibility.Visible;
             }
 
 
@@ -91,9 +106,9 @@ namespace InżynierkaBiblioteka
 
         private void btnWypozyczKsiazke_Click(object sender, RoutedEventArgs e)
         {
-            if (GlowneOkno.ZalogowanyUzytkownik.LiczbaWypozyczonychKsiazek >= 3)
+            if (GlowneOkno.ZalogowanyUzytkownik.LiczbaWypozyczonychKsiazek >= 3 || GlowneOkno.ZalogowanyUzytkownik.Zaleglosci != 0)
             {
-                MessageBox.Show("Blad! Zbyt wiele wypozyczonych ksiazek!");
+                MessageBox.Show("Blad! Nie mozna wypozyczyc wiecej ksiazek!");
             }
             else
             {
@@ -128,6 +143,49 @@ namespace InżynierkaBiblioteka
         private void btnNapiszRecenzje_Click(object sender, RoutedEventArgs e)
         {
             MainWindow.Nawigacja("NapiszRecenzje.xaml");
+        }
+
+        private void btnStworzPowiadomienie_Click(object sender, RoutedEventArgs e)
+        {
+            if (GlowneOkno.ZalogowanyUzytkownik.Powiadomienia.Any(p => p.Ksiazka == PokazKsiazkeKsiazka))
+            {
+                MessageBoxResult result = MessageBox.Show("Czy chcesz usunąć swoje powiadomienie o tej książce?", "Powiadomienie", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.Yes)
+                {
+                    Powiadomienia pow = GlowneOkno.ZalogowanyUzytkownik.Powiadomienia.First(pow => pow.Ksiazka == PokazKsiazkeKsiazka);
+                    GlowneOkno.ZalogowanyUzytkownik.Powiadomienia.Remove(pow);
+                    GlowneOkno.BazaDanych.Powiadomienia.Remove(pow);
+                    PokazKsiazkeKsiazka.LiczbaOczekujacych--;
+                    GlowneOkno.BazaDanych.SaveChanges();
+                }
+            }
+            else
+            {
+
+                if (GlowneOkno.ZalogowanyUzytkownik.email != null)
+                {
+                    Powiadomienia p = new Powiadomienia()
+                    {
+                        KiedyStworzono = DateTime.UtcNow,
+                        Ksiazka = PokazKsiazkeKsiazka,
+                        Uzytkownik = GlowneOkno.ZalogowanyUzytkownik,
+                        KiedyWyslanoMail = null
+                    };
+                    GlowneOkno.BazaDanych.Powiadomienia.Add(p);
+                    GlowneOkno.ZalogowanyUzytkownik.Powiadomienia.Add(p);
+                    PokazKsiazkeKsiazka.LiczbaOczekujacych++;
+                    GlowneOkno.BazaDanych.SaveChanges();
+                }
+                else
+                {
+                    MessageBox.Show("Blad! Aby otrzymac powiadomienie musisz miec ustawiony adres email");
+                }
+
+                
+            }
+
+
+            
         }
     }
 }

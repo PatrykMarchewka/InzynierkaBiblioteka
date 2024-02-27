@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InżynierkaBiblioteka.BazaDanych;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -21,10 +22,22 @@ namespace InżynierkaBiblioteka
     /// </summary>
     public partial class NapiszRecenzje : Page
     {
-        int ocena;
+        int ocena = 0;
+        public static Recenzje? IstniejacaRecenzja;
+        Button[] ocenyArray;
+
         public NapiszRecenzje()
         {
             InitializeComponent();
+            ocenyArray = new[] { btnGwiazda1,btnGwiazda2,btnGwiazda3,btnGwiazda4,btnGwiazda5 };
+            if (IstniejacaRecenzja != null)
+            {
+                txtBoxRecenzja.Text = IstniejacaRecenzja.TekstRecenzji;
+                ocena = IstniejacaRecenzja.Ocena;
+                btnGwiazda_Click(ocenyArray[ocena-1], new RoutedEventArgs());
+                
+            }
+            
         }
 
         private void btnGwiazda_Click(object sender, RoutedEventArgs e)
@@ -33,52 +46,44 @@ namespace InżynierkaBiblioteka
             SolidColorBrush black = new SolidColorBrush(Colors.Black);
             if (sender is Button btn)
             {
+
+                
+
+
+
                 switch (btn.Name)
                 {
                     case "btnGwiazda1":
-                        btnGwiazda1.Foreground = white;
-                        btnGwiazda2.Foreground = black;
-                        btnGwiazda3.Foreground = black;
-                        btnGwiazda4.Foreground = black;
-                        btnGwiazda5.Foreground = black;
                         ocena = 1;
                         break;
                     case "btnGwiazda2":
-                        btnGwiazda1.Foreground = white;
-                        btnGwiazda2.Foreground = white;
-                        btnGwiazda3.Foreground = black;
-                        btnGwiazda4.Foreground = black;
-                        btnGwiazda5.Foreground = black;
                         ocena = 2;
                         break;
                     case "btnGwiazda3":
-                        btnGwiazda1.Foreground = white;
-                        btnGwiazda2.Foreground = white;
-                        btnGwiazda3.Foreground = white;
-                        btnGwiazda4.Foreground = black;
-                        btnGwiazda5.Foreground = black;
                         ocena = 3;
                         break;
                     case "btnGwiazda4":
-                        btnGwiazda1.Foreground = white;
-                        btnGwiazda2.Foreground = white;
-                        btnGwiazda3.Foreground = white;
-                        btnGwiazda4.Foreground = white;
-                        btnGwiazda5.Foreground = black;
                         ocena = 4;
                         break;
                     case "btnGwiazda5":
-                        btnGwiazda1.Foreground = white;
-                        btnGwiazda2.Foreground = white;
-                        btnGwiazda3.Foreground = white;
-                        btnGwiazda4.Foreground = white;
-                        btnGwiazda5.Foreground = white;
                         ocena = 5;
                         break;
 
 
                     default:
                         break;
+                }
+
+                for (int i = 0; i < 5; i++)
+                {
+                    if (ocena > i)
+                    {
+                        ocenyArray[i].Foreground = white;
+                    }
+                    else
+                    {
+                        ocenyArray[i].Foreground = black;
+                    }
                 }
             }
         }
@@ -91,15 +96,27 @@ namespace InżynierkaBiblioteka
             }
             else
             {
-                GlowneOkno.ZalogowanyUzytkownik.Recenzje.Add(new BazaDanych.Recenzje
+                if (IstniejacaRecenzja != null)
                 {
-                    DataWystawienia = DateTime.UtcNow,
-                    Ocena = ocena,
-                    TekstRecenzji = txtBoxRecenzja.Text,
-                    Ukryta = false,
-                    Uzytkownik = GlowneOkno.ZalogowanyUzytkownik,
-                    Ksiazka = PokazKsiazke.PokazKsiazkeKsiazka
-                });
+                    IstniejacaRecenzja.DataWystawienia = DateTime.UtcNow;
+                    IstniejacaRecenzja.Ocena = ocena;
+                    IstniejacaRecenzja.TekstRecenzji = txtBoxRecenzja.Text;
+                    IstniejacaRecenzja.Ukryta = false;
+                }
+                else
+                {
+                    GlowneOkno.ZalogowanyUzytkownik.Recenzje.Add(new BazaDanych.Recenzje
+                    {
+                        DataWystawienia = DateTime.UtcNow,
+                        Ocena = ocena,
+                        TekstRecenzji = txtBoxRecenzja.Text,
+                        Ukryta = false,
+                        Uzytkownik = GlowneOkno.ZalogowanyUzytkownik,
+                        Ksiazka = PokazKsiazke.PokazKsiazkeKsiazka
+                    });
+                }
+
+                
                 GlowneOkno.BazaDanych.SaveChanges();
                 MainWindow.GlownaRamka.GoBack();
             }
@@ -107,6 +124,7 @@ namespace InżynierkaBiblioteka
 
         private void btnPowrot_Click(object sender, RoutedEventArgs e)
         {
+            IstniejacaRecenzja = null;
             MainWindow.GlownaRamka.GoBack();
         }
     }

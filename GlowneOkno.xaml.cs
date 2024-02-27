@@ -28,6 +28,7 @@ namespace InżynierkaBiblioteka
         public GlowneOkno()
         {
             InitializeComponent();
+            
             ZalogowanyUzytkownik = null;
             ZalogowanyAdministrator = null;
             BazaDanych.Database.EnsureCreated();

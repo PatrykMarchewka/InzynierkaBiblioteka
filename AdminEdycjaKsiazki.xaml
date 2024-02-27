@@ -27,7 +27,7 @@
             </Button.Resources>
         </Button>
 
-        <TextBox x:Name="txtBoxISBN" FontSize="30" TextWrapping="NoWrap" Width="275" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,14,160,0"/>
+        <TextBox x:Name="txtBoxISBN" FontSize="30" PreviewTextInput="txtBoxISBNRegex" TextWrapping="NoWrap" Width="275" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,14,160,0"/>
         <TextBox x:Name="txtBoxTytul" FontSize="30" TextWrapping="NoWrap" Width="275" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,69,160,0"/>
         <ComboBox x:Name="comboGatunki" Width="275" SelectedIndex="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="525,129,0,0">
             <ComboBox.ItemTemplate>

@@ -35,6 +35,8 @@ namespace InżynierkaBiblioteka.BazaDanych
         public DateTime DataStworzeniaKonta { get; set; }
         [MaxLength]
         public string? Komentarze;
+        public decimal Zaleglosci { get; set; } = 0;
+        public DateTime DataOstatniegoLogowania { get; set; }
 
 
 

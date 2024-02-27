@@ -49,9 +49,17 @@
             </Button.Resources>
         </Button>
 
+        <Button x:Name="btnStworzPowiadomienie" Content=" Stworz/Usun Powiadomienie" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" Background="Black" Click="btnStworzPowiadomienie_Click" Margin="273,311,0,0" Visibility="Hidden">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+
         <ScrollViewer Grid.Row="1">
             <StackPanel x:Name="Stack">
-                
+
             </StackPanel>
         </ScrollViewer>
 

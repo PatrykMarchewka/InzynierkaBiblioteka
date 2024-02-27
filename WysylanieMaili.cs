@@ -29,23 +29,31 @@ namespace InżynierkaBiblioteka
         {
             if (GetSmtpClient == null)
             {
-                MessageBox.Show("Blad! Nie zalogowano do klienta SMTP");
-            }
-            else
-            {
-                using (MailMessage mm = new MailMessage("InzynieriaBiblioteka@outlook.com", emailOdbiorcy, temat, wiadomosc))
+                try
                 {
-                    try
-                    {
-                        GetSmtpClient.Send(mm);
-                        MessageBox.Show("Wyslano wiadomosc Email");
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show($"Blad! {ex.Message}");
-                    }
+                    LogowanieDoMaila();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Blad! Nie mozna zalogowac sie do klienta SMTP: {ex.Message}");
                 }
             }
+
+            if (emailOdbiorcy != null)
+            {
+                try
+                {
+                    using (MailMessage mm = new MailMessage("InzynieriaBiblioteka@outlook.com", emailOdbiorcy, temat, wiadomosc))
+                    {
+                        GetSmtpClient.Send(mm);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Blad! {ex.Message}");
+                }
+            }
+                
         }
 
 

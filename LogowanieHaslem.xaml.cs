@@ -82,26 +82,42 @@ namespace InżynierkaBiblioteka
 
                 if(proba != null)
                 {
-                    string hash = proba.hashHaslo;
-                    if (WeryfikacjaHasla(Haslo,hash))
+
+                    if (proba.StatusKonta.idStatusu == 2)
                     {
-                        GlowneOkno.ZalogowanyUzytkownik = proba;
-                        proba = null;
-                        if (GlowneOkno.ZalogowanyUzytkownik.Rola.idRoli == 1)
-                        {
-                            MainWindow.Nawigacja("PoZalogowaniuUzytkownik.xaml");
-                        }
-                        else if (GlowneOkno.ZalogowanyUzytkownik.Rola.idRoli == 2)
-                        {
-                            GlowneOkno.ZalogowanyAdministrator = GlowneOkno.ZalogowanyUzytkownik;
-                            GlowneOkno.ZalogowanyUzytkownik = null;
-                            MainWindow.Nawigacja("PoZalogowaniuAdmin.xaml");
-                        }
+                    MessageBox.Show("Blad! Konto zbanowane, skontaktuj sie z administratoem");
+                    proba = null;
+                    MainWindow.GlownaRamka.GoBack();
                     }
                     else
                     {
-                        MessageBox.Show("Zle haslo, sprobuj ponownie");
+                        string hash = proba.hashHaslo;
+                        if (WeryfikacjaHasla(Haslo, hash))
+                        {
+                            GlowneOkno.ZalogowanyUzytkownik = proba;
+                            proba = null;
+                        GlowneOkno.ZalogowanyUzytkownik.DataOstatniegoLogowania = DateTime.UtcNow;
+                        GlowneOkno.BazaDanych.SaveChanges();
+                            if (GlowneOkno.ZalogowanyUzytkownik.Rola.idRoli == 1)
+                            {
+                                MainWindow.Nawigacja("PoZalogowaniuUzytkownik.xaml");
+                            }
+                            else if (GlowneOkno.ZalogowanyUzytkownik.Rola.idRoli == 2)
+                            {
+                                GlowneOkno.ZalogowanyAdministrator = GlowneOkno.ZalogowanyUzytkownik;
+                                GlowneOkno.ZalogowanyUzytkownik = null;
+                            GlowneOkno.ZalogowanyAdministrator.DataOstatniegoLogowania = DateTime.UtcNow;
+                            GlowneOkno.BazaDanych.SaveChanges();
+                                MainWindow.Nawigacja("PoZalogowaniuAdmin.xaml");
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Zle haslo, sprobuj ponownie");
+                        }
                     }
+
+                    
                 }
         }
 

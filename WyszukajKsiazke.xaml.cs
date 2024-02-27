@@ -23,16 +23,17 @@ namespace InżynierkaBiblioteka
     public partial class WyszukajKsiazke : Page
     {
         HashSet<Ksiazki> Lista;
-        private int MaksLiczbaStron = 2500;
 
         public WyszukajKsiazke()
         {
             InitializeComponent();
+            comboGatunki.BeginInit();
+            comboJezyki.BeginInit();
             comboGatunki.Items.Clear();
             comboJezyki.Items.Clear();
             comboGatunki.Items.Add("Brak zaznaczenia");
             comboJezyki.Items.Add("Brak zaznaczenia");
-            foreach (var item in GlowneOkno.BazaDanych.GatunkiKsiazek)
+            foreach (var item in GlowneOkno.BazaDanych.GatunkiKsiazek.OrderBy(g => g.Nazwa).ToHashSet())
             {
                 comboGatunki.Items.Add(item.Nazwa);
             }
@@ -42,11 +43,14 @@ namespace InżynierkaBiblioteka
             {
                 comboJezyki.Items.Add(item.Nazwa);
             }
+            comboGatunki.EndInit();
+            comboJezyki.EndInit();
 
-
-            SliderStrony.Maximum = MaksLiczbaStron;
-            SliderStrony.Value = SliderStrony.Maximum;
+            SliderRok.Minimum = GlowneOkno.BazaDanych.Ksiazki.Min(k => k.RokPublikacjiKsiazki);
             SliderRok.Maximum = DateTime.Now.Year;
+            SliderRok.Value = SliderRok.Maximum;
+            SliderStrony.Maximum = GlowneOkno.BazaDanych.Ksiazki.Max(k => k.IloscStron);
+            SliderStrony.Value = SliderStrony.Maximum;
             lblRok.Content = SliderRok.Value;
             lblStrony.Content = SliderStrony.Value;
         }
@@ -54,23 +58,24 @@ namespace InżynierkaBiblioteka
         private void Wyszukaj()
         {
             Stack.Children.Clear();
+            Stack.BeginInit();
             //Wyszukiwanie
             //Dostepnosc, Do wypozyczenia
             Lista = GlowneOkno.BazaDanych.Ksiazki.Where(b => EF.Functions.Like(b.TytulKsiazki, $"%{txtBoxWyszukaj.Text}%") || EF.Functions.Like(b.ISBN, $"%{txtBoxWyszukaj.Text}%")).ToHashSet();
             if (comboGatunki.SelectedIndex > 0)
             {
-                Lista = Lista.Where(b => b.GatunekKsiazki.idGatunku == comboGatunki.SelectedIndex).ToHashSet();
+                Lista = Lista.Where(b => b.GatunekKsiazki.Nazwa == comboGatunki.SelectedItem.ToString()).ToHashSet();
             }
             if (comboJezyki.SelectedIndex > 0)
             {
-                Lista = Lista.Where(b => b.JezykKsiazki.idJezyka == comboJezyki.SelectedIndex).ToHashSet();
+                Lista = Lista.Where(b => b.JezykKsiazki.Nazwa == comboJezyki.SelectedItem.ToString()).ToHashSet();
             }
-            Lista = Lista.Where(b => b.RokPublikacjiKsiazki >= 1900 && b.RokPublikacjiKsiazki <= SliderRok.Value).ToHashSet();
+            Lista = Lista.Where(b => b.RokPublikacjiKsiazki <= SliderRok.Value).ToHashSet();
             Lista = Lista.Where(b => b.IloscStron <= SliderStrony.Value).ToHashSet();
 
             if (CheckBoxDostepne.IsChecked == true)
             {
-                Lista = Lista.Where(b => b.DostepnoscKsiazki > 1).ToHashSet();
+                Lista = Lista.Where(b => b.DostepnoscKsiazki > 0).ToHashSet();
             }
 
             if (CheckBoxDoWypozyczenia.IsChecked == true)
@@ -103,6 +108,7 @@ namespace InżynierkaBiblioteka
                 button.Click += (s, e) => Button_Click(s, e, KopiaItemu);
                 Stack.Children.Add(button);
             }
+            Stack.EndInit();
         }
 
         private void txtBoxWyszukaj_TextChanged(object sender, TextChangedEventArgs e)

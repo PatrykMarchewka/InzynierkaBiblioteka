@@ -86,27 +86,31 @@ namespace InżynierkaBiblioteka
             {
                 MessageBox.Show("Blad! Wypelnij wszystkie wymagane pola");
             }
+            else if (GlowneOkno.BazaDanych.Uzytkownik.Any(u => u.LoginUzytkownika == txtBoxLogin.Text))
+            {
+                MessageBox.Show("Blad! Niedostępna nazwa użytkownika (Login)");
+            }
             else
             {
-                if (comboBoxPlec.SelectedItem.ToString() == "Inna")
-                {
-                    try
-                    {
+                //if (comboBoxPlec.SelectedItem.ToString() == "Inna")
+                //{
+                //    try
+                //    {
                         
-                            string tempPlec = txtBoxPlec.Text;
-                            tempPlec = tempPlec.ToLower();
-                            tempPlec = char.ToUpper(tempPlec[0]) + tempPlec.Substring(1);
-                            GlowneOkno.BazaDanych.Plec.Add(new Plec() { Nazwa = tempPlec });
-                        GlowneOkno.BazaDanych.SaveChanges();
-                            WybranaPlecID = GlowneOkno.BazaDanych.Plec.First(p => p.Nazwa == tempPlec).idPlci;
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show($"Blad! {ex.Message}");
-                        MainWindow.Nawigacja("GlowneOkno.xaml");
-                    }
+                //            string tempPlec = txtBoxPlec.Text;
+                //            tempPlec = tempPlec.ToLower();
+                //            tempPlec = char.ToUpper(tempPlec[0]) + tempPlec.Substring(1);
+                //            GlowneOkno.BazaDanych.Plec.Add(new Plec() { Nazwa = tempPlec });
+                //        GlowneOkno.BazaDanych.SaveChanges();
+                //            WybranaPlecID = GlowneOkno.BazaDanych.Plec.First(p => p.Nazwa == tempPlec).idPlci;
+                //    }
+                //    catch (Exception ex)
+                //    {
+                //        MessageBox.Show($"Blad! {ex.Message}");
+                //        MainWindow.Nawigacja("GlowneOkno.xaml");
+                //    }
                     
-                }
+                //}
 
                 try
                 {
@@ -114,7 +118,7 @@ namespace InżynierkaBiblioteka
                         Role tempRola = GlowneOkno.BazaDanych.Role.First(r => r.idRoli == 1);
                         Statusy tempStatus = GlowneOkno.BazaDanych.Statusy.First(s => s.idStatusu == 1);
 
-                        Uzytkownik nowy = new Uzytkownik() { LoginUzytkownika = txtBoxLogin.Text, hashHaslo = StworzHash(txtBoxHaslo.Text),Imie = txtBoxImie.Text, Nazwisko = txtBoxNazwisko.Text, DataStworzeniaKonta = DateTime.UtcNow, Plec = tempPlec, Rola =tempRola, StatusKonta = tempStatus };
+                        Uzytkownik nowy = new Uzytkownik() { LoginUzytkownika = txtBoxLogin.Text, hashHaslo = StworzHash(txtBoxHaslo.Text),Imie = txtBoxImie.Text, Nazwisko = txtBoxNazwisko.Text, DataStworzeniaKonta = DateTime.UtcNow, Plec = tempPlec, Rola =tempRola, StatusKonta = tempStatus, DataOstatniegoLogowania = DateTime.UtcNow };
                         if (!String.IsNullOrEmpty(txtBoxEmail.Text))
                         {
                             nowy.email = txtBoxEmail.Text;
