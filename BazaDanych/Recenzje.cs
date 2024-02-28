@@ -20,7 +20,7 @@ namespace InżynierkaBiblioteka.BazaDanych
 
 
         [ForeignKey("idUzytkownika")]
-        public virtual Uzytkownik Uzytkownik { get; set; }
+        public virtual Uzytkownicy Uzytkownicy { get; set; }
         [ForeignKey("idKsiazki")]
         public virtual Ksiazki Ksiazka { get; set; }
 

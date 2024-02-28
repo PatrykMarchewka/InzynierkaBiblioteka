@@ -111,7 +111,7 @@ namespace InżynierkaBiblioteka
                         Ocena = ocena,
                         TekstRecenzji = txtBoxRecenzja.Text,
                         Ukryta = false,
-                        Uzytkownik = GlowneOkno.ZalogowanyUzytkownik,
+                        Uzytkownicy = GlowneOkno.ZalogowanyUzytkownik,
                         Ksiazka = PokazKsiazke.PokazKsiazkeKsiazka
                     });
                 }

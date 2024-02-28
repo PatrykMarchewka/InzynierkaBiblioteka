@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InżynierkaBiblioteka.BazaDanych;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -44,7 +45,6 @@ namespace InżynierkaBiblioteka
                 GlowneOkno.ZalogowanyUzytkownik = OdzyskajKonto.proba;
                 ZmienDane();
             }
-            
             else if (stringComparer.Compare(StworzNoweKonto.StworzHash(txtBoxStareHaslo.Text),GlowneOkno.ZalogowanyUzytkownik.hashHaslo) == 0)
             {
                 if (stringComparer.Compare(txtBoxNoweHaslo1.Text,txtBoxNoweHaslo2.Text) == 0)
@@ -71,11 +71,22 @@ namespace InżynierkaBiblioteka
 
         private void ZmienDane()
         {
-            GlowneOkno.BazaDanych.SaveChanges();
+            Logi nowyLog = new Logi() { TrescWiadomosci = $"Zmieniono haslo dla uzytkownika",Uzytkownicy = GlowneOkno.ZalogowanyUzytkownik, DataWystapienia=DateTime.UtcNow, Waznosc = 1 };
+            GlowneOkno.ZalogowanyUzytkownik.WszystkieLogi.Add(nowyLog);
             MessageBox.Show("Sukces! Pomyslnie zmieniono dane");
-            WysylanieMaili.LogowanieDoMaila();
-            WysylanieMaili.WysylanieWiadomosciEmail(OdzyskajKonto.proba.email, "Prośba o odzyskanie konta", $"Otrzymaliśmy prośbę o odzyskanie konta\nTwoje nowe hasło to: {txtBoxNoweHaslo1.Text}\nJeśli to nie ty wysłałeś prośbę to zmień hasło jak najszybciej!");
+
+            try
+            {
+                WysylanieMaili.LogowanieDoMaila();
+                WysylanieMaili.WysylanieWiadomosciEmail(GlowneOkno.ZalogowanyUzytkownik.email, "Prośba o odzyskanie konta", $"Otrzymaliśmy prośbę o odzyskanie konta\nTwoje nowe hasło to: {txtBoxNoweHaslo1.Text}\nJeśli to nie ty wysłałeś prośbę to zmień hasło jak najszybciej!");
+            }
+            catch (Exception ex)
+            {
+                Logi l = new Logi() { TrescWiadomosci = $"Blad wysylania emaila do uzytkownika: {ex.Message} - {ex.InnerException}", DataWystapienia = DateTime.UtcNow, Uzytkownicy = GlowneOkno.ZalogowanyUzytkownik, Waznosc = 1 };
+                GlowneOkno.ZalogowanyUzytkownik.WszystkieLogi.Add(l);
+            }
             OdzyskajKonto.proba = null;
+            GlowneOkno.BazaDanych.SaveChanges();
             MainWindow.Nawigacja("PoZalogowaniuUzytkownik.xaml");
         }
     }

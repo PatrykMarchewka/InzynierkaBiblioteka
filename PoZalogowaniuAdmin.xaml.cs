@@ -36,7 +36,7 @@ namespace InżynierkaBiblioteka
 
         private void btnWyszukajUzytkownika_Click(object sender, RoutedEventArgs e)
         {
-            //TODO: Przejscie na wyszukiwanie uzytkownikow
+            //TODO: Przejscie na wyszukiwanie Uzytkownicyow
 
         }
 

@@ -21,8 +21,8 @@ namespace InżynierkaBiblioteka
     /// </summary>
     public partial class GlowneOkno : Page
     {
-        public static Uzytkownik? ZalogowanyUzytkownik;
-        public static Uzytkownik? ZalogowanyAdministrator;
+        public static Uzytkownicy? ZalogowanyUzytkownik;
+        public static Uzytkownicy? ZalogowanyAdministrator;
         public static MyDbContext BazaDanych = new MyDbContext();
 
         public GlowneOkno()

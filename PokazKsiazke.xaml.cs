@@ -117,7 +117,7 @@ namespace InżynierkaBiblioteka
                     DataWypozyczenia = DateTime.UtcNow,
                     DataDoOddania = DateTime.UtcNow.AddDays(14),
                     DataAktualnegoOddania = null,
-                    Uzytkownik = GlowneOkno.ZalogowanyUzytkownik,
+                    Uzytkownicy = GlowneOkno.ZalogowanyUzytkownik,
                     Ksiazka = PokazKsiazkeKsiazka
                 };
                 GlowneOkno.BazaDanych.Wypozyczenia.Add(w);
@@ -168,7 +168,7 @@ namespace InżynierkaBiblioteka
                     {
                         KiedyStworzono = DateTime.UtcNow,
                         Ksiazka = PokazKsiazkeKsiazka,
-                        Uzytkownik = GlowneOkno.ZalogowanyUzytkownik,
+                        Uzytkownicy = GlowneOkno.ZalogowanyUzytkownik,
                         KiedyWyslanoMail = null
                     };
                     GlowneOkno.BazaDanych.Powiadomienia.Add(p);

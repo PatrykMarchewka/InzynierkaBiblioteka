@@ -69,14 +69,14 @@ namespace InżynierkaBiblioteka
             string Haslo = txtBoxZalogujHaslemHaslo.Text;
 
 
-                Uzytkownik? proba = null;
+                Uzytkownicy? proba = null;
                 try
                 {
-                    proba = GlowneOkno.BazaDanych.Uzytkownik.First(u => u.LoginUzytkownika == Login);
+                    proba = GlowneOkno.BazaDanych.Uzytkownicy.First(u => u.LoginUzytkownika == Login);
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Nie znaleziono takiego uzytkownika, sprawdz swoj login");
+                    MessageBox.Show("Nie znaleziono takiego Uzytkownika, sprawdz swoj login");
                 }
                 
 

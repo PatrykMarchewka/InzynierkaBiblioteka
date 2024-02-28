@@ -10,7 +10,7 @@
 
     <Grid>
         <Button x:Name="btnPowrot" Content="◀" FontSize="48" VerticalAlignment="Top" HorizontalAlignment="Left" Background="Transparent" BorderThickness="0" Click="btnPowrot_Click"/>
-        <Button x:Name="btnWyszukajUzytkownika" Content=" Wyszukaj uzytkownika " FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" Background="Black" Click="btnWyszukajUzytkownika_Click">
+        <Button x:Name="btnWyszukajUzytkownika" Content=" Wyszukaj Uzytkownika " FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" Background="Black" Click="btnWyszukajUzytkownika_Click">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="10"/>

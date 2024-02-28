@@ -86,7 +86,7 @@ namespace InżynierkaBiblioteka
             {
                 MessageBox.Show("Blad! Wypelnij wszystkie wymagane pola");
             }
-            else if (GlowneOkno.BazaDanych.Uzytkownik.Any(u => u.LoginUzytkownika == txtBoxLogin.Text))
+            else if (GlowneOkno.BazaDanych.Uzytkownicy.Any(u => u.LoginUzytkownika == txtBoxLogin.Text))
             {
                 MessageBox.Show("Blad! Niedostępna nazwa użytkownika (Login)");
             }
@@ -118,7 +118,7 @@ namespace InżynierkaBiblioteka
                         Role tempRola = GlowneOkno.BazaDanych.Role.First(r => r.idRoli == 1);
                         Statusy tempStatus = GlowneOkno.BazaDanych.Statusy.First(s => s.idStatusu == 1);
 
-                        Uzytkownik nowy = new Uzytkownik() { LoginUzytkownika = txtBoxLogin.Text, hashHaslo = StworzHash(txtBoxHaslo.Text),Imie = txtBoxImie.Text, Nazwisko = txtBoxNazwisko.Text, DataStworzeniaKonta = DateTime.UtcNow, Plec = tempPlec, Rola =tempRola, StatusKonta = tempStatus, DataOstatniegoLogowania = DateTime.UtcNow };
+                        Uzytkownicy nowy = new Uzytkownicy() { LoginUzytkownika = txtBoxLogin.Text, hashHaslo = StworzHash(txtBoxHaslo.Text),Imie = txtBoxImie.Text, Nazwisko = txtBoxNazwisko.Text, DataStworzeniaKonta = DateTime.UtcNow, Plec = tempPlec, Rola =tempRola, StatusKonta = tempStatus, DataOstatniegoLogowania = DateTime.UtcNow };
                         if (!String.IsNullOrEmpty(txtBoxEmail.Text))
                         {
                             nowy.email = txtBoxEmail.Text;
@@ -128,7 +128,7 @@ namespace InżynierkaBiblioteka
                             nowy.nrTelefonu = txtBoxNrTelefonu.Text;
                         }
 
-                    GlowneOkno.BazaDanych.Uzytkownik.Add(nowy);
+                    GlowneOkno.BazaDanych.Uzytkownicy.Add(nowy);
                     GlowneOkno.BazaDanych.SaveChanges();
                         MessageBox.Show("Dodano Uzytkownika");
                         GlowneOkno.ZalogowanyUzytkownik = nowy;

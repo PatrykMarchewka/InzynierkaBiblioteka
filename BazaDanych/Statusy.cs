@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace InżynierkaBiblioteka.BazaDanych
 {
     //Status konta, np aktywowane, dezaktywowane, zbanowane itp
-    //Status 1 = Nowy uzytkownik
+    //Status 1 = Nowy Uzytkownik
     //Status 2 = Zbanowane konto
     //Status 3 = Konto nieaktywne (brak logowania przez rok)
     //Status 4 = ???
@@ -19,7 +19,7 @@ namespace InżynierkaBiblioteka.BazaDanych
         [MaxLength(255)]
         public string Nazwa { get; set; }
 
-        public virtual ICollection<Uzytkownik> Uzytkownicy { get; set; }
+        public virtual ICollection<Uzytkownicy> Uzytkownicy { get; set; }
 
         public Statusy()
         {

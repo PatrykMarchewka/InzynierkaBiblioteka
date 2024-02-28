@@ -64,7 +64,7 @@ namespace InżynierkaBiblioteka
                 if (p != null)
                 {
                     WysylanieMaili.LogowanieDoMaila();
-                    WysylanieMaili.WysylanieWiadomosciEmail(p.Uzytkownik.email, "Powiadomienie o dostępności książki", $"Otrzymaliśmy dostawę z twoją książką\nKsiążka: {p.Ksiazka.TytulKsiazki} jest teraz dostępna w naszej bibliotece");
+                    WysylanieMaili.WysylanieWiadomosciEmail(p.Uzytkownicy.email, "Powiadomienie o dostępności książki", $"Otrzymaliśmy dostawę z twoją książką\nKsiążka: {p.Ksiazka.TytulKsiazki} jest teraz dostępna w naszej bibliotece");
                     p.KiedyWyslanoMail = DateTime.UtcNow;
                     p.Ksiazka.LiczbaOczekujacych--;
                 }

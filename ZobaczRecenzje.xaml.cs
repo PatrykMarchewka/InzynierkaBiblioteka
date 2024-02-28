@@ -31,10 +31,10 @@ namespace InżynierkaBiblioteka
 
         private void ZobaczRecenzje_Loaded(object sender, RoutedEventArgs e)
         {
-            lblUzytkownik.Content = String.Empty;
+            lblUzytkownicy.Content = String.Empty;
             lblOcena.Content = String.Empty;
             txtBlockRecenzja.Text = String.Empty;
-            lblUzytkownik.Content = recenzja.Uzytkownik.LoginUzytkownika;
+            lblUzytkownicy.Content = recenzja.Uzytkownicy.LoginUzytkownika;
             for (int i = 0; i < recenzja.Ocena; i++)
             {
                 lblOcena.Content += "⭐";

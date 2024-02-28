@@ -25,7 +25,7 @@
             <Label Content="Plec" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,380,0,0"/>
         <ComboBox x:Name="comboBoxPlec" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,400,0,0" Width="Auto" Height="Auto" SelectionChanged="comboBoxPlec_SelectionChanged"/>
         <TextBox x:Name="txtBoxPlec" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,425,0,0" Width="100" Visibility="Hidden"/>
-        <Button x:Name="btnStworzUzytkownika" Content=" Dodaj uzytkownika " FontSize="25" Foreground="White" Background="Black" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,470,0,0" Click="btnStworzUzytkownika_Click">
+        <Button x:Name="btnStworzUzytkownika" Content=" Dodaj Uzytkownika " FontSize="25" Foreground="White" Background="Black" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,470,0,0" Click="btnStworzUzytkownika_Click">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="10"/>

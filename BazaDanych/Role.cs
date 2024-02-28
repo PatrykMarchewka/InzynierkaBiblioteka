@@ -14,7 +14,7 @@ namespace InżynierkaBiblioteka.BazaDanych
         [MaxLength(255)]
         public string Nazwa { get; set; }
 
-        public virtual ICollection<Uzytkownik> Uzytkownicy { get; set; }
+        public virtual ICollection<Uzytkownicy> Uzytkownicy { get; set; }
 
         public Role()
         {

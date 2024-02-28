@@ -19,7 +19,7 @@ namespace InżynierkaBiblioteka.BazaDanych
         public string TrescRaportu { get; set; }
         public bool StatusRaportu { get; set; }
         [ForeignKey("idUzytkownika")]
-        public virtual Uzytkownik Reportujacy { get; set; }
+        public virtual Uzytkownicy Reportujacy { get; set; }
 
         public Reporty()
         {

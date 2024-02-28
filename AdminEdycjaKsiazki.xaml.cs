@@ -94,7 +94,7 @@ namespace InżynierkaBiblioteka
 
                 foreach (var item in powia)
                 {
-                    WysylanieMaili.WysylanieWiadomosciEmail(item.Uzytkownik.email, "Powiadomienie o dostępności książki", $"Otrzymaliśmy dostawę z twoją książką\nKsiążka: {EdytowanaKsiazka.TytulKsiazki} jest teraz dostępna w naszej bibliotece");
+                    WysylanieMaili.WysylanieWiadomosciEmail(item.Uzytkownicy.email, "Powiadomienie o dostępności książki", $"Otrzymaliśmy dostawę z twoją książką\nKsiążka: {EdytowanaKsiazka.TytulKsiazki} jest teraz dostępna w naszej bibliotece");
                     item.KiedyWyslanoMail = DateTime.UtcNow;
                 }
                 powia.Clear();

@@ -22,7 +22,7 @@ namespace InżynierkaBiblioteka
     public partial class OdzyskajKonto : Page
     {
 
-        public static Uzytkownik? proba;
+        public static Uzytkownicy? proba;
 
         public OdzyskajKonto()
         {
@@ -51,11 +51,11 @@ namespace InżynierkaBiblioteka
                 proba = null;
                 try
                 {
-                    proba = GlowneOkno.BazaDanych.Uzytkownik.First(u => u.LoginUzytkownika == txtBoxLogin.Text);
+                    proba = GlowneOkno.BazaDanych.Uzytkownicy.First(u => u.LoginUzytkownika == txtBoxLogin.Text);
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Nie znaleziono takiego uzytkownika, sprawdz swoj login");
+                    MessageBox.Show("Nie znaleziono takiego Uzytkownika, sprawdz swoj login");
                 }
 
                 if (proba != null && proba.email == txtBoxEmail.Text)

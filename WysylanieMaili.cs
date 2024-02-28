@@ -38,20 +38,9 @@ namespace InżynierkaBiblioteka
                     MessageBox.Show($"Blad! Nie mozna zalogowac sie do klienta SMTP: {ex.Message}");
                 }
             }
-
-            if (emailOdbiorcy != null)
+            using (MailMessage mm = new MailMessage("InzynieriaBiblioteka@outlook.com", emailOdbiorcy, temat, wiadomosc))
             {
-                try
-                {
-                    using (MailMessage mm = new MailMessage("InzynieriaBiblioteka@outlook.com", emailOdbiorcy, temat, wiadomosc))
-                    {
-                        GetSmtpClient.Send(mm);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Blad! {ex.Message}");
-                }
+                GetSmtpClient.Send(mm);
             }
                 
         }

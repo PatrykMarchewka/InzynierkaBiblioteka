@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace InżynierkaBiblioteka.BazaDanych
 {
-    public class Uzytkownik
+    public class Uzytkownicy
     {
         [System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity), Key]
         public int idUzytkownika { get; set; }
@@ -53,12 +53,14 @@ namespace InżynierkaBiblioteka.BazaDanych
         public virtual ICollection<Powiadomienia> Powiadomienia { get; set; }
         public virtual ICollection<Recenzje> Recenzje { get; set; }
         public virtual ICollection<Ksiazki> WszystkieWypozyczoneKsiazki { get; set; }
+        //To Potrzebne?
+        public virtual ICollection<Logi> WszystkieLogi { get; set; }
 
         public HashSet<Ksiazki> WszystkieWypozyczoneKsiazkiHash()
         {
             return WszystkieWypozyczoneKsiazki.OrderBy(b => b.ISBN).DistinctBy(b => b.ISBN).ToHashSet();
         }
-        public Uzytkownik()
+        public Uzytkownicy()
         {
             
         }
