@@ -33,7 +33,16 @@ namespace InżynierkaBiblioteka
         {
             InitializeComponent();
             GlownaRamka = ((MainWindow)Application.Current.MainWindow).MainFrame;
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
             Nawigacja("GlowneOkno.xaml");
+        }
+
+        private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            Exception ex = (Exception)e.ExceptionObject;
+            Logi nowyLog = new Logi() { DataWystapienia = DateTime.UtcNow, Uzytkownicy = GlowneOkno.ZalogowanyUzytkownik, TrescWiadomosci = $"Typ bledu: {ex.GetType().Name}, wiadomosc: {ex.Message} - {ex.InnerException}, Stack: {ex.StackTrace}", Waznosc = 100 };
+            GlowneOkno.BazaDanych.Logi.Add(nowyLog);
+            GlowneOkno.BazaDanych.SaveChanges();
         }
 
         public static void Nawigacja(string UriMiejsceDocelowe)

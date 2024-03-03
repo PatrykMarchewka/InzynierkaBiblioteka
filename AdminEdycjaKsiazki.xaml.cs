@@ -60,18 +60,25 @@ namespace InżynierkaBiblioteka
                 {
                     EdytowanaKsiazka = new Ksiazki() { ISBN = txtBoxISBN.Text, TytulKsiazki = txtBoxTytul.Text, GatunekKsiazki = (BazaDanych.GatunkiKsiazek)comboGatunki.SelectedItem, RokPublikacjiKsiazki = int.Parse(txtBoxRok.Text), JezykKsiazki = (BazaDanych.Jezyki)comboJezyk.SelectedItem, IloscStron = int.Parse(txtBoxStrony.Text), DostepnoscKsiazki = int.Parse(txtboxKopie.Text), DoWypozyczenia = (bool)chkBoxWypozyczenie.IsChecked };
                     GlowneOkno.BazaDanych.Ksiazki.Add(EdytowanaKsiazka);
-                    GlowneOkno.BazaDanych.SaveChanges();
+                    Logi nowyLog = new Logi() { DataWystapienia = DateTime.UtcNow, Uzytkownicy = GlowneOkno.ZalogowanyAdministrator, Waznosc = 1, TrescWiadomosci = $"Administrator dodal nowa ksiazke {EdytowanaKsiazka.TytulKsiazki}" };
+                    GlowneOkno.BazaDanych.Logi.Add(nowyLog);
+
                 }
                 catch (Exception ex)
                 {
+                    Logi nowyLog = new Logi() { DataWystapienia = DateTime.UtcNow, Uzytkownicy = GlowneOkno.ZalogowanyAdministrator, Waznosc = 10, TrescWiadomosci = $"Blad dodawania ksiazki {ex.Message} - {ex.InnerException}" };
                     MessageBox.Show($"Blad! {ex.Message}");
+                    GlowneOkno.BazaDanych.Logi.Add(nowyLog);
                 }
-                
+                GlowneOkno.BazaDanych.SaveChanges();
+
             }
             else
             {
                 if (EdytowanaKsiazka.DostepnoscKsiazki == 0)
                 {
+                    Logi l = new Logi() { DataWystapienia = DateTime.UtcNow, TrescWiadomosci = $"Ksiazka {EdytowanaKsiazka.TytulKsiazki} jest teraz ponownie dostepna", Uzytkownicy = GlowneOkno.ZalogowanyAdministrator, Waznosc = 1 };
+                    GlowneOkno.BazaDanych.Logi.Add(l);
                     int liczba = int.Parse(txtboxKopie.Text);
                     foreach (var item in GlowneOkno.BazaDanych.Powiadomienia)
                     {
@@ -108,6 +115,9 @@ namespace InżynierkaBiblioteka
                 EdytowanaKsiazka.DostepnoscKsiazki = int.Parse(txtboxKopie.Text);
                 EdytowanaKsiazka.DoWypozyczenia = (bool)chkBoxWypozyczenie.IsChecked;
 
+                Logi nowyLog = new Logi() { DataWystapienia = DateTime.UtcNow, TrescWiadomosci = "Administrator zmienil dane ksiazki", Uzytkownicy = GlowneOkno.ZalogowanyAdministrator, Waznosc = 1 };
+                GlowneOkno.BazaDanych.Logi.Add(nowyLog);
+
                 GlowneOkno.BazaDanych.SaveChanges();
 
 
@@ -131,5 +141,10 @@ namespace InżynierkaBiblioteka
             e.Handled = !regexliczby.IsMatch(e.Text);
         }
 
+        private void btnPrzypiszAutorow_Click(object sender, RoutedEventArgs e)
+        {
+            PowiazAutorzyKsiazki.WybranaKsiazka = EdytowanaKsiazka;
+            MainWindow.Nawigacja("PowiazAutorzyKsiazki.xaml");
+        }
     }
 }

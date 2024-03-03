@@ -14,6 +14,9 @@ namespace InżynierkaBiblioteka.BazaDanych
         [MaxLength(255)]
         public string Nazwa { get; set; }
 
+        //TODO: Sprawdzic czy potrzebne
+        public virtual ICollection<Ksiazki> Ksiazki { get; set; }
+
         public GatunkiKsiazek()
         {
                 

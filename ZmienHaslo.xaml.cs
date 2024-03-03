@@ -82,7 +82,7 @@ namespace InżynierkaBiblioteka
             }
             catch (Exception ex)
             {
-                Logi l = new Logi() { TrescWiadomosci = $"Blad wysylania emaila do uzytkownika: {ex.Message} - {ex.InnerException}", DataWystapienia = DateTime.UtcNow, Uzytkownicy = GlowneOkno.ZalogowanyUzytkownik, Waznosc = 1 };
+                Logi l = new Logi() { TrescWiadomosci = $"Blad wysylania emaila do uzytkownika: {ex.Message} - {ex.InnerException}", DataWystapienia = DateTime.UtcNow, Uzytkownicy = GlowneOkno.ZalogowanyUzytkownik, Waznosc = 10 };
                 GlowneOkno.ZalogowanyUzytkownik.WszystkieLogi.Add(l);
             }
             OdzyskajKonto.proba = null;

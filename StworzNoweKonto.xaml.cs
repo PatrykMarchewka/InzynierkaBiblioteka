@@ -82,7 +82,7 @@ namespace InżynierkaBiblioteka
 
         private void btnStworzUzytkownika_Click(object sender, RoutedEventArgs e)
         {
-            if (String.IsNullOrEmpty(txtBoxHaslo.Text) || String.IsNullOrEmpty(txtBoxImie.Text) || String.IsNullOrEmpty(txtBoxLogin.Text) || String.IsNullOrEmpty(txtBoxNazwisko.Text) || (comboBoxPlec.SelectedItem.ToString() == "Inna" && String.IsNullOrEmpty(txtBoxPlec.Text)))
+            if (String.IsNullOrEmpty(txtBoxHaslo.Text) || String.IsNullOrEmpty(txtBoxImie.Text) || String.IsNullOrEmpty(txtBoxLogin.Text) || String.IsNullOrEmpty(txtBoxNazwisko.Text) || (comboBoxPlec.SelectedItem.ToString() == "Inna" && String.IsNullOrEmpty(txtBoxPlec.Text)) || lblZnakA.Visibility == Visibility.Visible)
             {
                 MessageBox.Show("Blad! Wypelnij wszystkie wymagane pola");
             }
@@ -125,6 +125,7 @@ namespace InżynierkaBiblioteka
                         }
                         if (!String.IsNullOrEmpty(txtBoxNrTelefonu.Text))
                         {
+                        //TODO: Walidacja nr telefonu, tutaj i przy zmianie danych
                             nowy.nrTelefonu = txtBoxNrTelefonu.Text;
                         }
 
@@ -137,7 +138,8 @@ namespace InżynierkaBiblioteka
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Blad! {ex.Message}");
+                    Logi nowyLog = new Logi() { DataWystapienia = DateTime.UtcNow, TrescWiadomosci = $"Nie mozna stworzyc uzytkownika {ex.Message} - {ex.InnerException}", Uzytkownicy = null, Waznosc = 10 };
+                    MessageBox.Show($"Blad! Nie mozna stworzyc uzytkownika");
                     MainWindow.Nawigacja("GlowneOkno.xaml");
                 }
             }
@@ -146,6 +148,18 @@ namespace InżynierkaBiblioteka
         private void btnPowrot_Click(object sender, RoutedEventArgs e)
         {
             MainWindow.GlownaRamka.GoBack();
+        }
+
+        private void txtBoxEmail_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (String.IsNullOrEmpty(txtBoxEmail.Text) || txtBoxEmail.Text.Contains('@'))
+            {
+                lblZnakA.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                lblZnakA.Visibility = Visibility.Visible;
+            }
         }
     }
 }

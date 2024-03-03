@@ -47,5 +47,15 @@
         <TextBox x:Name="txtBoxStrony" FontSize="30" MaxLength="10" PreviewTextInput="txtBoxRegex" VerticalAlignment="Top" HorizontalAlignment="Left" Width="275" Margin="525,284,0,0"/>
         <TextBox x:Name="txtboxKopie" FontSize="30" MaxLength="10" PreviewTextInput="txtBoxRegex" VerticalAlignment="Top" HorizontalAlignment="Left" Width="275" Margin="525,339,0,0"/>
         <CheckBox x:Name="chkBoxWypozyczenie" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="525,407,0,0"/>
+
+        <Button x:Name="btnPrzypiszAutorow" Content=" Przypisz autorow " FontSize="30" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" Background="Black" Click="btnPrzypiszAutorow_Click" Margin="555,393,0,0">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+
+
     </Grid>
 </Page>

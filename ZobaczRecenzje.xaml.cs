@@ -26,6 +26,10 @@ namespace InżynierkaBiblioteka
         {
             InitializeComponent();
             this.Loaded += ZobaczRecenzje_Loaded;
+            if (recenzja.Uzytkownicy == GlowneOkno.ZalogowanyUzytkownik)
+            {
+                btnZglosRecenzje.Visibility = Visibility.Hidden;
+            }
             
         }
 

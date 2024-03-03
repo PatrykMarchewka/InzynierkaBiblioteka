@@ -10,8 +10,10 @@ namespace InżynierkaBiblioteka.BazaDanych
 {
     public class HashKsiazkiAutorzy
     {
-        [System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity), Key]
-        public int CompositeKey { get; set; }
+        [Key]
+        public int idKsiazki { get; set; }
+        [Key]
+        public int idAutora { get; set; }
 
 
         [ForeignKey("idKsiazki")]

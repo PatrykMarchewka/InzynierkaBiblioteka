@@ -10,14 +10,14 @@
 
     <Grid>
         <Button x:Name="btnPowrot" Content="◀" FontSize="48" VerticalAlignment="Top" HorizontalAlignment="Left" Background="Transparent" BorderThickness="0" Click="btnPowrot_Click" />
-        <Label Content="Imie" FontSize="40" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="230,90,0,0"/>
-        <Label Content="Nazwisko" FontSize="40" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="230,155,0,0"/>
-        <Label Content="Email" FontSize="40" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="230,220,0,0"/>
-        <Label Content="Nr Telefonu" FontSize="40" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="230,285,0,0"/>
-        <TextBox x:Name="txtBoxImie" FontSize="30" HorizontalAlignment="Left" Margin="500,113,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="185" Height="40"/>
-        <TextBox x:Name="txtBoxNazwisko" FontSize="30" HorizontalAlignment="Left" Margin="500,167,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="185" Height="40"/>
-        <TextBox x:Name="txtBoxEmail" FontSize="30" HorizontalAlignment="Left" Margin="500,232,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="185" Height="40"/>
-        <TextBox x:Name="txtBoxTelefon" FontSize="30" HorizontalAlignment="Left" Margin="500,297,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="185" Height="40"/>
+        <Label Content="Imie" FontSize="40" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="246,47,0,0"/>
+        <Label Content="Nazwisko" FontSize="40" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="246,112,0,0"/>
+        <Label Content="Email" FontSize="40" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="246,235,0,0"/>
+        <Label Content="Nr Telefonu" FontSize="40" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="246,175,0,0"/>
+        <TextBox x:Name="txtBoxImie" FontSize="30" HorizontalAlignment="Left" Margin="516,70,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="185" Height="40"/>
+        <TextBox x:Name="txtBoxNazwisko" FontSize="30" HorizontalAlignment="Left" Margin="516,124,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="185" Height="40"/>
+        <TextBox x:Name="txtBoxEmail" FontSize="30" HorizontalAlignment="Left" Margin="516,247,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="185" Height="40" TextChanged="txtBoxEmail_TextChanged"/>
+        <TextBox x:Name="txtBoxTelefon" FontSize="30" HorizontalAlignment="Left" Margin="516,187,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="185" Height="40"/>
         <Button x:Name="btnZapiszZmiany" Content=" Zapisz Zmiany " FontSize="40" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,370,0,0" Foreground="White" Background="Black" Click="btnZapiszZmiany_Click">
             <Button.Resources>
                 <Style TargetType="Border">
@@ -25,7 +25,8 @@
                 </Style>
             </Button.Resources>
         </Button>
-        <Label x:Name="lblKomentarze" Content="Komentarze: " FontSize="30" HorizontalAlignment="Center" Margin="0,455,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblKomentarze" Content="Komentarze: " FontSize="30" HorizontalAlignment="Left" Margin="0,455,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblZnakA" Content="Email musi zawierac znak @" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="481,292,0,0" Foreground="Red" Visibility="Visible"/>
 
     </Grid>
 </Page>

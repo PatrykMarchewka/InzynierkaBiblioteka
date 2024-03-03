@@ -53,6 +53,7 @@ namespace InżynierkaBiblioteka
             SliderStrony.Value = SliderStrony.Maximum;
             lblRok.Content = SliderRok.Value;
             lblStrony.Content = SliderStrony.Value;
+            Wyszukaj();
         }
 
         private void Wyszukaj()
@@ -61,7 +62,13 @@ namespace InżynierkaBiblioteka
             Stack.BeginInit();
             //Wyszukiwanie
             //Dostepnosc, Do wypozyczenia
-            Lista = GlowneOkno.BazaDanych.Ksiazki.Where(b => EF.Functions.Like(b.TytulKsiazki, $"%{txtBoxWyszukaj.Text}%") || EF.Functions.Like(b.ISBN, $"%{txtBoxWyszukaj.Text}%")).ToHashSet();
+            Lista = GlowneOkno.BazaDanych.Ksiazki.Where(k => EF.Functions.Like(k.TytulKsiazki, $"%{txtBoxWyszukaj.Text}%") || EF.Functions.Like(k.ISBN, $"%{txtBoxWyszukaj.Text}%")).ToHashSet();
+            //Dodawanie po imieniu
+            //Lista.UnionWith(GlowneOkno.BazaDanych.Ksiazki.Where(k => k.Hashe == GlowneOkno.BazaDanych.HashKsiazkiAutorzy.Where(h => EF.Functions.Like(h.Autor.ImieAutora, $"%{txtBoxWyszukaj.Text}%") || EF.Functions.Like(h.Autor.NazwiskoAutora, $"%{txtBoxWyszukaj.Text}%"))).ToHashSet());
+            Lista.UnionWith(GlowneOkno.BazaDanych.Ksiazki.Where(k => GlowneOkno.BazaDanych.HashKsiazkiAutorzy.Any(h => h.Ksiazka == k && (EF.Functions.Like(h.Autor.ImieAutora, $"%{txtBoxWyszukaj.Text}%") || EF.Functions.Like(h.Autor.NazwiskoAutora, $"%{txtBoxWyszukaj.Text}%")))).ToHashSet());
+
+            
+
             if (comboGatunki.SelectedIndex > 0)
             {
                 Lista = Lista.Where(b => b.GatunekKsiazki.Nazwa == comboGatunki.SelectedItem.ToString()).ToHashSet();

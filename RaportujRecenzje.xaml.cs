@@ -33,8 +33,18 @@ namespace InżynierkaBiblioteka
 
         private void btnWyslijReport_Click(object sender, RoutedEventArgs e)
         {
-            Reporty report = new Reporty() { Recenzje = ZobaczRecenzje.recenzja, StatusRaportu = false, TrescRaportu = txtBoxReport.Text, Reportujacy = GlowneOkno.ZalogowanyUzytkownik };
-            GlowneOkno.BazaDanych.Reporty.Add(report);
+            Reporty report;
+            if (GlowneOkno.BazaDanych.Reporty.Any(r => r.Recenzje == ZobaczRecenzje.recenzja && r.Reportujacy == GlowneOkno.ZalogowanyUzytkownik))
+            {
+                report = GlowneOkno.BazaDanych.Reporty.First(r => r.Recenzje == ZobaczRecenzje.recenzja && r.Reportujacy == GlowneOkno.ZalogowanyUzytkownik);
+                report.TrescRaportu = txtBoxReport.Text;
+                report.StatusRaportu = false;
+            }
+            else
+            {
+                report = new Reporty() { Recenzje = ZobaczRecenzje.recenzja, StatusRaportu = false, TrescRaportu = txtBoxReport.Text, Reportujacy = GlowneOkno.ZalogowanyUzytkownik };
+                GlowneOkno.BazaDanych.Reporty.Add(report);
+            }
             GlowneOkno.BazaDanych.SaveChanges();
             MessageBox.Show("Wyslano report");
             MainWindow.GlownaRamka.GoBack();

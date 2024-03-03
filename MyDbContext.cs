@@ -50,6 +50,8 @@ namespace InżynierkaBiblioteka
 
             mod.Entity<HashKsiazkiAutorzy>().HasOne(h => h.Ksiazka).WithMany(k => k.Hashe);
             mod.Entity<HashKsiazkiAutorzy>().HasOne(h => h.Autor).WithMany(a => a.Hashe);
+            //mod.Entity<HashKsiazkiAutorzy>().HasNoKey();
+            mod.Entity<HashKsiazkiAutorzy>().HasKey(h => new { h.idKsiazki, h.idAutora });
 
             mod.Entity<Wypozyczenia>().HasOne(w => w.Uzytkownicy).WithMany(u => u.Wypozyczenia);
             mod.Entity<Wypozyczenia>().HasOne(w => w.Ksiazka).WithMany(k => k.Wypozyczenia);

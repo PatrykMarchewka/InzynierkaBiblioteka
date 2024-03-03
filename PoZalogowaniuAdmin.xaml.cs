@@ -23,7 +23,6 @@ namespace InżynierkaBiblioteka
         public PoZalogowaniuAdmin()
         {
             InitializeComponent();
-            GlowneOkno.ZalogowanyAdministrator = GlowneOkno.ZalogowanyUzytkownik;
 
         }
 
@@ -48,6 +47,11 @@ namespace InżynierkaBiblioteka
         private void btnZobaczReporty_Click(object sender, RoutedEventArgs e)
         {
             //TODO: Przejscie na zobaczenie reportow
+        }
+
+        private void btnDodajZdjeciem_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow.Nawigacja("AdminDodajKsiazkeZdjeciem.xaml");
         }
     }
 }

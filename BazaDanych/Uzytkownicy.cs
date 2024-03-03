@@ -52,17 +52,15 @@ namespace InżynierkaBiblioteka.BazaDanych
         public virtual ICollection<Wypozyczenia> Wypozyczenia { get; set; }
         public virtual ICollection<Powiadomienia> Powiadomienia { get; set; }
         public virtual ICollection<Recenzje> Recenzje { get; set; }
-        public virtual ICollection<Ksiazki> WszystkieWypozyczoneKsiazki { get; set; }
-        //To Potrzebne?
         public virtual ICollection<Logi> WszystkieLogi { get; set; }
 
-        public HashSet<Ksiazki> WszystkieWypozyczoneKsiazkiHash()
-        {
-            return WszystkieWypozyczoneKsiazki.OrderBy(b => b.ISBN).DistinctBy(b => b.ISBN).ToHashSet();
-        }
         public Uzytkownicy()
         {
-            
+            //Aby nie wywalalo
+            Wypozyczenia = new List<Wypozyczenia>();
+            Powiadomienia = new List<Powiadomienia>();
+            Recenzje = new List<Recenzje>();
+            WszystkieLogi = new List<Logi>();
         }
     }
 }

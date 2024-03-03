@@ -25,7 +25,7 @@ namespace InżynierkaBiblioteka
         {
             InitializeComponent();
             grid.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto });
-            foreach (var item in GlowneOkno.ZalogowanyUzytkownik.Wypozyczenia)
+            foreach (var item in GlowneOkno.ZalogowanyUzytkownik.Wypozyczenia.Where(w => w.DataAktualnegoOddania == null))
             {
                 grid.RowDefinitions.Add(new RowDefinition() { Height= GridLength.Auto});
                 Button button = new Button() { Content= item.Ksiazka.TytulKsiazki };
@@ -49,9 +49,6 @@ namespace InżynierkaBiblioteka
                 TimeSpan data = w.DataAktualnegoOddania.Value - w.DataDoOddania;
                 decimal kara = 10 * data.Days;
                 GlowneOkno.ZalogowanyUzytkownik.Zaleglosci += kara;
-                //TODO: Naliczanie kary
-                //Np dodanie decimal do Uzytkownika w bazie i nie pozwalanie na wypozyczanie
-                //Moze dodac jeszcze jakies sprawdzanie przez admina?
             }
             GlowneOkno.ZalogowanyUzytkownik.LiczbaWypozyczonychKsiazek--;
             MessageBox.Show($"Oddano ksiazke! {w.Ksiazka.TytulKsiazki}");
@@ -70,7 +67,6 @@ namespace InżynierkaBiblioteka
                 }
 
             }
-            GlowneOkno.ZalogowanyUzytkownik.Wypozyczenia.Remove(w);
             GlowneOkno.BazaDanych.SaveChanges();
 
             grid.Children.Remove((Button)sender);

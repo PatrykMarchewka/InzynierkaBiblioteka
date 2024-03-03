@@ -31,7 +31,7 @@ namespace InżynierkaBiblioteka
             textBlockRokPublikacji.Text = PokazKsiazkeKsiazka.RokPublikacjiKsiazki.ToString();
             textBlockJezyk.Text = PokazKsiazkeKsiazka.JezykKsiazki.Nazwa;
             textBlockIloscStron.Text = PokazKsiazkeKsiazka.IloscStron.ToString();
-            if (PokazKsiazkeKsiazka.LiczbaOczekujacych > 0)
+            if (PokazKsiazkeKsiazka.DostepnoscKsiazki <= 0)
             {
                 textBlockDostepnosc.Text = "Liczba oczekujacych: " + PokazKsiazkeKsiazka.LiczbaOczekujacych.ToString();
             }
@@ -50,7 +50,19 @@ namespace InżynierkaBiblioteka
             }
             textBlockIloscWypozyczen30Dni.Text = PokazKsiazkeKsiazka.IloscWypozyczen30Dni.ToString();
 
-            if (GlowneOkno.ZalogowanyUzytkownik.WszystkieWypozyczoneKsiazkiHash().Contains(PokazKsiazkeKsiazka))
+            List<HashKsiazkiAutorzy> Lista = PokazKsiazkeKsiazka.Hashe.Where(h => h.Ksiazka == PokazKsiazkeKsiazka).ToList();
+            if (Lista.Count > 0)
+            {
+                foreach (var item in Lista)
+                {
+                    textBlockAutorzy.Text += $"{item.Autor.ImieAutora} {item.Autor.NazwiskoAutora}, ";
+                }
+                textBlockAutorzy.Text = textBlockAutorzy.Text.Substring(0, textBlockAutorzy.Text.Length - 2);
+            }
+
+
+
+            if (GlowneOkno.ZalogowanyUzytkownik.Wypozyczenia.Any(w => w.Ksiazka == PokazKsiazkeKsiazka))
             {
                 btnNapiszRecenzje.Visibility = Visibility.Visible;
                 if (GlowneOkno.ZalogowanyUzytkownik.Recenzje.Any(r => r.Ksiazka == PokazKsiazkeKsiazka))
@@ -63,6 +75,7 @@ namespace InżynierkaBiblioteka
                     NapiszRecenzje.IstniejacaRecenzja = null;
                 }
             }
+
 
             if (!PokazKsiazkeKsiazka.DoWypozyczenia || PokazKsiazkeKsiazka.DostepnoscKsiazki == 0)
             {
@@ -126,7 +139,17 @@ namespace InżynierkaBiblioteka
                 GlowneOkno.ZalogowanyUzytkownik.LiczbaWypozyczonychKsiazek++;
                 PokazKsiazkeKsiazka.DostepnoscKsiazki--;
                 PokazKsiazkeKsiazka.IloscWypozyczen30Dni++;
-                GlowneOkno.ZalogowanyUzytkownik.WszystkieWypozyczoneKsiazki.Add(PokazKsiazkeKsiazka);
+                try
+                {
+                    WysylanieMaili.LogowanieDoMaila();
+                    WysylanieMaili.WysylanieWiadomosciEmail(GlowneOkno.ZalogowanyUzytkownik.email, "Wypozyczono ksiazke!", $"Wypozyczyles/as ksiazke {PokazKsiazkeKsiazka.TytulKsiazki}\nTermin do oddania:{DateTime.UtcNow.AddDays(14)}\nZa kazdy dodatkowy dzien zostanie naliczona kara!");
+                }
+                catch (Exception ex)
+                {
+                    Logi nowyLog = new Logi() { DataWystapienia = DateTime.UtcNow, TrescWiadomosci = $"Nie mozna wyslac wiadomosci Email {ex.Message} - {ex.InnerException}", Uzytkownicy = GlowneOkno.ZalogowanyUzytkownik, Waznosc = 10 };
+                    GlowneOkno.BazaDanych.Logi.Add(nowyLog);
+                }
+
                 GlowneOkno.BazaDanych.SaveChanges();
                 MessageBox.Show("Wypozyczono ksiazke!");
             }
@@ -154,6 +177,7 @@ namespace InżynierkaBiblioteka
                 {
                     Powiadomienia pow = GlowneOkno.ZalogowanyUzytkownik.Powiadomienia.First(pow => pow.Ksiazka == PokazKsiazkeKsiazka);
                     GlowneOkno.ZalogowanyUzytkownik.Powiadomienia.Remove(pow);
+                    //TODO: Rozkminic czy tutaj tez usuwac, moze zostawic stare w bazie?
                     GlowneOkno.BazaDanych.Powiadomienia.Remove(pow);
                     PokazKsiazkeKsiazka.LiczbaOczekujacych--;
                     GlowneOkno.BazaDanych.SaveChanges();
