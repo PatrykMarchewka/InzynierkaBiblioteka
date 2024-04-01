@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data.SqlTypes;
 using System.Linq;
 using System.Printing.IndexedProperties;
+using System.Security;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,6 +47,19 @@ namespace InżynierkaBiblioteka
             comboBoxPlec.ItemsSource = ListaPlci;
             comboBoxPlec.SelectedIndex = 0;
         }
+
+        //TODO: Nowa sol i hash co jakis interwal czasowy
+        public static string LosowaSol()
+        {
+            Random rnd = new Random();
+            int length = rnd.Next(255);
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            string wynik = new string(Enumerable.Repeat(chars, length).Select(s => s[rnd.Next(s.Length)]).ToArray());
+            return wynik;
+        }
+
+
+
 
         public static string StworzHash(string Haslo, string SolString = "BibliotekaInzynieria")
         {
@@ -96,7 +110,7 @@ namespace InżynierkaBiblioteka
                 //{
                 //    try
                 //    {
-                        
+
                 //            string tempPlec = txtBoxPlec.Text;
                 //            tempPlec = tempPlec.ToLower();
                 //            tempPlec = char.ToUpper(tempPlec[0]) + tempPlec.Substring(1);
@@ -109,31 +123,36 @@ namespace InżynierkaBiblioteka
                 //        MessageBox.Show($"Blad! {ex.Message}");
                 //        MainWindow.Nawigacja("GlowneOkno.xaml");
                 //    }
-                    
+
                 //}
 
                 try
                 {
-                        Plec tempPlec = GlowneOkno.BazaDanych.Plec.First(p => p.idPlci == WybranaPlecID);
-                        Role tempRola = GlowneOkno.BazaDanych.Role.First(r => r.idRoli == 1);
-                        Statusy tempStatus = GlowneOkno.BazaDanych.Statusy.First(s => s.idStatusu == 1);
-
-                        Uzytkownicy nowy = new Uzytkownicy() { LoginUzytkownika = txtBoxLogin.Text, hashHaslo = StworzHash(txtBoxHaslo.Text),Imie = txtBoxImie.Text, Nazwisko = txtBoxNazwisko.Text, DataStworzeniaKonta = DateTime.UtcNow, Plec = tempPlec, Rola =tempRola, StatusKonta = tempStatus, DataOstatniegoLogowania = DateTime.UtcNow };
-                        if (!String.IsNullOrEmpty(txtBoxEmail.Text))
-                        {
-                            nowy.email = txtBoxEmail.Text;
-                        }
-                        if (!String.IsNullOrEmpty(txtBoxNrTelefonu.Text))
-                        {
+                    Plec tempPlec = GlowneOkno.BazaDanych.Plec.First(p => p.idPlci == WybranaPlecID);
+                    Role tempRola = GlowneOkno.BazaDanych.Role.First(r => r.idRoli == 1);
+                    Statusy tempStatus = GlowneOkno.BazaDanych.Statusy.First(s => s.idStatusu == 1);
+                    string temp = LosowaSol();
+                    Uzytkownicy nowy = new Uzytkownicy() { LoginUzytkownika = txtBoxLogin.Text, hashHaslo = StworzHash(txtBoxHaslo.Text, temp), Imie = txtBoxImie.Text, Nazwisko = txtBoxNazwisko.Text, DataStworzeniaKonta = DateTime.UtcNow, Plec = tempPlec, Rola = tempRola, StatusKonta = tempStatus, DataOstatniegoLogowania = DateTime.UtcNow, salt = temp };
+                    if (!String.IsNullOrEmpty(txtBoxEmail.Text))
+                    {
+                        nowy.email = txtBoxEmail.Text;
+                    }
+                    if (!String.IsNullOrEmpty(txtBoxNrTelefonu.Text))
+                    {
                         //TODO: Walidacja nr telefonu, tutaj i przy zmianie danych
-                            nowy.nrTelefonu = txtBoxNrTelefonu.Text;
-                        }
+                        nowy.nrTelefonu = txtBoxNrTelefonu.Text;
+                    }
 
                     GlowneOkno.BazaDanych.Uzytkownicy.Add(nowy);
+
+
+
                     GlowneOkno.BazaDanych.SaveChanges();
-                        MessageBox.Show("Dodano Uzytkownika");
-                        GlowneOkno.ZalogowanyUzytkownik = nowy;
-                        nowy = null;
+                    MessageBox.Show("Dodano Uzytkownika");
+                    GlowneOkno.ZalogowanyUzytkownik = nowy;
+                    nowy = null;
+                    Logi nowyLog = new Logi() { DataWystapienia = DateTime.UtcNow, TrescWiadomosci = "Stworzono nowego uzytkownika", Uzytkownicy = GlowneOkno.ZalogowanyUzytkownik, Waznosc = 1 };
+                    GlowneOkno.ZalogowanyUzytkownik.WszystkieLogi.Add(nowyLog);
                     MainWindow.GlownaRamka.GoBack();
                 }
                 catch (Exception ex)

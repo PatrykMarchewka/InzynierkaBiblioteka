@@ -16,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Windows.Devices.Enumeration;
 using Windows.Foundation;
 using Windows.Graphics.Imaging;
 using Windows.Media.Capture;
@@ -41,6 +42,8 @@ namespace InżynierkaBiblioteka
         {
             InitializeComponent();
             skan = false;
+            barcodeReader.Options.TryHarder = true;
+            barcodeReader.Options.TryInverted = true;
 
 
 
@@ -52,8 +55,8 @@ namespace InżynierkaBiblioteka
 
 
 
-            //Bitmap bitmapa = new Bitmap(@"C:\Users\Patryk\OneDrive\Pulpit\kkkkk.png");
-            //barcodeReader.Options.TryHarder = true;
+            //Bitmap bitmapa = new Bitmap(@"C:\Users\Patryk\OneDrive\Pulpit\sk2.png");
+
             //barcodeReader.Options.TryInverted = true;
             //Result result = barcodeReader.Decode(bitmapa);
             //MessageBox.Show(result.Text);
@@ -68,13 +71,12 @@ namespace InżynierkaBiblioteka
             var cancellationToken = cancellationTokenSource.Token;
 
             
-            mediaCapture = new MediaCapture();
-            await mediaCapture.InitializeAsync();
+            //mediaCapture = new MediaCapture();
+            //await mediaCapture.InitializeAsync();
             while (!skan)
             {
                 Bitmap bitmapa = await CapturePhotoAsync();
                 imObraz.Source = bitmapImage;
-                await Task.Delay(1000);
                 var result = barcodeReader.Decode(bitmapa);
                 if (result != null)
                 {
@@ -158,7 +160,7 @@ namespace InżynierkaBiblioteka
             ImageEncodingProperties imgFormat = ImageEncodingProperties.CreatePng();
 
             // Create a storage file for the photo
-            var file = await Windows.Storage.KnownFolders.PicturesLibrary.CreateFileAsync("temp.png", Windows.Storage.CreationCollisionOption.GenerateUniqueName);
+            var file = await Windows.Storage.KnownFolders.PicturesLibrary.CreateFileAsync("temp.png", Windows.Storage.CreationCollisionOption.ReplaceExisting);
 
             // Capture the photo
             await mediaCapture.CapturePhotoToStorageFileAsync(imgFormat, file);
@@ -181,6 +183,7 @@ namespace InżynierkaBiblioteka
                     encoder.Save(memoryStream);
 
                     Bitmap bitmap = new Bitmap(memoryStream);
+                    mediaCapture.Dispose();
                     return bitmap;
                 }
             }

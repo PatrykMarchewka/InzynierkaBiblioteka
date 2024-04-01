@@ -10,8 +10,8 @@
 
     <Grid>
         <Button x:Name="btnPowrot" Content="◀" FontSize="48" VerticalAlignment="Top" HorizontalAlignment="Left" Background="Transparent" BorderThickness="0" Click="btnPowrot_Click"/>
-        <TextBox x:Name="txtBoxAutorzy" HorizontalAlignment="Left" Margin="68,153,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="200" TextChanged="txtBoxAutorzy_TextChanged" Height="31"/>
-        <ComboBox x:Name="comboAutorzy" FontSize="20" HorizontalAlignment="Left" Margin="68,215,0,0" VerticalAlignment="Top" Width="200" Height="40" SelectionChanged="comboAutorzy_SelectionChanged">
+        <TextBox x:Name="txtBoxAutorzy" HorizontalAlignment="Left" Margin="68,247,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="200" TextChanged="txtBoxAutorzy_TextChanged" Height="31"/>
+        <ComboBox x:Name="comboAutorzy" FontSize="20" HorizontalAlignment="Left" Margin="68,309,0,0" VerticalAlignment="Top" Width="200" Height="40" SelectionChanged="comboAutorzy_SelectionChanged">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock>
@@ -22,21 +22,23 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <ComboBox x:Name="comboKsiazki" FontSize="20" HorizontalAlignment="Left" Margin="695,212,0,0" VerticalAlignment="Top" Width="201" Height="40" SelectionChanged="comboKsiazki_SelectionChanged">
+        <ComboBox x:Name="comboKsiazki" FontSize="20" HorizontalAlignment="Left" Margin="695,306,0,0" VerticalAlignment="Top" Width="201" Height="40" SelectionChanged="comboKsiazki_SelectionChanged">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding TytulKsiazki}"/>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <TextBox x:Name="txtBoxKsiazki" HorizontalAlignment="Left" Margin="695,153,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="201" TextChanged="txtBoxKsiazki_TextChanged" Height="33"/>
-        <Button x:Name="btnPowiaz" Click="btnPowiaz_Click" Content=" Powiaz " Foreground="White" Background="Black" FontSize="30" HorizontalAlignment="Center" Margin="0,270,0,0" VerticalAlignment="Top">
+        <TextBox x:Name="txtBoxKsiazki" HorizontalAlignment="Left" Margin="695,247,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="201" TextChanged="txtBoxKsiazki_TextChanged" Height="33"/>
+        <Button x:Name="btnPowiaz" Click="btnPowiaz_Click" Content=" Powiaz " Foreground="White" Background="Black" FontSize="30" HorizontalAlignment="Center" Margin="0,364,0,0" VerticalAlignment="Top">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="10"/>
                 </Style>
             </Button.Resources>
         </Button>
+        <Label Content="Wyszukaj autora" FontSize="30" HorizontalAlignment="Left" Margin="54,192,0,0" VerticalAlignment="Top"/>
+        <Label Content="Wyszukaj ksiazke" FontSize="30" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="678,192,0,0"/>
 
     </Grid>
 </Page>

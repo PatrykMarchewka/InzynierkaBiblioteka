@@ -13,7 +13,8 @@ namespace InżynierkaBiblioteka.BazaDanych
     {
         [System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity), Key]
         public int idUzytkownika { get; set; }
-        public int? RFID { get; set; }
+        [MaxLength(255)]
+        public string? RFID { get; set; }
         public int? RFIDPin { get; set; }
         [MaxLength(255)]
         public string LoginUzytkownika { get; set; }
@@ -35,6 +36,7 @@ namespace InżynierkaBiblioteka.BazaDanych
         public DateTime DataStworzeniaKonta { get; set; }
         [MaxLength]
         public string? Komentarze;
+        //TODO: Do usuniecia
         public decimal Zaleglosci { get; set; } = 0;
         public DateTime DataOstatniegoLogowania { get; set; }
 
@@ -54,6 +56,8 @@ namespace InżynierkaBiblioteka.BazaDanych
         public virtual ICollection<Recenzje> Recenzje { get; set; }
         public virtual ICollection<Logi> WszystkieLogi { get; set; }
 
+        public virtual ICollection<Zaleglosci> WszystkieZaleglosci { get; set; }
+
         public Uzytkownicy()
         {
             //Aby nie wywalalo
@@ -61,6 +65,7 @@ namespace InżynierkaBiblioteka.BazaDanych
             Powiadomienia = new List<Powiadomienia>();
             Recenzje = new List<Recenzje>();
             WszystkieLogi = new List<Logi>();
+            WszystkieZaleglosci = new List<Zaleglosci>();
         }
     }
 }

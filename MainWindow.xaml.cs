@@ -40,7 +40,17 @@ namespace InżynierkaBiblioteka
         private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             Exception ex = (Exception)e.ExceptionObject;
-            Logi nowyLog = new Logi() { DataWystapienia = DateTime.UtcNow, Uzytkownicy = GlowneOkno.ZalogowanyUzytkownik, TrescWiadomosci = $"Typ bledu: {ex.GetType().Name}, wiadomosc: {ex.Message} - {ex.InnerException}, Stack: {ex.StackTrace}", Waznosc = 100 };
+            Logi nowyLog = new Logi() { DataWystapienia = DateTime.UtcNow, TrescWiadomosci = $"Typ bledu: {ex.GetType().Name}, wiadomosc: {ex.Message} - {ex.InnerException}, Stack: {ex.StackTrace}", Waznosc = 100 };
+            if (GlowneOkno.ZalogowanyAdministrator != null)
+            {
+                nowyLog.Uzytkownicy = GlowneOkno.ZalogowanyAdministrator;
+                GlowneOkno.ZalogowanyAdministrator.WszystkieLogi.Add(nowyLog);
+            }
+            else if (GlowneOkno.ZalogowanyUzytkownik != null)
+            {
+                nowyLog.Uzytkownicy = GlowneOkno.ZalogowanyUzytkownik;
+                GlowneOkno.ZalogowanyUzytkownik.WszystkieLogi.Add(nowyLog);
+            }
             GlowneOkno.BazaDanych.Logi.Add(nowyLog);
             GlowneOkno.BazaDanych.SaveChanges();
         }

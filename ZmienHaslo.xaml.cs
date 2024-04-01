@@ -41,15 +41,15 @@ namespace InżynierkaBiblioteka
 
             if (OdzyskajKonto.proba != null)
             {
-                OdzyskajKonto.proba.hashHaslo = StworzNoweKonto.StworzHash(txtBoxNoweHaslo1.Text);
+                OdzyskajKonto.proba.hashHaslo = StworzNoweKonto.StworzHash(txtBoxNoweHaslo1.Text, OdzyskajKonto.proba.salt);
                 GlowneOkno.ZalogowanyUzytkownik = OdzyskajKonto.proba;
                 ZmienDane();
             }
-            else if (stringComparer.Compare(StworzNoweKonto.StworzHash(txtBoxStareHaslo.Text),GlowneOkno.ZalogowanyUzytkownik.hashHaslo) == 0)
+            else if (stringComparer.Compare(StworzNoweKonto.StworzHash(txtBoxStareHaslo.Text, GlowneOkno.ZalogowanyUzytkownik.salt),GlowneOkno.ZalogowanyUzytkownik.hashHaslo) == 0)
             {
                 if (stringComparer.Compare(txtBoxNoweHaslo1.Text,txtBoxNoweHaslo2.Text) == 0)
                 {
-                    GlowneOkno.ZalogowanyUzytkownik.hashHaslo = StworzNoweKonto.StworzHash(txtBoxNoweHaslo1.Text);
+                    GlowneOkno.ZalogowanyUzytkownik.hashHaslo = StworzNoweKonto.StworzHash(txtBoxNoweHaslo1.Text, GlowneOkno.ZalogowanyUzytkownik.salt);
                     ZmienDane();
                 }
                 else
@@ -87,7 +87,7 @@ namespace InżynierkaBiblioteka
             }
             OdzyskajKonto.proba = null;
             GlowneOkno.BazaDanych.SaveChanges();
-            MainWindow.Nawigacja("PoZalogowaniuUzytkownik.xaml");
+            MainWindow.Nawigacja("GlowneOkno.xaml");
         }
     }
 }

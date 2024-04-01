@@ -47,8 +47,14 @@ namespace InżynierkaBiblioteka
             if (w.DataAktualnegoOddania > w.DataDoOddania)
             {
                 TimeSpan data = w.DataAktualnegoOddania.Value - w.DataDoOddania;
-                decimal kara = 10 * data.Days;
-                GlowneOkno.ZalogowanyUzytkownik.Zaleglosci += kara;
+                Zaleglosci nowaZaleglosc = new Zaleglosci() { Ksiazka = w.Ksiazka, Uzytkownicy = GlowneOkno.ZalogowanyUzytkownik, Zaleglosc = 10 * data.Days, Zaplacono = false, Komentarz = "Oddanie ksiazki po czasie" };
+
+                GlowneOkno.ZalogowanyUzytkownik.WszystkieZaleglosci.Add(nowaZaleglosc);
+
+                Logi nowyLog = new Logi() { DataWystapienia = DateTime.UtcNow, TrescWiadomosci = $"Uzytkownik oddal ksiazke po czasie i zostala policzona kara {(10 * data.Days):C}", Uzytkownicy = GlowneOkno.ZalogowanyUzytkownik, Waznosc = 1 };
+                GlowneOkno.ZalogowanyUzytkownik.WszystkieLogi.Add(nowyLog);
+
+                MessageBox.Show($"Ksiazka zostala oddana po czasie, naliczono kare: {(10 * data.Days):C}. Nie mozesz wypozyczac wiecej ksiazek dopoki nie uregulujesz tej platnosci");
             }
             GlowneOkno.ZalogowanyUzytkownik.LiczbaWypozyczonychKsiazek--;
             MessageBox.Show($"Oddano ksiazke! {w.Ksiazka.TytulKsiazki}");

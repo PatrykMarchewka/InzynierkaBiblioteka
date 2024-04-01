@@ -32,6 +32,7 @@
         <Label Content="Jezyk" HorizontalAlignment="Left" Margin="219,130,0,0" VerticalAlignment="Top"/>
         <Label Content="Maks rok wydania" HorizontalAlignment="Left" Margin="328,130,0,0" VerticalAlignment="Top"/>
         <Label Content="Maks liczba stron" HorizontalAlignment="Left" Margin="489,130,0,0" VerticalAlignment="Top"/>
+        <Label Content="Wybierz ksiazke" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,223,0,0"/>
 
 
     </Grid>

@@ -23,7 +23,6 @@ namespace InżynierkaBiblioteka
         public PoZalogowaniuAdmin()
         {
             InitializeComponent();
-
         }
 
         private void btnPowrot_Click(object sender, RoutedEventArgs e)
@@ -36,12 +35,12 @@ namespace InżynierkaBiblioteka
         private void btnWyszukajUzytkownika_Click(object sender, RoutedEventArgs e)
         {
             //TODO: Przejscie na wyszukiwanie Uzytkownicyow
-
+            MainWindow.Nawigacja("Administrator/AdminWyszukajUzytkownikow.xaml");
         }
 
         private void btnDodajKsiazke_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow.Nawigacja("AdminDodajKsiazke.xaml");
+            MainWindow.Nawigacja("Administrator/AdminDodajKsiazke.xaml");
         }
 
         private void btnZobaczReporty_Click(object sender, RoutedEventArgs e)
@@ -51,7 +50,18 @@ namespace InżynierkaBiblioteka
 
         private void btnDodajZdjeciem_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow.Nawigacja("AdminDodajKsiazkeZdjeciem.xaml");
+            MainWindow.Nawigacja("Administrator/AdminDodajKsiazkeZdjeciem.xaml");
+        }
+
+        private void btnOpcje_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow.Nawigacja("UzytkownikOpcje.xaml");
+        }
+
+        private void btnZmienTryb_Click(object sender, RoutedEventArgs e)
+        {
+            GlowneOkno.ZalogowanyUzytkownik = GlowneOkno.ZalogowanyAdministrator;
+            MainWindow.Nawigacja("PoZalogowaniuUzytkownik.xaml");
         }
     }
 }

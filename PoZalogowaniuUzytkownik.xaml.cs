@@ -24,6 +24,7 @@ namespace InżynierkaBiblioteka
         public PoZalogowaniu()
         {
             InitializeComponent();
+            //TODO: Dodanie przyciskow dla administratora
             
         }
 

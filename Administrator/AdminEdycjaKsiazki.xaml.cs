@@ -116,7 +116,8 @@ namespace InżynierkaBiblioteka
                 EdytowanaKsiazka.DoWypozyczenia = (bool)chkBoxWypozyczenie.IsChecked;
 
                 Logi nowyLog = new Logi() { DataWystapienia = DateTime.UtcNow, TrescWiadomosci = "Administrator zmienil dane ksiazki", Uzytkownicy = GlowneOkno.ZalogowanyAdministrator, Waznosc = 1 };
-                GlowneOkno.BazaDanych.Logi.Add(nowyLog);
+                //TEST czy trzeba .Logi.Add czy wystarczy Uzytkownicy.WszystkieLogi.Add
+                GlowneOkno.ZalogowanyAdministrator.WszystkieLogi.Add(nowyLog);
 
                 GlowneOkno.BazaDanych.SaveChanges();
 
@@ -144,7 +145,7 @@ namespace InżynierkaBiblioteka
         private void btnPrzypiszAutorow_Click(object sender, RoutedEventArgs e)
         {
             PowiazAutorzyKsiazki.WybranaKsiazka = EdytowanaKsiazka;
-            MainWindow.Nawigacja("PowiazAutorzyKsiazki.xaml");
+            MainWindow.Nawigacja("Administrator/PowiazAutorzyKsiazki.xaml");
         }
     }
 }

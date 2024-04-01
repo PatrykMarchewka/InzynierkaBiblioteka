@@ -1,5 +1,6 @@
 ﻿using InżynierkaBiblioteka.BazaDanych;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,7 @@ namespace InżynierkaBiblioteka
         public DbSet<HashKsiazkiAutorzy> HashKsiazkiAutorzy { get; set; }
         public DbSet<GatunkiKsiazek> GatunkiKsiazek { get; set; }
         public DbSet<Logi> Logi { get; set; }
+        public DbSet<Zaleglosci> Zaleglosci { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -62,6 +64,8 @@ namespace InżynierkaBiblioteka
             mod.Entity<Recenzje>().HasOne(r => r.Ksiazka).WithMany(k => k.Recenzje);
             mod.Entity<Recenzje>().HasOne(r => r.Uzytkownicy).WithMany(u => u.Recenzje);
 
+            mod.Entity<Zaleglosci>().HasOne(z => z.Uzytkownicy).WithMany(u => u.WszystkieZaleglosci);
+            mod.Entity<Zaleglosci>().HasOne(z => z.Ksiazka).WithMany(k => k.Zaleglosci);
 
 
 

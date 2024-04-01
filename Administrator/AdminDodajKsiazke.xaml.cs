@@ -39,7 +39,7 @@ namespace InżynierkaBiblioteka
                 MessageBoxResult result = MessageBox.Show("Nieznaleziono ksiazki w bazie danych, czy chcesz utworzyc nowa ksiazke?", "Brak wynikow", MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.Yes)
                 {
-                    MainWindow.Nawigacja("AdminEdycjaKsiazki.xaml");
+                    MainWindow.Nawigacja("Administrator/AdminEdycjaKsiazki.xaml");
                 }
             }
             foreach (var item in Lista)
@@ -56,7 +56,7 @@ namespace InżynierkaBiblioteka
 
         private void Button_Click(object s, RoutedEventArgs e, Ksiazki kopiaItemu)
         {
-            MainWindow.Nawigacja("AdminEdycjaKsiazki.xaml");
+            MainWindow.Nawigacja("Administrator/AdminEdycjaKsiazki.xaml");
             AdminEdycjaKsiazki.EdytowanaKsiazka = kopiaItemu;
         }
 

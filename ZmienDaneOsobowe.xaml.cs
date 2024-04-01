@@ -23,12 +23,12 @@ namespace InżynierkaBiblioteka
     {
         public ZmienDaneOsobowe()
         {
-            //TODO: Dodac walidacje emaila
             InitializeComponent();
             txtBoxImie.Text = GlowneOkno.ZalogowanyUzytkownik.Imie;
             txtBoxNazwisko.Text = GlowneOkno.ZalogowanyUzytkownik.Nazwisko;
             txtBoxEmail.Text = GlowneOkno.ZalogowanyUzytkownik.email;
             txtBoxTelefon.Text = GlowneOkno.ZalogowanyUzytkownik.nrTelefonu;
+            lblZnakA.Visibility = Visibility.Hidden;
 
             if (GlowneOkno.ZalogowanyAdministrator != null)
             {
@@ -58,14 +58,28 @@ namespace InżynierkaBiblioteka
                 catch (Exception ex)
                 {
                     Logi nowyLog = new Logi() { DataWystapienia = DateTime.UtcNow, TrescWiadomosci = $"Nie udalo sie wyslac wiadomosci Email {ex.Message} - {ex.InnerException}", Uzytkownicy = GlowneOkno.ZalogowanyUzytkownik, Waznosc = 10 };
-                    GlowneOkno.BazaDanych.Logi.Add(nowyLog);
+                    GlowneOkno.ZalogowanyUzytkownik.WszystkieLogi.Add(nowyLog);
                 }
                 GlowneOkno.ZalogowanyUzytkownik.Imie = txtBoxImie.Text;
                 GlowneOkno.ZalogowanyUzytkownik.Nazwisko = txtBoxNazwisko.Text;
-                GlowneOkno.ZalogowanyUzytkownik.email = txtBoxEmail.Text;
-                GlowneOkno.ZalogowanyUzytkownik.nrTelefonu = txtBoxTelefon.Text;
+                if (String.IsNullOrEmpty(txtBoxEmail.Text))
+                {
+                    GlowneOkno.ZalogowanyUzytkownik.email = null;
+                }
+                else
+                {
+                    GlowneOkno.ZalogowanyUzytkownik.email = txtBoxEmail.Text;
+                }
+                if (String.IsNullOrEmpty(txtBoxTelefon.Text))
+                {
+                    GlowneOkno.ZalogowanyUzytkownik.email = null;
+                }
+                else
+                {
+                    GlowneOkno.ZalogowanyUzytkownik.nrTelefonu = txtBoxTelefon.Text;
+                }
                 Logi l = new Logi() { DataWystapienia = DateTime.UtcNow, TrescWiadomosci = $"Zmieniono dane uzytkownika", Uzytkownicy = GlowneOkno.ZalogowanyUzytkownik, Waznosc = 1 };
-                GlowneOkno.BazaDanych.Logi.Add(l);
+                GlowneOkno.ZalogowanyUzytkownik.WszystkieLogi.Add(l);
                 GlowneOkno.BazaDanych.SaveChanges();
                 MessageBox.Show("Sukces! Pomyslnie zmieniono dane");
 

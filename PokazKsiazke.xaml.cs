@@ -119,9 +119,21 @@ namespace InżynierkaBiblioteka
 
         private void btnWypozyczKsiazke_Click(object sender, RoutedEventArgs e)
         {
-            if (GlowneOkno.ZalogowanyUzytkownik.LiczbaWypozyczonychKsiazek >= 3 || GlowneOkno.ZalogowanyUzytkownik.Zaleglosci != 0)
+            if (GlowneOkno.ZalogowanyUzytkownik.LiczbaWypozyczonychKsiazek >= 3)
             {
-                MessageBox.Show("Blad! Nie mozna wypozyczyc wiecej ksiazek!");
+                MessageBox.Show("Blad! Nie mozesz wypozyczyc wiecej ksiazek, najpierw oddaj te ktore wypozyczyles!");
+            }
+            else if(GlowneOkno.ZalogowanyUzytkownik.WszystkieZaleglosci.Any(z => z.Zaplacono == false))
+            {
+                decimal kara = 0;
+                foreach (var item in GlowneOkno.ZalogowanyUzytkownik.WszystkieZaleglosci)
+                {
+                    if (item.Zaplacono == false)
+                    {
+                        kara += item.Zaleglosc;
+                    }
+                }
+                MessageBox.Show($"Blad! Masz nieoplacone zaleglosci w formie {kara:C}");
             }
             else
             {
@@ -133,9 +145,7 @@ namespace InżynierkaBiblioteka
                     Uzytkownicy = GlowneOkno.ZalogowanyUzytkownik,
                     Ksiazka = PokazKsiazkeKsiazka
                 };
-                GlowneOkno.BazaDanych.Wypozyczenia.Add(w);
                 GlowneOkno.ZalogowanyUzytkownik.Wypozyczenia.Add(w);
-                PokazKsiazkeKsiazka.Wypozyczenia.Add(w);
                 GlowneOkno.ZalogowanyUzytkownik.LiczbaWypozyczonychKsiazek++;
                 PokazKsiazkeKsiazka.DostepnoscKsiazki--;
                 PokazKsiazkeKsiazka.IloscWypozyczen30Dni++;
@@ -178,7 +188,6 @@ namespace InżynierkaBiblioteka
                     Powiadomienia pow = GlowneOkno.ZalogowanyUzytkownik.Powiadomienia.First(pow => pow.Ksiazka == PokazKsiazkeKsiazka);
                     GlowneOkno.ZalogowanyUzytkownik.Powiadomienia.Remove(pow);
                     //TODO: Rozkminic czy tutaj tez usuwac, moze zostawic stare w bazie?
-                    GlowneOkno.BazaDanych.Powiadomienia.Remove(pow);
                     PokazKsiazkeKsiazka.LiczbaOczekujacych--;
                     GlowneOkno.BazaDanych.SaveChanges();
                 }

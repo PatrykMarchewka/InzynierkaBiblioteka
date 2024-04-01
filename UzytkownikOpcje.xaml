@@ -10,13 +10,15 @@
 
     <Grid>
         <Button x:Name="btnPowrot" Content="◀" FontSize="48" VerticalAlignment="Top" HorizontalAlignment="Left" Background="Transparent" BorderThickness="0" Click="btnPowrot_Click" />
-        <Button x:Name="btnZmienRFIDPin" Content=" Zmien RFID Pin " FontSize="40" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,175" Foreground="White" Background="Black" Click="btnZmienRFIDPin_Click">
+        
+        <Button x:Name="btnDodajRFID" Content=" Zarejestruj czytnik RFID " FontSize="40" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,175" Foreground="White" Background="Black" Click="btnDodajRFID_Click">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="10"/>
                 </Style>
             </Button.Resources>
         </Button>
+        
         <Button x:Name="btnZmienHaslo" Content=" Zmien Haslo " FontSize="40" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Background="Black" Click="btnZmienHaslo_Click">
             <Button.Resources>
                 <Style TargetType="Border">

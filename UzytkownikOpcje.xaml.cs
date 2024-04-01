@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InżynierkaBiblioteka.BazaDanych;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,13 +21,35 @@ namespace InżynierkaBiblioteka
     /// </summary>
     public partial class UzytkownikOpcje : Page
     {
+        bool usun = false;
         public UzytkownikOpcje()
         {
             InitializeComponent();
+
+            if (GlowneOkno.ZalogowanyAdministrator != null && GlowneOkno.ZalogowanyUzytkownik == null)
+            {
+                GlowneOkno.ZalogowanyUzytkownik = GlowneOkno.ZalogowanyAdministrator;
+            }
+
+
+            if (GlowneOkno.ZalogowanyUzytkownik.RFID != null)
+            {
+                btnDodajRFID.Content = " Usun czytnik RFID ";
+                usun = true;
+            }
+            else
+            {
+                btnDodajRFID.Content = " Zarejestruj czytnik RFID ";
+                usun = false;
+            }
         }
 
         private void btnPowrot_Click(object sender, RoutedEventArgs e)
         {
+            if (GlowneOkno.ZalogowanyUzytkownik == GlowneOkno.ZalogowanyAdministrator)
+            {
+                GlowneOkno.ZalogowanyUzytkownik = null;
+            }
             MainWindow.GlownaRamka.GoBack();
         }
 
@@ -35,21 +58,32 @@ namespace InżynierkaBiblioteka
             MainWindow.Nawigacja("ZmienHaslo.xaml");
         }
 
-        private void btnZmienRFIDPin_Click(object sender, RoutedEventArgs e)
-        {
-            if (GlowneOkno.ZalogowanyUzytkownik.RFID == null)
-            {
-                MessageBox.Show("Blad! Nie przypisano czytnika RFID");
-            }
-            else
-            {
-                //TODO: Przejscie na strone zmiany pinu
-            }
-        }
-
         private void btnZmienDaneOsobowe_Click(object sender, RoutedEventArgs e)
         {
             MainWindow.Nawigacja("ZmienDaneOsobowe.xaml");
+        }
+
+        private void btnDodajRFID_Click(object sender, RoutedEventArgs e)
+        {
+            if (usun)
+            {
+                MessageBoxResult result = MessageBox.Show("Czy chcesz usunac przypisany RFID?", "Usuniecie RFID", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.Yes)
+                {
+
+                    Logi nowyLog = new Logi() { DataWystapienia = DateTime.UtcNow, TrescWiadomosci = "Usunieto czytnik RFID", Uzytkownicy = GlowneOkno.ZalogowanyUzytkownik, Waznosc = 1 };
+                    GlowneOkno.ZalogowanyUzytkownik.WszystkieLogi.Add(nowyLog);
+
+                    GlowneOkno.ZalogowanyUzytkownik.RFID = null;
+                    GlowneOkno.BazaDanych.SaveChanges();
+                    MessageBox.Show("Pomyslnie usunieto przypisany RFID");
+                }
+            }
+            else
+            {
+                MainWindow.Nawigacja("LogowanieRFID.xaml");
+            }
+            
         }
     }
 }

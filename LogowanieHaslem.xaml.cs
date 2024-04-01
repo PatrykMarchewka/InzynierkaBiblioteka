@@ -92,7 +92,7 @@ namespace InżynierkaBiblioteka
                     else
                     {
                         string hash = proba.hashHaslo;
-                        if (WeryfikacjaHasla(Haslo, hash))
+                        if (WeryfikacjaHasla(Haslo, hash, proba.salt))
                         {
                             GlowneOkno.ZalogowanyUzytkownik = proba;
                             proba = null;
@@ -108,7 +108,7 @@ namespace InżynierkaBiblioteka
                                 GlowneOkno.ZalogowanyUzytkownik = null;
                             GlowneOkno.ZalogowanyAdministrator.DataOstatniegoLogowania = DateTime.UtcNow;
                             GlowneOkno.BazaDanych.SaveChanges();
-                                MainWindow.Nawigacja("PoZalogowaniuAdmin.xaml");
+                                MainWindow.Nawigacja("Administrator/PoZalogowaniuAdmin.xaml");
                             }
                         }
                         else

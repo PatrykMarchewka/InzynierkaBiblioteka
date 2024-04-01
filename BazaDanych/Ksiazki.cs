@@ -31,6 +31,7 @@ namespace InżynierkaBiblioteka.BazaDanych
         public virtual ICollection<Wypozyczenia> Wypozyczenia { get; set; } = new List<Wypozyczenia>();
         public virtual ICollection<Powiadomienia> Powiadomienia { get; set; } = new List<Powiadomienia>();
         public virtual ICollection<Recenzje> Recenzje { get; set; } = new List<Recenzje>();
+        public virtual ICollection<Zaleglosci> Zaleglosci { get; set; } = new List<Zaleglosci>();
 
 
         public Ksiazki()

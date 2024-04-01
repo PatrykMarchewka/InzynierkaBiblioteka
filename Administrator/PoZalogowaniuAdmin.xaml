@@ -34,7 +34,15 @@
             </Button.Resources>
         </Button>
 
-        <Button x:Name="btnDodajZdjeciem" Content=" 📷 " FontSize="30" HorizontalAlignment="Left" VerticalAlignment="Top" Click="btnDodajZdjeciem_Click" Margin="600,315,0,0" Foreground="White" Background="Black"> 
+        <Button x:Name="btnDodajZdjeciem" Content=" 📷 " FontSize="30" HorizontalAlignment="Left" VerticalAlignment="Top" Click="btnDodajZdjeciem_Click" Margin="600,315,0,0" Foreground="White" Background="Black">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button x:Name="btnOpcje" Content="⚙️" FontSize="48" VerticalAlignment="Top" HorizontalAlignment="Right" Background="Transparent" BorderThickness="0" Click="btnOpcje_Click"/>
+        <Button x:Name="btnZmienTryb" Content=" Zmien Tryb " FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center" Background="Black" Foreground="White" Click="btnZmienTryb_Click" Margin="0,0,0,150">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="10"/>
