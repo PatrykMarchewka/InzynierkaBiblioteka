@@ -77,6 +77,7 @@ namespace InżynierkaBiblioteka
                     GlowneOkno.ZalogowanyUzytkownik.RFID = null;
                     GlowneOkno.BazaDanych.SaveChanges();
                     MessageBox.Show("Pomyslnie usunieto przypisany RFID");
+                    MainWindow.GlownaRamka.NavigationService.Refresh();
                 }
             }
             else

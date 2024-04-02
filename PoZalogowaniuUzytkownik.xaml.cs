@@ -56,5 +56,10 @@ namespace InżynierkaBiblioteka
         {
             MainWindow.Nawigacja("UzytkownikOpcje.xaml");
         }
+
+        private void btnZobaczZaleglosci_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow.Nawigacja("ZobaczZaleglosci.xaml");
+        }
     }
 }

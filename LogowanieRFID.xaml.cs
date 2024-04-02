@@ -64,6 +64,8 @@ namespace InżynierkaBiblioteka
 
                     GlowneOkno.ZalogowanyUzytkownik.RFID = Kod;
                     GlowneOkno.BazaDanych.SaveChanges();
+                    MessageBox.Show("Dodano czytnik RFID");
+                    MainWindow.GlownaRamka.GoBack();
                 }
                 else if (GlowneOkno.ZalogowanyAdministrator != null)
                 {
@@ -74,6 +76,8 @@ namespace InżynierkaBiblioteka
 
                     GlowneOkno.ZalogowanyAdministrator.RFID = Kod;
                     GlowneOkno.BazaDanych.SaveChanges();
+                    MessageBox.Show("Dodano czytnik RFID");
+                    MainWindow.GlownaRamka.GoBack();
                 }
                 else
                 {

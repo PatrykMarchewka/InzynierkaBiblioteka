@@ -25,5 +25,12 @@
                 </Style>
             </Button.Resources>
         </Button>
+        <Button x:Name="btnZobaczZaleglosci" Content=" Zobacz Zaleglosci " FontSize="40" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,350,0,0" Foreground="White" Background="Black" Click="btnZobaczZaleglosci_Click">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Button.Resources>
+        </Button>
     </Grid>
 </Page>
