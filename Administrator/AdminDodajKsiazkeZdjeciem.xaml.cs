@@ -20,6 +20,7 @@ using Windows.Devices.Enumeration;
 using Windows.Foundation;
 using Windows.Graphics.Imaging;
 using Windows.Media.Capture;
+using Windows.Media.Devices;
 using Windows.Media.MediaProperties;
 using Windows.Storage;
 using Windows.Storage.FileProperties;
@@ -156,6 +157,18 @@ namespace InżynierkaBiblioteka
             // Initialize MediaCapture
             await mediaCapture.InitializeAsync();
 
+
+            //Proba autofokusa
+            if (mediaCapture.VideoDeviceController.FocusControl.Supported)
+            {
+                var focusSettings = new FocusSettings { Mode = FocusMode.Auto };
+                mediaCapture.VideoDeviceController.FocusControl.Configure(focusSettings);
+
+                await mediaCapture.VideoDeviceController.FocusControl.FocusAsync();
+            }
+
+
+
             // Set the format for capturing photos
             ImageEncodingProperties imgFormat = ImageEncodingProperties.CreatePng();
 
@@ -194,5 +207,26 @@ namespace InżynierkaBiblioteka
             skan = true;
             MainWindow.GlownaRamka.GoBack();
         }
+
+
+
+
+
+        //Dla czytnika laserowego
+        //private static void CzytanieZCzytnika(object sender, KeyEventArgs e)
+        //{
+        //    if (e.Key >= Key.D0 && e.Key <= Key.D9)
+        //    {
+        //        Kod += (e.Key - Key.D0).ToString();
+        //    }
+        //    else if (e.Key == Key.Enter)
+        //    {
+        //        //Tutaj przejsc do strony Ksiazki
+        //        //
+        //        Kod = String.Empty;
+        //    }
+        //}
+
+
     }
 }
