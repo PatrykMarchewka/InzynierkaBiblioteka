@@ -48,7 +48,7 @@ namespace InżynierkaBiblioteka
             comboBoxPlec.SelectedIndex = 0;
         }
 
-        //TODO: Nowa sol i hash co jakis interwal czasowy
+        //TODO: Nowa sol i hash co jakis interwal czasowy, dodac pole ostatniej zmiany do tabeli Uzytkownicy
         public static string LosowaSol()
         {
             Random rnd = new Random();

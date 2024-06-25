@@ -62,6 +62,11 @@ namespace InżynierkaBiblioteka
                 {
                     MainWindow.Nawigacja("ZmienHaslo.xaml");
                 }
+                else
+                {
+                    MessageBox.Show("Podano bledne dane, sprawdz ponownie!");
+                    //TODO: Moze jakas walidacja zeby ktos nie probowal spamowac tak dlugo az mu sie uda
+                }
             }
             else
             {

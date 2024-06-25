@@ -63,10 +63,10 @@ namespace InżynierkaBiblioteka
             //Wyszukiwanie
             //Dostepnosc, Do wypozyczenia
             Lista = GlowneOkno.BazaDanych.Ksiazki.Where(k => EF.Functions.Like(k.TytulKsiazki, $"%{txtBoxWyszukaj.Text}%") || EF.Functions.Like(k.ISBN, $"%{txtBoxWyszukaj.Text}%")).ToHashSet();
-            //Dodawanie po imieniu
+            //Dodawanie po autorze
             //Lista.UnionWith(GlowneOkno.BazaDanych.Ksiazki.Where(k => k.Hashe == GlowneOkno.BazaDanych.HashKsiazkiAutorzy.Where(h => EF.Functions.Like(h.Autor.ImieAutora, $"%{txtBoxWyszukaj.Text}%") || EF.Functions.Like(h.Autor.NazwiskoAutora, $"%{txtBoxWyszukaj.Text}%"))).ToHashSet());
             Lista.UnionWith(GlowneOkno.BazaDanych.Ksiazki.Where(k => GlowneOkno.BazaDanych.HashKsiazkiAutorzy.Any(h => h.Ksiazka == k && (EF.Functions.Like(h.Autor.ImieAutora, $"%{txtBoxWyszukaj.Text}%") || EF.Functions.Like(h.Autor.NazwiskoAutora, $"%{txtBoxWyszukaj.Text}%")))).ToHashSet());
-            //TODO: Sprawdzic czy dziala
+            
             
 
             if (comboGatunki.SelectedIndex > 0)

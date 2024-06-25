@@ -62,6 +62,7 @@ namespace InżynierkaBiblioteka.Administrator
 
             Stack.Children.Clear();
             Stack.BeginInit();
+            //TODO: Wywala blad bo pomagalem patrycji i wprowadzila zle dane, poprawic baze aby pola byly NOT NULL wtedy bedzie dzialac
             Lista = GlowneOkno.BazaDanych.Uzytkownicy.Where(u => EF.Functions.Like(u.Imie, $"%{txtBoxWyszukaj.Text}%") || EF.Functions.Like(u.Nazwisko, $"%{txtBoxWyszukaj.Text}%") || EF.Functions.Like(u.email, $"%{txtBoxWyszukaj.Text}%") || EF.Functions.Like(u.LoginUzytkownika, $"%{txtBoxWyszukaj.Text}%")).ToHashSet();
 
             

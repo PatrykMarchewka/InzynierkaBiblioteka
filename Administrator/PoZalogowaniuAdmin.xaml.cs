@@ -34,7 +34,7 @@ namespace InżynierkaBiblioteka
 
         private void btnWyszukajUzytkownika_Click(object sender, RoutedEventArgs e)
         {
-            //TODO: Przejscie na wyszukiwanie Uzytkownicyow
+            
             MainWindow.Nawigacja("Administrator/AdminWyszukajUzytkownikow.xaml");
         }
 
