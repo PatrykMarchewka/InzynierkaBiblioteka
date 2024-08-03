@@ -42,6 +42,15 @@ namespace InżynierkaBiblioteka
                 btnDodajRFID.Content = " Zarejestruj czytnik RFID ";
                 usun = false;
             }
+
+            if (GlowneOkno.ZalogowanyAdministrator == null)
+            {
+                btnZmienOpcjeBazy.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                btnZmienOpcjeBazy.Visibility = Visibility.Visible;
+            }
         }
 
         private void btnPowrot_Click(object sender, RoutedEventArgs e)
@@ -85,6 +94,11 @@ namespace InżynierkaBiblioteka
                 MainWindow.Nawigacja("LogowanieRFID.xaml");
             }
             
+        }
+
+        private void btnZmienOpcjeBazy_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow.opcjePolaczeniaOkno.Show();
         }
     }
 }

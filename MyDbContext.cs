@@ -29,19 +29,35 @@ namespace InżynierkaBiblioteka
         public DbSet<Logi> Logi { get; set; }
         public DbSet<Zaleglosci> Zaleglosci { get; set; }
 
+        private static string? _ConnectionString;
+        public static string? ConnectionString
+        {
+            set
+            {
+                _ConnectionString = value;
+            }
+            private get
+            {
+                return _ConnectionString;
+            }
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            string serwer = "InzynieriaBiblioteka.mssql.somee.com";
-            string nazwaBazy = "InzynieriaBiblioteka";
-            string Login = "patryk4610_SQLLogin_1";
-            string Haslo = "myy4mgwo5k";
+            //$"Server={serwer};Database={nazwaBazy};User Id={Login};Password={Haslo};Encrypt=False"
+            //string serwer = "InzynieriaBiblioteka.mssql.somee.com";
+            //string nazwaBazy = "InzynieriaBiblioteka";
+            //string Login = "patryk4610_SQLLogin_1";
+            //string Haslo = "myy4mgwo5k";
+            
+            //STARE NIE UZYWAC
             //string serwer = "sql.bsite.net\\MSSQL2016";
             //string nazwaBazy = "patryk4610_InzynieriaBiblioteka";
             //string Login = "patryk4610_InzynieriaBiblioteka"; //Nazwa bazy danych jest taka sama jak loginn
             //string Haslo = "Logowanie";
 
 
-            optionsBuilder.UseLazyLoadingProxies().UseSqlServer($"Server={serwer};Database={nazwaBazy};User Id={Login};Password={Haslo};Encrypt=False");
+            optionsBuilder.UseLazyLoadingProxies().UseSqlServer(ConnectionString);
         }
 
         protected override void OnModelCreating(ModelBuilder mod)

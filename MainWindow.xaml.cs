@@ -1,9 +1,13 @@
 ﻿using InżynierkaBiblioteka.BazaDanych;
 using Microsoft.Extensions.Logging;
+using Microsoft.VisualBasic.Logging;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -26,6 +30,7 @@ namespace InżynierkaBiblioteka
 
         public static Frame GlownaRamka;
         public static string UserInput; //Po co to? Bo zapomnialem
+        public static OpcjePolaczeniaOkno opcjePolaczeniaOkno = new OpcjePolaczeniaOkno();
         
 
 
@@ -34,7 +39,23 @@ namespace InżynierkaBiblioteka
             InitializeComponent();
             GlownaRamka = ((MainWindow)Application.Current.MainWindow).MainFrame;
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
-            Nawigacja("GlowneOkno.xaml");
+
+            if (File.Exists(Directory.GetCurrentDirectory() + @"\Connection.json"))
+            {
+                string tekst = File.ReadAllText(Directory.GetCurrentDirectory() + @"\Connection.json");
+                JSONStructure JSON = JsonSerializer.Deserialize<JSONStructure>(tekst);
+                MyDbContext.ConnectionString = $"Server={JSON.Serwer};Database={JSON.NazwaBazy};User Id={JSON.Login};Password={JSON.Haslo};Encrypt=False;";
+                tekst = null;
+                JSON = null;
+                Nawigacja("GlowneOkno.xaml");
+            }
+            else
+            {
+                opcjePolaczeniaOkno.Show();
+            }
+
+
+            
         }
 
         private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
