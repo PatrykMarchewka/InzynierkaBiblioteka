@@ -53,6 +53,7 @@ namespace InżynierkaBiblioteka
                     button.Background = new SolidColorBrush(Colors.Black);
                     button.Content = $" {KopiaItemu.Ksiazka.ISBN} {KopiaItemu.Ksiazka.TytulKsiazki} - {KopiaItemu.Zaleglosc:C} {KopiaItemu.Komentarz} ";
                 }
+                Stack.Children.Add(button);
                 button.Click += (s,e) => Button_Click(s,e,KopiaItemu);
             }
         }

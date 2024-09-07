@@ -43,7 +43,8 @@ namespace InżynierkaBiblioteka
                 usun = false;
             }
 
-            if (GlowneOkno.ZalogowanyAdministrator == null)
+            //2 to administrator
+            if (GlowneOkno.ZalogowanyUzytkownik.Rola.idRoli != 2)
             {
                 btnZmienOpcjeBazy.Visibility = Visibility.Hidden;
             }
