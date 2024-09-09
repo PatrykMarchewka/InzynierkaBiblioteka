@@ -32,6 +32,13 @@ namespace InżynierkaBiblioteka
         public ZobaczZaleglosci()
         {
             InitializeComponent();
+
+            if (GlowneOkno.ZalogowanyAdministrator == null)
+            {
+                btnDodajZaleglosc.Visibility = Visibility.Hidden;
+            }
+
+
             Style style = new Style(typeof(Border));
             style.Setters.Add(cornerRadiusSetter);
             foreach (var item in GlowneOkno.ZalogowanyUzytkownik.WszystkieZaleglosci)
@@ -69,6 +76,11 @@ namespace InżynierkaBiblioteka
         private void btnPowrot_Click(object sender, RoutedEventArgs e)
         {
             MainWindow.GlownaRamka.GoBack();
+        }
+
+        private void btnDodajZaleglosc_Click(object sender, RoutedEventArgs e)
+        {
+            //TODO: Przejscie na strone dodawnia zaleglosci
         }
     }
 }

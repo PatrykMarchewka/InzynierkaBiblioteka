@@ -69,56 +69,47 @@ namespace InżynierkaBiblioteka
             string Haslo = txtBoxZalogujHaslemHaslo.Text;
 
 
-                Uzytkownicy? proba = null;
-                try
-                {
-                    proba = GlowneOkno.BazaDanych.Uzytkownicy.First(u => u.LoginUzytkownika == Login);
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Nie znaleziono takiego Uzytkownika, sprawdz swoj login");
-                }
-                
+            Uzytkownicy? proba = null;
+            try
+            {
+                proba = GlowneOkno.BazaDanych.Uzytkownicy.First(u => u.LoginUzytkownika == Login);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Nie znaleziono takiego Uzytkownika, sprawdz swoj login");
+            }
 
-                if(proba != null)
-                {
 
-                    if (proba.StatusKonta.idStatusu == 2)
-                    {
-                    MessageBox.Show("Blad! Konto zbanowane, skontaktuj sie z administratoem");
+            if (proba != null)
+            {
+
+                string hash = proba.hashHaslo;
+                if (WeryfikacjaHasla(Haslo, hash, proba.salt))
+                {
+                    GlowneOkno.ZalogowanyUzytkownik = proba;
                     proba = null;
-                    MainWindow.GlownaRamka.GoBack();
-                    }
-                    else
+                    GlowneOkno.ZalogowanyUzytkownik.DataOstatniegoLogowania = DateTime.UtcNow;
+                    GlowneOkno.BazaDanych.SaveChanges();
+                    if (GlowneOkno.ZalogowanyUzytkownik.Rola.idRoli == 1)
                     {
-                        string hash = proba.hashHaslo;
-                        if (WeryfikacjaHasla(Haslo, hash, proba.salt))
-                        {
-                            GlowneOkno.ZalogowanyUzytkownik = proba;
-                            proba = null;
-                        GlowneOkno.ZalogowanyUzytkownik.DataOstatniegoLogowania = DateTime.UtcNow;
-                        GlowneOkno.BazaDanych.SaveChanges();
-                            if (GlowneOkno.ZalogowanyUzytkownik.Rola.idRoli == 1)
-                            {
-                                MainWindow.Nawigacja("PoZalogowaniuUzytkownik.xaml");
-                            }
-                            else if (GlowneOkno.ZalogowanyUzytkownik.Rola.idRoli == 2)
-                            {
-                                GlowneOkno.ZalogowanyAdministrator = GlowneOkno.ZalogowanyUzytkownik;
-                                GlowneOkno.ZalogowanyUzytkownik = null;
-                            GlowneOkno.ZalogowanyAdministrator.DataOstatniegoLogowania = DateTime.UtcNow;
-                            GlowneOkno.BazaDanych.SaveChanges();
-                                MainWindow.Nawigacja("Administrator/PoZalogowaniuAdmin.xaml");
-                            }
-                        }
-                        else
-                        {
-                            MessageBox.Show("Zle haslo, sprobuj ponownie");
-                        }
+                        MainWindow.Nawigacja("PoZalogowaniuUzytkownik.xaml");
                     }
-
-                    
+                    else if (GlowneOkno.ZalogowanyUzytkownik.Rola.idRoli == 2)
+                    {
+                        GlowneOkno.ZalogowanyAdministrator = GlowneOkno.ZalogowanyUzytkownik;
+                        GlowneOkno.ZalogowanyUzytkownik = null;
+                        GlowneOkno.ZalogowanyAdministrator.DataOstatniegoLogowania = DateTime.UtcNow;
+                        GlowneOkno.BazaDanych.SaveChanges();
+                        MainWindow.Nawigacja("Administrator/PoZalogowaniuAdmin.xaml");
+                    }
                 }
+                else
+                {
+                    MessageBox.Show("Zle haslo, sprobuj ponownie");
+                }
+
+
+            }
         }
 
         private void btnPowrot_Click(object sender, RoutedEventArgs e)

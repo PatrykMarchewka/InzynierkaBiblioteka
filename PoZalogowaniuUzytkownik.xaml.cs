@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InżynierkaBiblioteka.BazaDanych;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,8 +25,29 @@ namespace InżynierkaBiblioteka
         public PoZalogowaniu()
         {
             InitializeComponent();
+
+
+            if (GlowneOkno.ZalogowanyAdministrator != null && GlowneOkno.ZalogowanyUzytkownik.StatusKonta.idStatusu == 2)
+            {
+                btnZbanuj.Visibility = Visibility.Hidden;
+            }
+            else if (GlowneOkno.ZalogowanyAdministrator != null && GlowneOkno.ZalogowanyUzytkownik.StatusKonta.idStatusu == 1)
+            {
+                btnOdbanuj.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                btnZbanuj.Visibility = Visibility.Hidden;
+                btnOdbanuj.Visibility = Visibility.Hidden;
+            }
+
             //TODO: Dodanie przyciskow dla administratora
-            
+            if (GlowneOkno.ZalogowanyUzytkownik.StatusKonta.idStatusu == 2 && GlowneOkno.ZalogowanyAdministrator == null)
+            {
+                MessageBox.Show("Blad! Konto obecnie zbanowane, skontaktuj sie z administratorem");
+                btnPowrot_Click(this, new RoutedEventArgs());
+            }
+
         }
 
         private void btnPowrot_Click(object sender, RoutedEventArgs e)
@@ -36,7 +58,7 @@ namespace InżynierkaBiblioteka
 
         private void btnWyszukajKsiazke_Click(object sender, RoutedEventArgs e)
         {
-                MainWindow.Nawigacja("WyszukajKsiazke.xaml");
+            MainWindow.Nawigacja("WyszukajKsiazke.xaml");
         }
 
         private void btnOddajKsiazke_Click(object sender, RoutedEventArgs e)
@@ -60,6 +82,24 @@ namespace InżynierkaBiblioteka
         private void btnZobaczZaleglosci_Click(object sender, RoutedEventArgs e)
         {
             MainWindow.Nawigacja("ZobaczZaleglosci.xaml");
+        }
+
+        private void btnZbanuj_Click(object sender, RoutedEventArgs e)
+        {
+            GlowneOkno.ZalogowanyUzytkownik.StatusKonta = GlowneOkno.BazaDanych.Statusy.First(s => s.idStatusu == 2);
+            Logi nowyLog = new Logi() { DataWystapienia = DateTime.UtcNow, TrescWiadomosci = $"Administrator o ID= {GlowneOkno.ZalogowanyAdministrator.idUzytkownika} zbanowal uzytkownika", Uzytkownicy = GlowneOkno.ZalogowanyUzytkownik, Waznosc = 1 };
+            GlowneOkno.ZalogowanyUzytkownik.WszystkieLogi.Add(nowyLog);
+            GlowneOkno.BazaDanych.SaveChanges();
+            btnPowrot_Click(this, new RoutedEventArgs());
+        }
+
+        private void btnOdbanuj_Click(object sender, RoutedEventArgs e)
+        {
+            GlowneOkno.ZalogowanyUzytkownik.StatusKonta = GlowneOkno.BazaDanych.Statusy.First(s => s.idStatusu == 1);
+            Logi nowyLog = new Logi() { DataWystapienia = DateTime.UtcNow, TrescWiadomosci = $"Administrator o ID= {GlowneOkno.ZalogowanyAdministrator.idUzytkownika} odbanowal uzytkownika", Uzytkownicy = GlowneOkno.ZalogowanyUzytkownik, Waznosc = 1 };
+            GlowneOkno.ZalogowanyUzytkownik.WszystkieLogi.Add(nowyLog);
+            GlowneOkno.BazaDanych.SaveChanges();
+            btnPowrot_Click(this, new RoutedEventArgs());
         }
     }
 }
