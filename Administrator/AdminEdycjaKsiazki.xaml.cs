@@ -44,6 +44,15 @@ namespace InżynierkaBiblioteka
                 chkBoxWypozyczenie.IsChecked = EdytowanaKsiazka.DoWypozyczenia;
 
             }
+
+
+            if (EdytowanaKsiazka == null)
+            {
+                btnPrzypiszAutorow.Visibility = Visibility.Hidden;
+            }
+
+
+
         }
 
         private void btnPowrot_Click(object sender, RoutedEventArgs e)
@@ -54,76 +63,89 @@ namespace InżynierkaBiblioteka
 
         private void btnZapiszZmiany_Click(object sender, RoutedEventArgs e)
         {
-            if (EdytowanaKsiazka == null)
+            if (txtBoxISBN.Text.Length > 13 || txtBoxTytul.Text.Length > 255 || !int.TryParse(txtBoxRok.Text, out int result) || !int.TryParse(txtBoxStrony.Text, out int result2) || !int.TryParse(txtboxKopie.Text, out int result3))
             {
-                try
-                {
-                    EdytowanaKsiazka = new Ksiazki() { ISBN = txtBoxISBN.Text, TytulKsiazki = txtBoxTytul.Text, GatunekKsiazki = (BazaDanych.GatunkiKsiazek)comboGatunki.SelectedItem, RokPublikacjiKsiazki = int.Parse(txtBoxRok.Text), JezykKsiazki = (BazaDanych.Jezyki)comboJezyk.SelectedItem, IloscStron = int.Parse(txtBoxStrony.Text), DostepnoscKsiazki = int.Parse(txtboxKopie.Text), DoWypozyczenia = (bool)chkBoxWypozyczenie.IsChecked };
-                    GlowneOkno.BazaDanych.Ksiazki.Add(EdytowanaKsiazka);
-                    Logi nowyLog = new Logi() { DataWystapienia = DateTime.UtcNow, Uzytkownicy = GlowneOkno.ZalogowanyAdministrator, Waznosc = 1, TrescWiadomosci = $"Administrator dodal nowa ksiazke {EdytowanaKsiazka.TytulKsiazki}" };
-                    GlowneOkno.BazaDanych.Logi.Add(nowyLog);
-
-                }
-                catch (Exception ex)
-                {
-                    Logi nowyLog = new Logi() { DataWystapienia = DateTime.UtcNow, Uzytkownicy = GlowneOkno.ZalogowanyAdministrator, Waznosc = 10, TrescWiadomosci = $"Blad dodawania ksiazki {ex.Message} - {ex.InnerException}" };
-                    MessageBox.Show($"Blad! {ex.Message}");
-                    GlowneOkno.BazaDanych.Logi.Add(nowyLog);
-                }
-                GlowneOkno.BazaDanych.SaveChanges();
-
+                MessageBox.Show("Blad! Jedno lub wiecej pol jest za dlugie, sprawdz wszystkie pola");
             }
             else
             {
-                if (EdytowanaKsiazka.DostepnoscKsiazki == 0)
+                if (EdytowanaKsiazka == null)
                 {
-                    Logi l = new Logi() { DataWystapienia = DateTime.UtcNow, TrescWiadomosci = $"Ksiazka {EdytowanaKsiazka.TytulKsiazki} jest teraz ponownie dostepna", Uzytkownicy = GlowneOkno.ZalogowanyAdministrator, Waznosc = 1 };
-                    GlowneOkno.BazaDanych.Logi.Add(l);
-                    int liczba = int.Parse(txtboxKopie.Text);
-                    foreach (var item in GlowneOkno.BazaDanych.Powiadomienia)
+                    try
                     {
-                        if (item.Ksiazka.ISBN == EdytowanaKsiazka.ISBN && item.KiedyWyslanoMail == null && (bool)chkBoxWypozyczenie.IsChecked && liczba > 0)
+                        EdytowanaKsiazka = new Ksiazki() { ISBN = txtBoxISBN.Text, TytulKsiazki = txtBoxTytul.Text, GatunekKsiazki = (BazaDanych.GatunkiKsiazek)comboGatunki.SelectedItem, RokPublikacjiKsiazki = int.Parse(txtBoxRok.Text), JezykKsiazki = (BazaDanych.Jezyki)comboJezyk.SelectedItem, IloscStron = int.Parse(txtBoxStrony.Text), DostepnoscKsiazki = int.Parse(txtboxKopie.Text), DoWypozyczenia = (bool)chkBoxWypozyczenie.IsChecked };
+                        GlowneOkno.BazaDanych.Ksiazki.Add(EdytowanaKsiazka);
+                        string tresc = $"Administrator dodal nowa ksiazke {EdytowanaKsiazka.TytulKsiazki}";
+                        tresc = tresc.Length > 255 ? tresc.Substring(0, 255) : tresc;
+                        Logi nowyLog = new Logi() { DataWystapienia = DateTime.UtcNow, Uzytkownicy = GlowneOkno.ZalogowanyAdministrator, Waznosc = 1, TrescWiadomosci = tresc };
+                        GlowneOkno.BazaDanych.Logi.Add(nowyLog);
+
+                    }
+                    catch (Exception ex)
+                    {
+                        Logi nowyLog = new Logi() { DataWystapienia = DateTime.UtcNow, Uzytkownicy = GlowneOkno.ZalogowanyAdministrator, Waznosc = 10, TrescWiadomosci = $"Blad dodawania ksiazki {ex.Message} - {ex.InnerException}" };
+                        MessageBox.Show($"Blad! {ex.Message}");
+                        GlowneOkno.BazaDanych.Logi.Add(nowyLog);
+                    }
+                    GlowneOkno.BazaDanych.SaveChanges();
+
+                }
+                else
+                {
+                    if (EdytowanaKsiazka.DostepnoscKsiazki == 0)
+                    {
+                        string ltresc = $"Ksiazka {EdytowanaKsiazka.TytulKsiazki} jest teraz ponownie dostepna";
+                        ltresc = ltresc.Length > 255 ? ltresc.Substring(0, 255) : ltresc;
+
+
+                        Logi l = new Logi() { DataWystapienia = DateTime.UtcNow, TrescWiadomosci = ltresc, Uzytkownicy = GlowneOkno.ZalogowanyAdministrator, Waznosc = 1 };
+                        GlowneOkno.BazaDanych.Logi.Add(l);
+                        int liczba = int.Parse(txtboxKopie.Text);
+                        foreach (var item in GlowneOkno.BazaDanych.Powiadomienia)
                         {
-                            //Dodawanie do listy poniewaz EF Core nie lubi jak sie otwiera wiele polaczen naraz!
-                            powia.Add(item);
-                            item.Ksiazka.LiczbaOczekujacych--;
-                            liczba--;
-                        }
-                        else if (liczba <= 0)
-                        {
-                            break;
+                            if (item.Ksiazka.ISBN == EdytowanaKsiazka.ISBN && item.KiedyWyslanoMail == null && (bool)chkBoxWypozyczenie.IsChecked && liczba > 0)
+                            {
+                                //Dodawanie do listy poniewaz EF Core nie lubi jak sie otwiera wiele polaczen naraz!
+                                powia.Add(item);
+                                item.Ksiazka.LiczbaOczekujacych--;
+                                liczba--;
+                            }
+                            else if (liczba <= 0)
+                            {
+                                break;
+                            }
                         }
                     }
+
+
+
+
+                    foreach (var item in powia)
+                    {
+                        WysylanieMaili.WysylanieWiadomosciEmail(item.Uzytkownicy.email, "Powiadomienie o dostępności książki", $"Otrzymaliśmy dostawę z twoją książką\nKsiążka: {EdytowanaKsiazka.TytulKsiazki} jest teraz dostępna w naszej bibliotece");
+                        item.KiedyWyslanoMail = DateTime.UtcNow;
+                    }
+                    powia.Clear();
+
+                    EdytowanaKsiazka.ISBN = txtBoxISBN.Text;
+                    EdytowanaKsiazka.TytulKsiazki = txtBoxTytul.Text;
+                    EdytowanaKsiazka.GatunekKsiazki = (BazaDanych.GatunkiKsiazek)comboGatunki.SelectedItem;
+                    EdytowanaKsiazka.RokPublikacjiKsiazki = int.Parse(txtBoxRok.Text);
+                    EdytowanaKsiazka.JezykKsiazki = (BazaDanych.Jezyki)comboJezyk.SelectedItem;
+                    EdytowanaKsiazka.IloscStron = int.Parse(txtBoxStrony.Text);
+                    EdytowanaKsiazka.DostepnoscKsiazki = int.Parse(txtboxKopie.Text);
+                    EdytowanaKsiazka.DoWypozyczenia = (bool)chkBoxWypozyczenie.IsChecked;
+
+                    string tresc = $"Administrator zmienil dane ksiazki {EdytowanaKsiazka.ISBN} - {EdytowanaKsiazka.TytulKsiazki}";
+                    tresc = tresc.Length > 255 ? tresc.Substring(0, 255) : tresc;
+                    Logi nowyLog = new Logi() { DataWystapienia = DateTime.UtcNow, TrescWiadomosci = tresc, Uzytkownicy = GlowneOkno.ZalogowanyAdministrator, Waznosc = 1 };
+                    GlowneOkno.BazaDanych.Logi.Add(nowyLog);
+
+                    GlowneOkno.BazaDanych.SaveChanges();
+
+
                 }
-
-
-
-
-                foreach (var item in powia)
-                {
-                    WysylanieMaili.WysylanieWiadomosciEmail(item.Uzytkownicy.email, "Powiadomienie o dostępności książki", $"Otrzymaliśmy dostawę z twoją książką\nKsiążka: {EdytowanaKsiazka.TytulKsiazki} jest teraz dostępna w naszej bibliotece");
-                    item.KiedyWyslanoMail = DateTime.UtcNow;
-                }
-                powia.Clear();
-
-                EdytowanaKsiazka.ISBN = txtBoxISBN.Text;
-                EdytowanaKsiazka.TytulKsiazki = txtBoxTytul.Text;
-                EdytowanaKsiazka.GatunekKsiazki = (BazaDanych.GatunkiKsiazek)comboGatunki.SelectedItem;
-                EdytowanaKsiazka.RokPublikacjiKsiazki = int.Parse(txtBoxRok.Text);
-                EdytowanaKsiazka.JezykKsiazki = (BazaDanych.Jezyki)comboJezyk.SelectedItem;
-                EdytowanaKsiazka.IloscStron = int.Parse(txtBoxStrony.Text);
-                EdytowanaKsiazka.DostepnoscKsiazki = int.Parse(txtboxKopie.Text);
-                EdytowanaKsiazka.DoWypozyczenia = (bool)chkBoxWypozyczenie.IsChecked;
-
-                Logi nowyLog = new Logi() { DataWystapienia = DateTime.UtcNow, TrescWiadomosci = "Administrator zmienil dane ksiazki", Uzytkownicy = GlowneOkno.ZalogowanyAdministrator, Waznosc = 1 };
-                //TEST czy trzeba .Logi.Add czy wystarczy Uzytkownicy.WszystkieLogi.Add
-                GlowneOkno.ZalogowanyAdministrator.WszystkieLogi.Add(nowyLog);
-
-                GlowneOkno.BazaDanych.SaveChanges();
-
-
             }
-
 
         }
 
@@ -134,7 +156,7 @@ namespace InżynierkaBiblioteka
                 string tekst = txtBox.Text + e.Text;
                 e.Handled = !regex.IsMatch(tekst);
             }
-            
+
         }
 
         private void txtBoxRegex(object sender, TextCompositionEventArgs e)

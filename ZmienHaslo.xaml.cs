@@ -47,7 +47,7 @@ namespace InżynierkaBiblioteka
             }
             else if (stringComparer.Compare(StworzNoweKonto.StworzHash(txtBoxStareHaslo.Text, GlowneOkno.ZalogowanyUzytkownik.salt),GlowneOkno.ZalogowanyUzytkownik.hashHaslo) == 0)
             {
-                if (stringComparer.Compare(txtBoxNoweHaslo1.Text,txtBoxNoweHaslo2.Text) == 0)
+                if (stringComparer.Compare(txtBoxNoweHaslo1.Text, txtBoxNoweHaslo2.Text) == 0 && txtBoxNoweHaslo1.Text.Length > 0 && txtBoxNoweHaslo1.Text.Length < 255)
                 {
                     GlowneOkno.ZalogowanyUzytkownik.hashHaslo = StworzNoweKonto.StworzHash(txtBoxNoweHaslo1.Text, GlowneOkno.ZalogowanyUzytkownik.salt);
                     ZmienDane();

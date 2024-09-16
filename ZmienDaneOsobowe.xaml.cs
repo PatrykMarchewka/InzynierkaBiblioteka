@@ -48,6 +48,10 @@ namespace InżynierkaBiblioteka
             {
                 MessageBox.Show("Blad! Wypelnij wszystkie pola");
             }
+            else if (txtBoxImie.Text.Length > 255 || txtBoxNazwisko.Text.Length > 255 || txtBoxEmail.Text.Length > 255 || txtBoxTelefon.Text.Length > 20)
+            {
+                MessageBox.Show("Blad! Jedno lub wiecej pol jest za dlugie, sprawdz wszystkie pola");
+            }
             else
             {
                 try

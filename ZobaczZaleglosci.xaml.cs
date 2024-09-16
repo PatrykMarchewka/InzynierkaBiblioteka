@@ -1,4 +1,5 @@
-﻿using InżynierkaBiblioteka.BazaDanych;
+﻿using InżynierkaBiblioteka.Administrator;
+using InżynierkaBiblioteka.BazaDanych;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -53,12 +54,12 @@ namespace InżynierkaBiblioteka
                 if (KopiaItemu.Zaplacono)
                 {
                     button.Background = new SolidColorBrush(Colors.Gold);
-                    button.Content = $" {KopiaItemu.Ksiazka.ISBN} {KopiaItemu.Ksiazka.TytulKsiazki} - {KopiaItemu.Zaleglosc:C} {KopiaItemu.Komentarz} ZAPLACONO ";
+                    button.Content = $" {KopiaItemu.Ksiazka?.ISBN ?? "(Brak ksiazki)"} {KopiaItemu.Ksiazka?.TytulKsiazki ?? ""} - {KopiaItemu.Zaleglosc:C} {KopiaItemu.Komentarz} ZAPLACONO ";
                 }
                 else
                 {
                     button.Background = new SolidColorBrush(Colors.Black);
-                    button.Content = $" {KopiaItemu.Ksiazka.ISBN} {KopiaItemu.Ksiazka.TytulKsiazki} - {KopiaItemu.Zaleglosc:C} {KopiaItemu.Komentarz} ";
+                    button.Content = $" {KopiaItemu.Ksiazka?.ISBN ?? "(Brak ksiazki)"} {KopiaItemu.Ksiazka?.TytulKsiazki ?? ""} - {KopiaItemu.Zaleglosc:C} {KopiaItemu.Komentarz} ";
                 }
                 Stack.Children.Add(button);
                 button.Click += (s,e) => Button_Click(s,e,KopiaItemu);
@@ -69,7 +70,10 @@ namespace InżynierkaBiblioteka
         {
             if (GlowneOkno.ZalogowanyAdministrator != null)
             {
-                //TODO: Przejscie na strone dla administratora
+                //TODO: przejscie na strone informacji o zaleglosci
+                DodajZaleglosci.Zaleglosc = z;
+                MainWindow.Nawigacja("Administrator/DodajZaleglosci.xaml");
+
             }
         }
 
@@ -80,7 +84,7 @@ namespace InżynierkaBiblioteka
 
         private void btnDodajZaleglosc_Click(object sender, RoutedEventArgs e)
         {
-            //TODO: Przejscie na strone dodawnia zaleglosci
+            MainWindow.Nawigacja("Administrator/DodajZaleglosci.xaml");
         }
     }
 }

@@ -27,6 +27,15 @@ namespace InżynierkaBiblioteka
     {
         private static int WybranaPlecID = 1;
         private static List<string> ListaPlci = new List<string>();
+
+
+
+
+        //Najdluzszy nr telefonu ma 19 znakow, jest to +999123451234567890 dlatego maks 20 znakow na nr tel
+
+
+
+
         public StworzNoweKonto()
         {
             InitializeComponent();
@@ -100,6 +109,10 @@ namespace InżynierkaBiblioteka
             {
                 MessageBox.Show("Blad! Wypelnij wszystkie wymagane pola");
             }
+            else if (txtBoxNrTelefonu.Text.Length > 20 || txtBoxHaslo.Text.Length > 255 || txtBoxLogin.Text.Length > 255 || txtBoxImie.Text.Length > 255 || txtBoxNazwisko.Text.Length > 255 || txtBoxEmail.Text.Length > 255)
+            {
+                MessageBox.Show("Blad! Jedno lub wiecej pol jest za dlugie, sprawdz wszystkie pola");
+            }
             else if (GlowneOkno.BazaDanych.Uzytkownicy.Any(u => u.LoginUzytkownika == txtBoxLogin.Text))
             {
                 MessageBox.Show("Blad! Niedostępna nazwa użytkownika (Login)");
@@ -139,7 +152,6 @@ namespace InżynierkaBiblioteka
                     }
                     if (!String.IsNullOrEmpty(txtBoxNrTelefonu.Text))
                     {
-                        //TODO: Walidacja nr telefonu, tutaj i przy zmianie danych
                         nowy.nrTelefonu = txtBoxNrTelefonu.Text;
                     }
 
