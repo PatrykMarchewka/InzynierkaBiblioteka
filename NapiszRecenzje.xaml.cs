@@ -46,11 +46,6 @@ namespace InżynierkaBiblioteka
             SolidColorBrush black = new SolidColorBrush(Colors.Black);
             if (sender is Button btn)
             {
-
-                
-
-
-
                 switch (btn.Name)
                 {
                     case "btnGwiazda1":
@@ -94,6 +89,10 @@ namespace InżynierkaBiblioteka
             {
                 MessageBox.Show("Blad! Wybierz ocene przed dodaniem recenzji");
             }
+            else if (txtBoxRecenzja.Text.Length >= 512)
+            {
+                MessageBox.Show("Blad! Tresc recenzji zbyt dluga");
+            }
             else
             {
                 if (IstniejacaRecenzja != null)
@@ -116,7 +115,7 @@ namespace InżynierkaBiblioteka
                     });
                 }
 
-                
+
                 GlowneOkno.BazaDanych.SaveChanges();
                 MainWindow.GlownaRamka.GoBack();
             }

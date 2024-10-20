@@ -62,7 +62,7 @@ namespace InżynierkaBiblioteka
                 catch (Exception ex)
                 {
                     Logi nowyLog = new Logi() { DataWystapienia = DateTime.UtcNow, TrescWiadomosci = $"Nie udalo sie wyslac wiadomosci Email {ex.Message} - {ex.InnerException}", Uzytkownicy = GlowneOkno.ZalogowanyUzytkownik, Waznosc = 10 };
-                    GlowneOkno.ZalogowanyUzytkownik.WszystkieLogi.Add(nowyLog);
+                    GlowneOkno.BazaDanych.Logi.Add(nowyLog);
                 }
                 GlowneOkno.ZalogowanyUzytkownik.Imie = txtBoxImie.Text;
                 GlowneOkno.ZalogowanyUzytkownik.Nazwisko = txtBoxNazwisko.Text;
@@ -76,14 +76,14 @@ namespace InżynierkaBiblioteka
                 }
                 if (String.IsNullOrEmpty(txtBoxTelefon.Text))
                 {
-                    GlowneOkno.ZalogowanyUzytkownik.email = null;
+                    GlowneOkno.ZalogowanyUzytkownik.nrTelefonu = null;
                 }
                 else
                 {
                     GlowneOkno.ZalogowanyUzytkownik.nrTelefonu = txtBoxTelefon.Text;
                 }
                 Logi l = new Logi() { DataWystapienia = DateTime.UtcNow, TrescWiadomosci = $"Zmieniono dane uzytkownika", Uzytkownicy = GlowneOkno.ZalogowanyUzytkownik, Waznosc = 1 };
-                GlowneOkno.ZalogowanyUzytkownik.WszystkieLogi.Add(l);
+                GlowneOkno.BazaDanych.Logi.Add(l);
                 GlowneOkno.BazaDanych.SaveChanges();
                 MessageBox.Show("Sukces! Pomyslnie zmieniono dane");
 
@@ -97,13 +97,15 @@ namespace InżynierkaBiblioteka
 
         private void txtBoxEmail_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (txtBoxEmail.Text.Contains('@') || String.IsNullOrEmpty(txtBoxEmail.Text))
+            if (txtBoxEmail.Text.Contains('@'))
             {
                 lblZnakA.Visibility = Visibility.Hidden;
+                btnZapiszZmiany.Visibility = Visibility.Visible;
             }
             else
             {
                 lblZnakA.Visibility = Visibility.Visible;
+                btnZapiszZmiany.Visibility = Visibility.Hidden;
             }
         }
     }

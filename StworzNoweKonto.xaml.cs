@@ -55,6 +55,15 @@ namespace InżynierkaBiblioteka
             
             comboBoxPlec.ItemsSource = ListaPlci;
             comboBoxPlec.SelectedIndex = 0;
+
+            if (GlowneOkno.ZalogowanyAdministrator == null)
+            {
+                chkBoxAdmin.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                chkBoxAdmin.Visibility = Visibility.Visible;
+            }
         }
 
         //TODO: Nowa sol i hash co jakis interwal czasowy, dodac pole ostatniej zmiany do tabeli Uzytkownicy
@@ -142,15 +151,23 @@ namespace InżynierkaBiblioteka
                 try
                 {
                     Plec tempPlec = GlowneOkno.BazaDanych.Plec.First(p => p.idPlci == WybranaPlecID);
-                    Role tempRola = GlowneOkno.BazaDanych.Role.First(r => r.idRoli == 1);
+                    Role tempRola;
+                    if ((bool)chkBoxAdmin.IsChecked)
+                    {
+                        tempRola = GlowneOkno.BazaDanych.Role.First(r => r.idRoli == 2);
+                    }
+                    else
+                    {
+                        tempRola = GlowneOkno.BazaDanych.Role.First(r => r.idRoli == 1);
+                    }
                     Statusy tempStatus = GlowneOkno.BazaDanych.Statusy.First(s => s.idStatusu == 1);
                     string temp = LosowaSol();
                     Uzytkownicy nowy = new Uzytkownicy() { LoginUzytkownika = txtBoxLogin.Text, hashHaslo = StworzHash(txtBoxHaslo.Text, temp), Imie = txtBoxImie.Text, Nazwisko = txtBoxNazwisko.Text, DataStworzeniaKonta = DateTime.UtcNow, Plec = tempPlec, Rola = tempRola, StatusKonta = tempStatus, DataOstatniegoLogowania = DateTime.UtcNow, salt = temp };
-                    if (!String.IsNullOrEmpty(txtBoxEmail.Text))
+                    if (!String.IsNullOrWhiteSpace(txtBoxEmail.Text))
                     {
                         nowy.email = txtBoxEmail.Text;
                     }
-                    if (!String.IsNullOrEmpty(txtBoxNrTelefonu.Text))
+                    if (!String.IsNullOrWhiteSpace(txtBoxNrTelefonu.Text))
                     {
                         nowy.nrTelefonu = txtBoxNrTelefonu.Text;
                     }
@@ -163,7 +180,22 @@ namespace InżynierkaBiblioteka
                     MessageBox.Show("Dodano Uzytkownika");
                     GlowneOkno.ZalogowanyUzytkownik = nowy;
                     nowy = null;
-                    Logi nowyLog = new Logi() { DataWystapienia = DateTime.UtcNow, TrescWiadomosci = "Stworzono nowego uzytkownika", Uzytkownicy = GlowneOkno.ZalogowanyUzytkownik, Waznosc = 1 };
+                    Logi nowyLog;
+
+                    if (GlowneOkno.ZalogowanyAdministrator == null)
+                    {
+                        nowyLog = new Logi() { DataWystapienia = DateTime.UtcNow, TrescWiadomosci = "Stworzono nowego uzytkownika", Uzytkownicy = GlowneOkno.ZalogowanyUzytkownik, Waznosc = 1 };
+                    }
+                    else
+                    {
+                        string tekst = $"Administrator {GlowneOkno.ZalogowanyAdministrator.idUzytkownika} dodal nowego uzytkownika";
+                        if ((bool)chkBoxAdmin.IsChecked)
+                        {
+                            tekst += " o przywilejach administratora";
+                        }
+                        nowyLog = new Logi() { DataWystapienia = DateTime.UtcNow, TrescWiadomosci = tekst, Uzytkownicy = GlowneOkno.ZalogowanyUzytkownik, Waznosc = 1 };
+                    }
+
                     GlowneOkno.ZalogowanyUzytkownik.WszystkieLogi.Add(nowyLog);
                     MainWindow.GlownaRamka.GoBack();
                 }

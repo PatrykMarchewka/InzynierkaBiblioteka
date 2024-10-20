@@ -10,7 +10,7 @@
 
     <Grid>
         <Button x:Name="btnPowrot" Content="◀" FontSize="48" VerticalAlignment="Top" HorizontalAlignment="Left" Background="Transparent" BorderThickness="0" Click="btnPowrot_Click"/>
-        <Button x:Name="btnWyszukajUzytkownika" Content=" Wyszukaj Uzytkownika " FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" Background="Black" Click="btnWyszukajUzytkownika_Click">
+        <Button x:Name="btnWyszukajUzytkownika" Content=" Wyszukaj Uzytkownika " FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" Background="Black" Click="btnWyszukajUzytkownika_Click" Margin="0,154,0,0">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="10"/>
@@ -18,7 +18,7 @@
             </Button.Resources>
         </Button>
 
-        <Button x:Name="btnDodajKsiazke" Content=" Dodaj ksiazke " FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,150,0,0" Foreground="White" Background="Black" Click="btnDodajKsiazke_Click">
+        <Button x:Name="btnDodajKsiazke" Content=" Dodaj ksiazke " FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,229,0,0" Foreground="White" Background="Black" Click="btnDodajKsiazke_Click">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="10"/>
@@ -26,7 +26,7 @@
             </Button.Resources>
         </Button>
 
-        <Button x:Name="btnZobaczReporty" Content=" ZobaczReporty " FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,300,0,0" Foreground="White" Background="Black" Click="btnZobaczReporty_Click">
+        <Button x:Name="btnZobaczReporty" Content=" Zobacz Reporty " FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,304,0,0" Foreground="White" Background="Black" Click="btnZobaczReporty_Click">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="10"/>
@@ -34,7 +34,7 @@
             </Button.Resources>
         </Button>
 
-        <Button x:Name="btnDodajZdjeciem" Content=" 📷 " FontSize="30" HorizontalAlignment="Left" VerticalAlignment="Top" Click="btnDodajZdjeciem_Click" Margin="600,315,0,0" Foreground="White" Background="Black">
+        <Button x:Name="btnDodajZdjeciem" Content=" 📷 " FontSize="30" HorizontalAlignment="Left" VerticalAlignment="Top" Click="btnDodajZdjeciem_Click" Margin="600,221,0,0" Foreground="White" Background="Black">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="10"/>
@@ -42,7 +42,28 @@
             </Button.Resources>
         </Button>
         <Button x:Name="btnOpcje" Content="⚙️" FontSize="48" VerticalAlignment="Top" HorizontalAlignment="Right" Background="Transparent" BorderThickness="0" Click="btnOpcje_Click"/>
-        <Button x:Name="btnZmienTryb" Content=" Zmien Tryb " FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center" Background="Black" Foreground="White" Click="btnZmienTryb_Click" Margin="0,0,0,150">
+        <Button x:Name="btnZmienTryb" Content=" Zmien Tryb " FontSize="30" VerticalAlignment="Top" HorizontalAlignment="Center" Background="Black" Foreground="White" Click="btnZmienTryb_Click" Margin="0,79,0,0">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button x:Name="btnStworzUzytkownika" Content=" Stworz Nowego Uzytkownika " FontSize="30" VerticalAlignment="Top" HorizontalAlignment="Center" Background="Black" Foreground="White" Click="btnStworzUzytkownika_Click" Margin="0,361,0,0">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button x:Name="btnPowiazAutorow" Content=" Powiaz Autorow z Ksiazkami " FontSize="30" VerticalAlignment="Top" HorizontalAlignment="Center" Background="Black" Foreground="White" Click="btnPowiazAutorow_Click" Margin="0,419,0,0">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button x:Name="btnPokazLogi" Content=" Pokaz Logi " FontSize="30" VerticalAlignment="Top" HorizontalAlignment="Center" Background="Black" Foreground="White" Click="btnPokazLogi_Click" Margin="0,476,0,0">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="10"/>

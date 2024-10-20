@@ -46,6 +46,7 @@ namespace InżynierkaBiblioteka
         private void btnZobaczReporty_Click(object sender, RoutedEventArgs e)
         {
             //TODO: Przejscie na zobaczenie reportow
+            MainWindow.Nawigacja("Administrator/ZobaczReporty.xaml");
         }
 
         private void btnDodajZdjeciem_Click(object sender, RoutedEventArgs e)
@@ -62,6 +63,21 @@ namespace InżynierkaBiblioteka
         {
             GlowneOkno.ZalogowanyUzytkownik = GlowneOkno.ZalogowanyAdministrator;
             MainWindow.Nawigacja("PoZalogowaniuUzytkownik.xaml");
+        }
+
+        private void btnStworzUzytkownika_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow.Nawigacja("StworzNoweKonto.xaml");
+        }
+
+        private void btnPowiazAutorow_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow.Nawigacja("Administrator/PowiazAutorzyKsiazki.xaml");
+        }
+
+        private void btnPokazLogi_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow.Nawigacja("Administrator/PokazLogi.xaml");
         }
     }
 }

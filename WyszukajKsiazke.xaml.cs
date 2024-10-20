@@ -27,33 +27,42 @@ namespace InżynierkaBiblioteka
         public WyszukajKsiazke()
         {
             InitializeComponent();
-            comboGatunki.BeginInit();
-            comboJezyki.BeginInit();
-            comboGatunki.Items.Clear();
-            comboJezyki.Items.Clear();
-            comboGatunki.Items.Add("Brak zaznaczenia");
-            comboJezyki.Items.Add("Brak zaznaczenia");
-            foreach (var item in GlowneOkno.BazaDanych.GatunkiKsiazek.OrderBy(g => g.Nazwa).ToHashSet())
+            if (GlowneOkno.BazaDanych.Ksiazki.Count() == 0)
             {
-                comboGatunki.Items.Add(item.Nazwa);
+                MessageBox.Show("Aktualnie brak ksiazek, wroc pozniej!");
+                MainWindow.GlownaRamka.GoBack();
             }
-
-
-            foreach (var item in GlowneOkno.BazaDanych.Jezyki)
+            else
             {
-                comboJezyki.Items.Add(item.Nazwa);
-            }
-            comboGatunki.EndInit();
-            comboJezyki.EndInit();
+                comboGatunki.BeginInit();
+                comboJezyki.BeginInit();
+                comboGatunki.Items.Clear();
+                comboJezyki.Items.Clear();
+                comboGatunki.Items.Add("Brak zaznaczenia");
+                comboJezyki.Items.Add("Brak zaznaczenia");
+                foreach (var item in GlowneOkno.BazaDanych.GatunkiKsiazek.OrderBy(g => g.Nazwa).ToHashSet())
+                {
+                    comboGatunki.Items.Add(item.Nazwa);
+                }
 
-            SliderRok.Minimum = GlowneOkno.BazaDanych.Ksiazki.Min(k => k.RokPublikacjiKsiazki);
-            SliderRok.Maximum = DateTime.Now.Year;
-            SliderRok.Value = SliderRok.Maximum;
-            SliderStrony.Maximum = GlowneOkno.BazaDanych.Ksiazki.Max(k => k.IloscStron);
-            SliderStrony.Value = SliderStrony.Maximum;
-            lblRok.Content = SliderRok.Value;
-            lblStrony.Content = SliderStrony.Value;
-            Wyszukaj();
+
+                foreach (var item in GlowneOkno.BazaDanych.Jezyki)
+                {
+                    comboJezyki.Items.Add(item.Nazwa);
+                }
+                comboGatunki.EndInit();
+                comboJezyki.EndInit();
+
+                SliderRok.Minimum = GlowneOkno.BazaDanych.Ksiazki.Min(k => k.RokPublikacjiKsiazki);
+                SliderRok.Maximum = DateTime.Now.Year;
+                SliderRok.Value = SliderRok.Maximum;
+                SliderStrony.Maximum = GlowneOkno.BazaDanych.Ksiazki.Max(k => k.IloscStron);
+                SliderStrony.Value = SliderStrony.Maximum;
+                lblRok.Content = SliderRok.Value;
+                lblStrony.Content = SliderStrony.Value;
+                Wyszukaj();
+            }
+            
         }
 
         private void Wyszukaj()

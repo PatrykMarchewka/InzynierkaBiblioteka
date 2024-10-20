@@ -75,7 +75,7 @@ namespace InżynierkaBiblioteka
                     {
                         EdytowanaKsiazka = new Ksiazki() { ISBN = txtBoxISBN.Text, TytulKsiazki = txtBoxTytul.Text, GatunekKsiazki = (BazaDanych.GatunkiKsiazek)comboGatunki.SelectedItem, RokPublikacjiKsiazki = int.Parse(txtBoxRok.Text), JezykKsiazki = (BazaDanych.Jezyki)comboJezyk.SelectedItem, IloscStron = int.Parse(txtBoxStrony.Text), DostepnoscKsiazki = int.Parse(txtboxKopie.Text), DoWypozyczenia = (bool)chkBoxWypozyczenie.IsChecked };
                         GlowneOkno.BazaDanych.Ksiazki.Add(EdytowanaKsiazka);
-                        string tresc = $"Administrator dodal nowa ksiazke {EdytowanaKsiazka.TytulKsiazki}";
+                        string tresc = $"Administrator {GlowneOkno.ZalogowanyAdministrator.idUzytkownika} dodal nowa ksiazke {EdytowanaKsiazka.TytulKsiazki}";
                         tresc = tresc.Length > 255 ? tresc.Substring(0, 255) : tresc;
                         Logi nowyLog = new Logi() { DataWystapienia = DateTime.UtcNow, Uzytkownicy = GlowneOkno.ZalogowanyAdministrator, Waznosc = 1, TrescWiadomosci = tresc };
                         GlowneOkno.BazaDanych.Logi.Add(nowyLog);
@@ -136,7 +136,7 @@ namespace InżynierkaBiblioteka
                     EdytowanaKsiazka.DostepnoscKsiazki = int.Parse(txtboxKopie.Text);
                     EdytowanaKsiazka.DoWypozyczenia = (bool)chkBoxWypozyczenie.IsChecked;
 
-                    string tresc = $"Administrator zmienil dane ksiazki {EdytowanaKsiazka.ISBN} - {EdytowanaKsiazka.TytulKsiazki}";
+                    string tresc = $"Administrator {GlowneOkno.ZalogowanyAdministrator.idUzytkownika} zmienil dane ksiazki {EdytowanaKsiazka.ISBN} - {EdytowanaKsiazka.TytulKsiazki}";
                     tresc = tresc.Length > 255 ? tresc.Substring(0, 255) : tresc;
                     Logi nowyLog = new Logi() { DataWystapienia = DateTime.UtcNow, TrescWiadomosci = tresc, Uzytkownicy = GlowneOkno.ZalogowanyAdministrator, Waznosc = 1 };
                     GlowneOkno.BazaDanych.Logi.Add(nowyLog);

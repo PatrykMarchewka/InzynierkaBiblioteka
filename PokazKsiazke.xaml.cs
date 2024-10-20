@@ -86,7 +86,7 @@ namespace InżynierkaBiblioteka
 
 
             //Recenzje
-            foreach (var item in GlowneOkno.BazaDanych.Recenzje.Where(r => r.Ksiazka == PokazKsiazkeKsiazka))
+            foreach (var item in GlowneOkno.BazaDanych.Recenzje.Where(r => r.Ksiazka == PokazKsiazkeKsiazka && !r.Ukryta))
             {
                 var kopiaItemu = item;
                 Button button = new Button();

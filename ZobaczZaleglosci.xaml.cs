@@ -70,7 +70,6 @@ namespace InżynierkaBiblioteka
         {
             if (GlowneOkno.ZalogowanyAdministrator != null)
             {
-                //TODO: przejscie na strone informacji o zaleglosci
                 DodajZaleglosci.Zaleglosc = z;
                 MainWindow.Nawigacja("Administrator/DodajZaleglosci.xaml");
 

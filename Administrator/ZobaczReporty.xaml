@@ -1,0 +1,24 @@
+﻿<Page x:Class="InżynierkaBiblioteka.Administrator.ZobaczReporty"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:InżynierkaBiblioteka.Administrator"
+      mc:Ignorable="d" 
+      d:DesignHeight="540" d:DesignWidth="960"
+      Title="ZobaczReporty" Background="MediumPurple">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Button x:Name="btnPowrot" Content="◀" FontSize="48" VerticalAlignment="Top" HorizontalAlignment="Left" Background="Transparent" BorderThickness="0" Click="btnPowrot_Click"/>
+        <TextBox x:Name="txtBoxUzytkownik" HorizontalAlignment="Center" VerticalAlignment="Top" Width="250" Height="36" Margin="0,79,0,0"/>
+        <CheckBox x:Name="chkBoxRozwiazane" Content="Pokaz rozwiazane" HorizontalAlignment="Left" Margin="72,153,0,0" VerticalAlignment="Top"/>
+        <ScrollViewer Grid.Row="1">
+            <StackPanel x:Name="Stack"/>
+        </ScrollViewer>
+
+    </Grid>
+</Page>

@@ -71,6 +71,11 @@ namespace InżynierkaBiblioteka
             //mod.Entity<HashKsiazkiAutorzy>().HasNoKey();
             mod.Entity<HashKsiazkiAutorzy>().HasKey(h => new { h.idKsiazki, h.idAutora });
 
+            mod.Entity<Ksiazki>().HasOne(k => k.GatunekKsiazki).WithMany(g => g.Ksiazki);
+            mod.Entity<Ksiazki>().HasOne(k => k.JezykKsiazki).WithMany(j => j.Ksiazki);
+
+            mod.Entity<Logi>().HasOne(l => l.Uzytkownicy).WithMany(u => u.WszystkieLogi);
+
             mod.Entity<Wypozyczenia>().HasOne(w => w.Uzytkownicy).WithMany(u => u.Wypozyczenia);
             mod.Entity<Wypozyczenia>().HasOne(w => w.Ksiazka).WithMany(k => k.Wypozyczenia);
 
@@ -78,10 +83,26 @@ namespace InżynierkaBiblioteka
             mod.Entity<Powiadomienia>().HasOne(p => p.Uzytkownicy).WithMany(u => u.Powiadomienia);
 
             mod.Entity<Recenzje>().HasOne(r => r.Ksiazka).WithMany(k => k.Recenzje);
-            mod.Entity<Recenzje>().HasOne(r => r.Uzytkownicy).WithMany(u => u.Recenzje);
+            mod.Entity<Recenzje>().HasOne(r => r.Uzytkownicy).WithMany(u => u.Recenzje).OnDelete(DeleteBehavior.Restrict);
 
             mod.Entity<Zaleglosci>().HasOne(z => z.Uzytkownicy).WithMany(u => u.WszystkieZaleglosci);
             mod.Entity<Zaleglosci>().HasOne(z => z.Ksiazka).WithMany(k => k.Zaleglosci);
+
+            mod.Entity<Reporty>().HasOne(r => r.Reportujacy).WithMany(u => u.WszystkieReporty).OnDelete(DeleteBehavior.Restrict);
+            mod.Entity<Reporty>().HasOne(r => r.Recenzje).WithMany(r => r.Reporty).OnDelete(DeleteBehavior.Restrict);
+
+            mod.Entity<Plec>().HasIndex(p => p.Nazwa).IsUnique();
+            mod.Entity<Jezyki>().HasIndex(j => j.Nazwa).IsUnique();
+            mod.Entity<Role>().HasIndex(r => r.Nazwa).IsUnique();
+            mod.Entity<GatunkiKsiazek>().HasIndex(g => g.Nazwa).IsUnique();
+            mod.Entity<Statusy>().HasIndex(s => s.Nazwa).IsUnique();
+            mod.Entity<Uzytkownicy>().HasIndex(u => u.LoginUzytkownika).IsUnique();
+            mod.Entity<Ksiazki>().HasIndex(k => k.ISBN).IsUnique();
+
+            //UC_Constraint, nie mozna z nawigacja
+            //mod.Entity<Powiadomienia>().HasIndex(p => new { p.Uzytkownicy.idUzytkownika, p.Ksiazka.ISBN }).IsUnique();
+            //mod.Entity<Recenzje>().HasIndex(r => new { r.Uzytkownicy.idUzytkownika, r.Ksiazka.ISBN });
+
 
 
 

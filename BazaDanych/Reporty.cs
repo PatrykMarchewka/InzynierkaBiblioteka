@@ -17,7 +17,7 @@ namespace InżynierkaBiblioteka.BazaDanych
         public virtual Recenzje Recenzje { get; set; }
         [MaxLength]
         public string TrescRaportu { get; set; }
-        public bool StatusRaportu { get; set; }
+        public bool StatusRaportu { get; set; } //False = Nierozwiazany, True = Rozwiazany
         [ForeignKey("idUzytkownika")]
         public virtual Uzytkownicy Reportujacy { get; set; }
 

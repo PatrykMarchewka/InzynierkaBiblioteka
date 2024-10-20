@@ -53,8 +53,8 @@ namespace InżynierkaBiblioteka.BazaDanych
         public virtual ICollection<Powiadomienia> Powiadomienia { get; set; }
         public virtual ICollection<Recenzje> Recenzje { get; set; }
         public virtual ICollection<Logi> WszystkieLogi { get; set; }
-
         public virtual ICollection<Zaleglosci> WszystkieZaleglosci { get; set; }
+        public virtual ICollection<Reporty> WszystkieReporty { get; set; }
 
         public Uzytkownicy()
         {
@@ -64,6 +64,7 @@ namespace InżynierkaBiblioteka.BazaDanych
             Recenzje = new List<Recenzje>();
             WszystkieLogi = new List<Logi>();
             WszystkieZaleglosci = new List<Zaleglosci>();
+            WszystkieReporty = new List<Reporty>();
         }
     }
 }
