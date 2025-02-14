@@ -35,9 +35,10 @@ namespace InżynierkaBiblioteka.Administrator
             foreach (var item in Logi)
             {
                 var kopiaItemu = item;
-                Label lbl = new Label();
-                lbl.Content = $"{kopiaItemu.idLoga}: {kopiaItemu.TrescWiadomosci}, uzytkownik {kopiaItemu.Uzytkownicy}, waznosc {kopiaItemu.Waznosc}, data {kopiaItemu.DataWystapienia}";
+                TextBlock lbl = new TextBlock();
+                lbl.Text = $"{kopiaItemu.idLoga}: {kopiaItemu.TrescWiadomosci}, uzytkownik {kopiaItemu.Uzytkownicy.LoginUzytkownika}, waznosc {kopiaItemu.Waznosc}, data {kopiaItemu.DataWystapienia}";
                 lbl.Margin = new Thickness(5);
+                lbl.TextWrapping = TextWrapping.Wrap;
                 Stack.Children.Add(lbl);
             }
             Stack.EndInit();

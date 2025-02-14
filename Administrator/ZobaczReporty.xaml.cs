@@ -44,14 +44,24 @@ namespace InżynierkaBiblioteka.Administrator
 
             if (!String.IsNullOrWhiteSpace(txtBoxUzytkownik.Text))
             {
-                Lista = Lista.Where(r => EF.Functions.Like(r.Reportujacy.Imie, $"%{txtBoxUzytkownik.Text}%") || EF.Functions.Like(r.Reportujacy.Nazwisko, $"%{txtBoxUzytkownik.Text}%") || EF.Functions.Like(r.TrescRaportu, $"%{txtBoxUzytkownik.Text}%") || EF.Functions.Like(r.Recenzje.Uzytkownicy.Imie, $"%{txtBoxUzytkownik.Text}%") || EF.Functions.Like(r.Recenzje.Uzytkownicy.Nazwisko, $"%{txtBoxUzytkownik.Text}%")).OrderBy(r => r.IDReportu).ToHashSet();
+                var queryText = txtBoxUzytkownik.Text.ToLower();
+
+                Lista = Lista.Where(r =>
+                    r.Reportujacy.Imie.ToLower().Contains(queryText) ||
+                    r.Reportujacy.Nazwisko.ToLower().Contains(queryText) ||
+                    r.Reportujacy.LoginUzytkownika.ToLower().Contains(queryText) ||
+                    r.TrescRaportu.ToLower().Contains(queryText) ||
+                    r.Recenzje.Uzytkownicy.Imie.ToLower().Contains(queryText) ||
+                    r.Recenzje.Uzytkownicy.Nazwisko.ToLower().Contains(queryText) ||
+                    r.Recenzje.Uzytkownicy.LoginUzytkownika.ToLower().Contains(queryText)
+                ).OrderBy(r => r.IDReportu).ToHashSet();
             }
 
             foreach (var item in Lista)
             {
                 var KopiaItemu = item;
                 Button button = new Button();
-                button.Content = $"{KopiaItemu.IDReportu} - {KopiaItemu.TrescRaportu}";
+                button.Content = $"{KopiaItemu.IDReportu} - {KopiaItemu.Reportujacy.LoginUzytkownika} {KopiaItemu.TrescRaportu} | {KopiaItemu.Recenzje.Uzytkownicy.LoginUzytkownika}";
                 button.Margin = new Thickness(5);
                 if (!KopiaItemu.StatusRaportu)
                 {
@@ -73,14 +83,23 @@ namespace InżynierkaBiblioteka.Administrator
 
         private void Button_Click(object sender, RoutedEventArgs e, Reporty r)
         {
-            //TODO: Przejscie na strone raportu
-            //PokazRaport.raport = r
-            //MainWindow.Nawigacja("PokazRaport.xaml");
+            PokazRaport.report = r;
+            MainWindow.Nawigacja("Administrator/PokazRaport.xaml");
         }
 
         private void btnPowrot_Click(object sender, RoutedEventArgs e)
         {
             MainWindow.GlownaRamka.GoBack();
+        }
+
+        private void chkBoxRozwiazane_Checked(object sender, RoutedEventArgs e)
+        {
+            Wyszukaj();
+        }
+
+        private void txtBoxUzytkownik_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Wyszukaj();
         }
     }
 }

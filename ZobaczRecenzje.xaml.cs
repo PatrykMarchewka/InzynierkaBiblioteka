@@ -43,14 +43,7 @@ namespace InżynierkaBiblioteka
                 btnZbanujReportowanego.Visibility = Visibility.Visible;
                 btnSchowajPokazRecenzje.Visibility = Visibility.Visible;
                 btnZbanujReportujacego.Visibility = Visibility.Visible;
-                btnZglosRecenzje.Visibility = Visibility.Hidden;
-            }
-            else if(GlowneOkno.ZalogowanyUzytkownik != null)
-            {
-                btnZbanujReportowanego.Visibility = Visibility.Hidden;
-                btnSchowajPokazRecenzje.Visibility = Visibility.Visible;
-                btnZbanujReportujacego.Visibility = Visibility.Hidden;
-                btnZglosRecenzje.Visibility = Visibility.Hidden;
+                btnZglosRecenzje.Visibility = Visibility.Visible;
             }
             else if (recenzja.Uzytkownicy == GlowneOkno.ZalogowanyUzytkownik)
             {
@@ -59,6 +52,14 @@ namespace InżynierkaBiblioteka
                 btnZbanujReportujacego.Visibility = Visibility.Hidden;
                 btnZglosRecenzje.Visibility = Visibility.Hidden;
             }
+            else if(GlowneOkno.ZalogowanyUzytkownik != null)
+            {
+                btnZbanujReportowanego.Visibility = Visibility.Hidden;
+                btnSchowajPokazRecenzje.Visibility = Visibility.Hidden;
+                btnZbanujReportujacego.Visibility = Visibility.Hidden;
+                btnZglosRecenzje.Visibility = Visibility.Visible;    
+            }
+            
             else
             {
                 btnZbanujReportowanego.Visibility = Visibility.Hidden;

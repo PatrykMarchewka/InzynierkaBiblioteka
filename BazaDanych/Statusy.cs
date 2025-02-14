@@ -11,7 +11,6 @@ namespace InżynierkaBiblioteka.BazaDanych
     //Status 1 = Nowy Uzytkownik
     //Status 2 = Zbanowane konto
     //Status 3 = Konto nieaktywne (brak logowania przez rok)
-    //Status 4 = ???
     public class Statusy
     {
         [System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity), Key]

@@ -63,7 +63,7 @@ namespace InżynierkaBiblioteka
                         MessageBoxResult result = MessageBox.Show("Czy chcesz dodac podstawowe dane do tabel?", "Podstawowe dane", MessageBoxButton.YesNo);
                         if (result == MessageBoxResult.Yes)
                         {
-                            DodajDanePodstawowe(WszystkieTabele()); //TODO: Dokonczyc
+                            DodajDanePodstawowe(WszystkieTabele());
                         }
                     }
                 }
@@ -89,7 +89,6 @@ namespace InżynierkaBiblioteka
                 }
                 else
                 {
-                    //TODO: Pozniej dodac osobne okno do powiadomien zamiast MessageBox?
                     if (MessageBox.Show("Nie mozna ustanowic polaczenia z baza danych, czy chcesz edytowac plik Connection.json?", "Blad polaczenia!", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     {
                         MainWindow.Nawigacja("PustaStrona.xaml");

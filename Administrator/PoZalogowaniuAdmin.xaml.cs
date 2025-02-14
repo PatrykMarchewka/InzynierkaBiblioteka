@@ -45,7 +45,6 @@ namespace InżynierkaBiblioteka
 
         private void btnZobaczReporty_Click(object sender, RoutedEventArgs e)
         {
-            //TODO: Przejscie na zobaczenie reportow
             MainWindow.Nawigacja("Administrator/ZobaczReporty.xaml");
         }
 
@@ -78,6 +77,11 @@ namespace InżynierkaBiblioteka
         private void btnPokazLogi_Click(object sender, RoutedEventArgs e)
         {
             MainWindow.Nawigacja("Administrator/PokazLogi.xaml");
+        }
+
+        private void btnRaport_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow.Nawigacja("Administrator/AdminRaporty.xaml");
         }
     }
 }

@@ -9,6 +9,7 @@
       Title="Oddaj Ksiazke" Background="MediumPurple">
 
     <Grid x:Name="grid">
+        <Label Content="Wybierz ksiazke do oddania" FontSize="24" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,12,0,0"/>
         <Button x:Name="btnPowrot" Content="◀" FontSize="48" VerticalAlignment="Top" HorizontalAlignment="Left" Background="Transparent" BorderThickness="0" Click="btnPowrot_Click"/>
     </Grid>
 </Page>

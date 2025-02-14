@@ -24,6 +24,11 @@ namespace InżynierkaBiblioteka
         public RaportujRecenzje()
         {
             InitializeComponent();
+            Reporty report = GlowneOkno.BazaDanych.Reporty.FirstOrDefault(r => r.Recenzje == ZobaczRecenzje.recenzja && r.Reportujacy == GlowneOkno.ZalogowanyUzytkownik);
+            if (report != null)
+            {
+                txtBoxReport.Text = report.TrescRaportu;
+            }
         }
 
         private void btnPowrot_Click(object sender, RoutedEventArgs e)
@@ -39,11 +44,15 @@ namespace InżynierkaBiblioteka
                 report = GlowneOkno.BazaDanych.Reporty.First(r => r.Recenzje == ZobaczRecenzje.recenzja && r.Reportujacy == GlowneOkno.ZalogowanyUzytkownik);
                 report.TrescRaportu = txtBoxReport.Text;
                 report.StatusRaportu = false;
+                Logi nowylog = new Logi() { DataWystapienia = DateTime.UtcNow, Uzytkownicy = GlowneOkno.ZalogowanyUzytkownik, TrescWiadomosci = "Uzytkownik zmienil tresc zgloszenia", Waznosc = 1 };
+                GlowneOkno.BazaDanych.Logi.Add(nowylog);
             }
             else
             {
                 report = new Reporty() { Recenzje = ZobaczRecenzje.recenzja, StatusRaportu = false, TrescRaportu = txtBoxReport.Text, Reportujacy = GlowneOkno.ZalogowanyUzytkownik };
                 GlowneOkno.BazaDanych.Reporty.Add(report);
+                Logi nowylog = new Logi() { DataWystapienia = DateTime.UtcNow, Uzytkownicy = GlowneOkno.ZalogowanyUzytkownik, TrescWiadomosci = "Uzytkownik dodal zgloszenie", Waznosc = 1 };
+                GlowneOkno.BazaDanych.Logi.Add(nowylog);
             }
             GlowneOkno.BazaDanych.SaveChanges();
             MessageBox.Show("Wyslano report");

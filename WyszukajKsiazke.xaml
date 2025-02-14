@@ -13,6 +13,7 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
+        <Label Content="Podaj tytul lub ISBN" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,38,0,0"/>
         <Button x:Name="btnPowrot" Content="◀" FontSize="48" VerticalAlignment="Top" HorizontalAlignment="Left" Background="Transparent" BorderThickness="0" Click="btnPowrot_Click"/>
         <TextBox x:Name="txtBoxWyszukaj" HorizontalAlignment="Center" TextWrapping="NoWrap" VerticalAlignment="Top" Width="240" Grid.Row="0" TextChanged="txtBoxWyszukaj_TextChanged" Margin="0,80,0,0"/>
         <ComboBox x:Name="comboGatunki" HorizontalAlignment="Left" Margin="32,190,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="0" SelectionChanged="comboGatunki_SelectionChanged"/>

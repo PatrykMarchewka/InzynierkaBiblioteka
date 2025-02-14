@@ -27,6 +27,16 @@ namespace InżynierkaBiblioteka
             txtBoxStareHaslo.Text = String.Empty;
             txtBoxNoweHaslo1.Text = String.Empty;
             txtBoxNoweHaslo2.Text = String.Empty;
+            if (OdzyskajKonto.proba != null)
+            {
+                txtBoxStareHaslo.Visibility = Visibility.Hidden;
+                lblStareHaslo.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                txtBoxStareHaslo.Visibility = Visibility.Visible;
+                lblStareHaslo.Visibility = Visibility.Visible;
+            }
         }
 
         private void btnPowrot_Click(object sender, RoutedEventArgs e)

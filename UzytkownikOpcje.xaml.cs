@@ -34,12 +34,12 @@ namespace InżynierkaBiblioteka
 
             if (GlowneOkno.ZalogowanyUzytkownik.RFID != null)
             {
-                btnDodajRFID.Content = " Usun czytnik RFID ";
+                btnDodajRFID.Content = " Usun karte RFID ";
                 usun = true;
             }
             else
             {
-                btnDodajRFID.Content = " Zarejestruj czytnik RFID ";
+                btnDodajRFID.Content = " Zarejestruj karte RFID ";
                 usun = false;
             }
 

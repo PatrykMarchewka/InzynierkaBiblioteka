@@ -21,7 +21,7 @@
         <Label Content="Nazwisko" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,260,0,0"/>
         <TextBox x:Name="txtBoxNazwisko" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,280,0,0" Width="100"/>
         <Label Content="NR Telefonu (opcjonalnie)" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,320,0,0"/>
-        <TextBox x:Name="txtBoxNrTelefonu" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,340,0,0" Width="100"/>
+        <TextBox x:Name="txtBoxNrTelefonu" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,340,0,0" Width="100" PreviewTextInput="txtBoxNrTelefonu_PreviewTextInput"/>
         <Label Content="Plec" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,380,0,0"/>
         <ComboBox x:Name="comboBoxPlec" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,400,0,0" Width="Auto" Height="Auto" SelectionChanged="comboBoxPlec_SelectionChanged"/>
         <TextBox x:Name="txtBoxPlec" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,425,0,0" Width="100" Visibility="Hidden"/>

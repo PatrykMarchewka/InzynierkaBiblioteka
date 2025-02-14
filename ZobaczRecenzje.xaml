@@ -27,7 +27,6 @@
 
 
         <!--Dla admina-->
-        <!--TODO: Dodanie przycisku banowania uzytkownika reportujacego, uzytkownika reportowanego i ukrywanie recenzji, a no i zaznaczenie reportu jako rozstzrygnietego-->
         <Button x:Name="btnZbanujReportujacego" Content=" Zbanuj uzytkownika reportujacego " FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="White" Background="Black" Click="btnZbanujReportujacego_Click" Margin="630,486,0,0">
             <Button.Resources>
                 <Style TargetType="Border">

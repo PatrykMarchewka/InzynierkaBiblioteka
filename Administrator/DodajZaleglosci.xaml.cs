@@ -103,7 +103,7 @@ namespace InżynierkaBiblioteka.Administrator
             {
                 if (Zaleglosc != null)
                 {
-                    string tresc = $"Administrator {GlowneOkno.ZalogowanyAdministrator.idUzytkownika} zmienil zaleglosc, poprzednie dane - Ksiazka:{Zaleglosc.Ksiazka} Koszt:{Zaleglosc.Zaleglosc} Zaplacony?:{Zaleglosc.Zaplacono} Komentarz:{Zaleglosc.Komentarz}";
+                    string tresc = $"Administrator {GlowneOkno.ZalogowanyAdministrator.idUzytkownika} zmienil zaleglosc, poprzednie dane - Ksiazka:{Zaleglosc.Ksiazka.ISBN} Koszt:{Zaleglosc.Zaleglosc} Zaplacony?:{Zaleglosc.Zaplacono} Komentarz:{Zaleglosc.Komentarz}";
                     tresc = tresc.Length > 255 ? tresc.Substring(0, 255) : tresc;
                     Logi nowyLog = new Logi() { DataWystapienia = DateTime.UtcNow, Uzytkownicy = GlowneOkno.ZalogowanyUzytkownik, Waznosc = 1, TrescWiadomosci = tresc };
                     GlowneOkno.BazaDanych.Logi.Add(nowyLog);

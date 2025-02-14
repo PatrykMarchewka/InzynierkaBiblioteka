@@ -13,9 +13,10 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
+        <Label Content="Wyszukaj uzytkownika" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,32,0,0"/>
         <Button x:Name="btnPowrot" Content="◀" FontSize="48" VerticalAlignment="Top" HorizontalAlignment="Left" Background="Transparent" BorderThickness="0" Click="btnPowrot_Click"/>
-        <TextBox x:Name="txtBoxUzytkownik" HorizontalAlignment="Center" VerticalAlignment="Top" Width="250" Height="36" Margin="0,79,0,0"/>
-        <CheckBox x:Name="chkBoxRozwiazane" Content="Pokaz rozwiazane" HorizontalAlignment="Left" Margin="72,153,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtBoxUzytkownik" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Top" Width="250" Height="36" Margin="0,79,0,0" TextChanged="txtBoxUzytkownik_TextChanged"/>
+        <CheckBox x:Name="chkBoxRozwiazane" Content="Pokaz rozwiazane" HorizontalAlignment="Center" Margin="0,135,0,0" VerticalAlignment="Top" Checked="chkBoxRozwiazane_Checked" Unchecked="chkBoxRozwiazane_Checked"/>
         <ScrollViewer Grid.Row="1">
             <StackPanel x:Name="Stack"/>
         </ScrollViewer>

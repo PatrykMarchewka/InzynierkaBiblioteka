@@ -15,7 +15,6 @@ namespace InżynierkaBiblioteka.BazaDanych
         public int idUzytkownika { get; set; }
         [MaxLength(255)]
         public string? RFID { get; set; }
-        public int? RFIDPin { get; set; }
         [MaxLength(255)]
         public string LoginUzytkownika { get; set; }
         [MaxLength(255)]

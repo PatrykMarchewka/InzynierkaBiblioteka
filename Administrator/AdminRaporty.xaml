@@ -1,0 +1,44 @@
+﻿<Page x:Class="InżynierkaBiblioteka.Administrator.AdminRaporty"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:InżynierkaBiblioteka.Administrator"
+      mc:Ignorable="d" 
+     d:DesignHeight="540" d:DesignWidth="960"
+    Title="Tworzenie Raportow" Background="MediumPurple">
+
+    <Grid>
+        <Button x:Name="btnPowrot" Content="◀" FontSize="48" VerticalAlignment="Top" HorizontalAlignment="Left" Background="Transparent" BorderThickness="0" Click="btnPowrot_Click" />
+        <Button x:Name="btnRaportUzytkownicy" Content=" Stworz raport o kontach uzytkownikow " FontSize="24" VerticalAlignment="Top" HorizontalAlignment="Center" Background="Black" Foreground="White" Margin="0,169,0,0" Click="btnRaportUzytkownicy_Click">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button x:Name="btnRaportKsiazki" Content=" Stworz raport o ksiazkach " FontSize="24" VerticalAlignment="Top" HorizontalAlignment="Center" Background="Black" Foreground="White" Margin="0,224,0,0" Click="btnRaportKsiazki_Click">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button x:Name="btnRaportWypozyczenia" Content=" Stworz raport o wypozyczeniach " FontSize="24" VerticalAlignment="Top" HorizontalAlignment="Center" Background="Black" Foreground="White" Click="btnRaportWypozyczenia_Click" Margin="0,280,0,0">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button x:Name="btnRaportZaleglosci" Content=" Stworz raport o zaleglosciach " FontSize="24" VerticalAlignment="Top" HorizontalAlignment="Center" Background="Black" Foreground="White" Click="btnRaportZaleglosci_Click" Margin="0,336,0,0">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+
+
+    </Grid>
+</Page>

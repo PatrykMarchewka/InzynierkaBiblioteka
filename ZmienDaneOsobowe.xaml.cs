@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -21,6 +22,10 @@ namespace InżynierkaBiblioteka
     /// </summary>
     public partial class ZmienDaneOsobowe : Page
     {
+
+
+        private static readonly Regex regex = new Regex(@"^(?:\+|\+\d{1,18}|\d{1,20})$", RegexOptions.Compiled);
+
         public ZmienDaneOsobowe()
         {
             InitializeComponent();
@@ -102,11 +107,24 @@ namespace InżynierkaBiblioteka
                 lblZnakA.Visibility = Visibility.Hidden;
                 btnZapiszZmiany.Visibility = Visibility.Visible;
             }
+            else if (String.IsNullOrEmpty(txtBoxEmail.Text))
+            {
+                lblZnakA.Visibility = Visibility.Hidden;
+                btnZapiszZmiany.Visibility = Visibility.Visible;
+            }
             else
             {
                 lblZnakA.Visibility = Visibility.Visible;
                 btnZapiszZmiany.Visibility = Visibility.Hidden;
             }
+        }
+
+        private void txtBoxTelefon_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            string nowy = textBox.Text.Insert(textBox.SelectionStart, e.Text);
+
+            e.Handled = !regex.IsMatch(nowy);
         }
     }
 }

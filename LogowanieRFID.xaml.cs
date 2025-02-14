@@ -37,7 +37,6 @@ namespace InżynierkaBiblioteka
             InitializeComponent();
             token = tokenSource.Token;
             Czytanie();
-            //PreviewKeyDown += CzytanieZCzytnika;
         }
 
         private void btnPowrot_Click(object sender, RoutedEventArgs e)
@@ -116,6 +115,10 @@ namespace InżynierkaBiblioteka
                     
                 }
             }
+            else
+            {
+                
+            }
         }
 
         private async Task<string> CzytanieZCzytnika()
@@ -125,7 +128,7 @@ namespace InżynierkaBiblioteka
             try
             {
                 sp.BaudRate = 9600;
-                sp.PortName = "COM8"; //FINAL: Zmienic
+                sp.PortName = "COM8";
                 sp.Open();
 
                 try
@@ -145,17 +148,7 @@ namespace InżynierkaBiblioteka
                 catch (Exception ex)
                 {
                     MessageBox.Show("Problem z inicjalizacja zadania do czytania RFID!");
-                    Logi nowyLog = new Logi() { DataWystapienia = DateTime.UtcNow, TrescWiadomosci = "Problem z inicjalizacja zadania do czytania RFID", Waznosc = 10 };
-                    if (GlowneOkno.ZalogowanyAdministrator != null)
-                    {
-                        nowyLog.Uzytkownicy = GlowneOkno.ZalogowanyAdministrator;
-                        GlowneOkno.ZalogowanyAdministrator.WszystkieLogi.Add(nowyLog);
-                    }
-                    else if (GlowneOkno.ZalogowanyUzytkownik != null)
-                    {
-                        nowyLog.Uzytkownicy = GlowneOkno.ZalogowanyUzytkownik;
-                        GlowneOkno.ZalogowanyUzytkownik.WszystkieLogi.Add(nowyLog);
-                    }
+                    Logi nowyLog = new Logi() { DataWystapienia = DateTime.UtcNow, TrescWiadomosci = "Problem z inicjalizacja zadania do czytania RFID", Waznosc = 10, Uzytkownicy = GlowneOkno.BazaDanych.Uzytkownicy.First() };
                     GlowneOkno.BazaDanych.Logi.Add(nowyLog);
                     GlowneOkno.BazaDanych.SaveChanges();
                     return null;
@@ -164,17 +157,7 @@ namespace InżynierkaBiblioteka
             catch (Exception ex)
             {
                 MessageBox.Show("Nie mozna otworzyc portu, sprawdz numer portu i zamknij wszystkie aplikacje korzystajace z niego!");
-                Logi nowyLog = new Logi() { DataWystapienia = DateTime.UtcNow, TrescWiadomosci = "Nie mozna otworzyc portu, sprawdz numer portu i zamknij wszystkie aplikacje korzystajace z niego", Waznosc = 10 };
-                if (GlowneOkno.ZalogowanyAdministrator != null)
-                {
-                    nowyLog.Uzytkownicy = GlowneOkno.ZalogowanyAdministrator;
-                    GlowneOkno.ZalogowanyAdministrator.WszystkieLogi.Add(nowyLog);
-                }
-                else if (GlowneOkno.ZalogowanyUzytkownik != null)
-                {
-                    nowyLog.Uzytkownicy = GlowneOkno.ZalogowanyUzytkownik;
-                    GlowneOkno.ZalogowanyUzytkownik.WszystkieLogi.Add(nowyLog);
-                }
+                Logi nowyLog = new Logi() { DataWystapienia = DateTime.UtcNow, TrescWiadomosci = "Nie mozna otworzyc portu, sprawdz numer portu i zamknij wszystkie aplikacje korzystajace z niego", Waznosc = 10, Uzytkownicy = GlowneOkno.BazaDanych.Uzytkownicy.First() };
                 GlowneOkno.BazaDanych.Logi.Add(nowyLog);
                 GlowneOkno.BazaDanych.SaveChanges();
                 return null;

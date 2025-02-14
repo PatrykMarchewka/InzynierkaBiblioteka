@@ -14,6 +14,7 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <Button x:Name="btnPowrot" Content="◀" FontSize="48" VerticalAlignment="Top" HorizontalAlignment="Left" Background="Transparent" BorderThickness="0" Click="btnPowrot_Click"/>
+        <Label x:Name="lblZaleglosci" Content="Wszystkie zaleglosci" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         <Button x:Name="btnDodajZaleglosc" FontSize="40" Content=" Dodaj Zaleglosc " VerticalAlignment="Center" HorizontalAlignment="Center" Background="Black" Foreground="White" Click="btnDodajZaleglosc_Click">
             <Button.Resources>
                 <Style TargetType="Border">

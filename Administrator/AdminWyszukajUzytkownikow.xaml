@@ -13,6 +13,7 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
+        <Label Content="Wyszukaj Uzytkownika" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,79,0,0"/>
         <Button x:Name="btnPowrot" Content="◀" FontSize="48" VerticalAlignment="Top" HorizontalAlignment="Left" Background="Transparent" BorderThickness="0" Click="btnPowrot_Click"/>
         <TextBox x:Name="txtBoxWyszukaj" VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="NoWrap" Width="240" FontSize="20" TextChanged="txtBoxWyszukaj_TextChanged"/>
         <Label Content="Wybierz Uzytkownika" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,223,0,0"/>

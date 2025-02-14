@@ -37,6 +37,12 @@ namespace InżynierkaBiblioteka
             if (GlowneOkno.ZalogowanyAdministrator == null)
             {
                 btnDodajZaleglosc.Visibility = Visibility.Hidden;
+                lblZaleglosci.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                btnDodajZaleglosc.Visibility = Visibility.Visible;
+                lblZaleglosci.Visibility = Visibility.Hidden;
             }
 
 

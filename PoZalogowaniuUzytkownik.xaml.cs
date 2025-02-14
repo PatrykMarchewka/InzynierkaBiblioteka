@@ -41,7 +41,6 @@ namespace InżynierkaBiblioteka
                 btnOdbanuj.Visibility = Visibility.Hidden;
             }
 
-            //TODO: Dodanie przyciskow dla administratora
             if (GlowneOkno.ZalogowanyUzytkownik.StatusKonta.idStatusu == 2 && GlowneOkno.ZalogowanyAdministrator == null)
             {
                 MessageBox.Show("Blad! Konto obecnie zbanowane, skontaktuj sie z administratorem");

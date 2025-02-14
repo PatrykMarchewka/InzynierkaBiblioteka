@@ -7,6 +7,7 @@ using System.Printing.IndexedProperties;
 using System.Security;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -32,7 +33,7 @@ namespace InżynierkaBiblioteka
 
 
         //Najdluzszy nr telefonu ma 19 znakow, jest to +999123451234567890 dlatego maks 20 znakow na nr tel
-
+        private static readonly Regex regex = new Regex(@"^(?:\+|\+\d{1,18}|\d{1,20})$", RegexOptions.Compiled);
 
 
 
@@ -65,8 +66,6 @@ namespace InżynierkaBiblioteka
                 chkBoxAdmin.Visibility = Visibility.Visible;
             }
         }
-
-        //TODO: Nowa sol i hash co jakis interwal czasowy, dodac pole ostatniej zmiany do tabeli Uzytkownicy
         public static string LosowaSol()
         {
             Random rnd = new Random();
@@ -79,7 +78,7 @@ namespace InżynierkaBiblioteka
 
 
 
-        public static string StworzHash(string Haslo, string SolString = "BibliotekaInzynieria")
+        public static string StworzHash(string Haslo, string SolString)
         {
             byte[] SolIHaslo = Encoding.UTF8.GetBytes(SolString + Haslo);
             byte[] Hash;
@@ -223,6 +222,14 @@ namespace InżynierkaBiblioteka
             {
                 lblZnakA.Visibility = Visibility.Visible;
             }
+        }
+
+        private void txtBoxNrTelefonu_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            string nowy = textBox.Text.Insert(textBox.SelectionStart, e.Text);
+
+            e.Handled = !regex.IsMatch(nowy);
         }
     }
 }

@@ -187,7 +187,6 @@ namespace InżynierkaBiblioteka
                 {
                     Powiadomienia pow = GlowneOkno.ZalogowanyUzytkownik.Powiadomienia.First(pow => pow.Ksiazka == PokazKsiazkeKsiazka);
                     GlowneOkno.ZalogowanyUzytkownik.Powiadomienia.Remove(pow);
-                    //TODO: Rozkminic czy tutaj tez usuwac, moze zostawic stare w bazie?
                     PokazKsiazkeKsiazka.LiczbaOczekujacych--;
                     GlowneOkno.BazaDanych.SaveChanges();
                 }

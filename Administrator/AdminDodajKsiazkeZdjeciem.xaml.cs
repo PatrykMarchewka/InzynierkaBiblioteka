@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InżynierkaBiblioteka.BazaDanych;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -70,7 +71,7 @@ namespace InżynierkaBiblioteka
         {
             var cancellationTokenSource = new CancellationTokenSource();
             var cancellationToken = cancellationTokenSource.Token;
-
+            Result result = null;
             
             //mediaCapture = new MediaCapture();
             //await mediaCapture.InitializeAsync();
@@ -78,7 +79,7 @@ namespace InżynierkaBiblioteka
             {
                 Bitmap bitmapa = await CapturePhotoAsync();
                 imObraz.Source = bitmapImage;
-                var result = barcodeReader.Decode(bitmapa);
+                result = barcodeReader.Decode(bitmapa);
                 if (result != null)
                 {
                     MessageBox.Show(result.Text);
@@ -89,6 +90,12 @@ namespace InżynierkaBiblioteka
                     Console.WriteLine("Nieznaleziono dla zdjecia");
                 }
             }
+
+            Ksiazki ksiazka = GlowneOkno.BazaDanych.Ksiazki.FirstOrDefault(k => k.ISBN == result.Text);
+            AdminEdycjaKsiazki.EdytowanaKsiazka = ksiazka;
+            MainWindow.Nawigacja("AdminEdycjaKsiazki.xaml");
+
+
         }
 
 
@@ -151,10 +158,8 @@ namespace InżynierkaBiblioteka
 
         public static async Task<Bitmap> CapturePhotoAsync()
         {
-            // Create MediaCapture object
             MediaCapture mediaCapture = new MediaCapture();
 
-            // Initialize MediaCapture
             await mediaCapture.InitializeAsync();
 
 
@@ -167,18 +172,13 @@ namespace InżynierkaBiblioteka
                 await mediaCapture.VideoDeviceController.FocusControl.FocusAsync();
             }
 
-
-
-            // Set the format for capturing photos
             ImageEncodingProperties imgFormat = ImageEncodingProperties.CreatePng();
 
-            // Create a storage file for the photo
             var file = await Windows.Storage.KnownFolders.PicturesLibrary.CreateFileAsync("temp.png", Windows.Storage.CreationCollisionOption.ReplaceExisting);
 
-            // Capture the photo
             await mediaCapture.CapturePhotoToStorageFileAsync(imgFormat, file);
 
-            // Convert the captured photo to BitmapImage
+            // Konwersja na BitmapImage
             using (IRandomAccessStream stream = await file.OpenAsync(Windows.Storage.FileAccessMode.Read))
             {
                 bitmapImage = new BitmapImage();
@@ -188,7 +188,7 @@ namespace InżynierkaBiblioteka
                 bitmapImage.EndInit();
 
 
-                // Convert BitmapImage to Bitmap
+                // Konwersja na Bitmape
                 using (MemoryStream memoryStream = new MemoryStream())
                 {
                     System.Windows.Media.Imaging.BitmapEncoder encoder = new BmpBitmapEncoder();

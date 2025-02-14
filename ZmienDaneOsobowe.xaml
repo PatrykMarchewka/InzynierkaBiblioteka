@@ -17,7 +17,7 @@
         <TextBox x:Name="txtBoxImie" FontSize="30" HorizontalAlignment="Left" Margin="516,70,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="185" Height="40"/>
         <TextBox x:Name="txtBoxNazwisko" FontSize="30" HorizontalAlignment="Left" Margin="516,124,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="185" Height="40"/>
         <TextBox x:Name="txtBoxEmail" FontSize="30" HorizontalAlignment="Left" Margin="516,247,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="185" Height="40" TextChanged="txtBoxEmail_TextChanged"/>
-        <TextBox x:Name="txtBoxTelefon" FontSize="30" HorizontalAlignment="Left" Margin="516,187,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="185" Height="40"/>
+        <TextBox x:Name="txtBoxTelefon" FontSize="30" HorizontalAlignment="Left" Margin="516,187,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="185" Height="40" PreviewTextInput="txtBoxTelefon_PreviewTextInput"/>
         <Button x:Name="btnZapiszZmiany" Content=" Zapisz Zmiany " FontSize="40" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,370,0,0" Foreground="White" Background="Black" Click="btnZapiszZmiany_Click">
             <Button.Resources>
                 <Style TargetType="Border">

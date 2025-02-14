@@ -10,7 +10,7 @@
 
     <Grid>
         <Button x:Name="btnPowrot" Content="◀" FontSize="48" VerticalAlignment="Top" HorizontalAlignment="Left" Background="Transparent" BorderThickness="0" Click="btnPowrot_Click" />
-        <Label Content="Podaj stare haslo:" FontSize="40" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="60,92,0,0"/>
+        <Label x:Name="lblStareHaslo" Content="Podaj stare haslo:" FontSize="40" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="60,92,0,0"/>
         <Label Content="Podaj nowe haslo:" FontSize="40" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="55,155,0,0"/>
         <Label Content="Podaj nowe haslo ponownie:" FontSize="40" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="55,218,0,0"/>
         <TextBox x:Name="txtBoxStareHaslo" FontSize="30" HorizontalAlignment="Left" Margin="620,113,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="185" Height="40" />
